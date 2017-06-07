@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project version="2G - 2.0.3" name="ARMada">
+  <Target name="rtos" isCurrent="1">
+    <Device manufacturerId="9" manufacturerName="ST" chipId="313" chipName="STM32F103RE" boardId="" boardName=""/>
+    <BuildOption>
+      <Compile>
+        <Option name="OptimizationLevel" value="0"/>
+        <Option name="UseFPU" value="0"/>
+        <Option name="UserEditCompiler" value="-std=c99"/>
+        <Option name="DEBUG" value="2"/>
+        <Option name="WARNING" value="0"/>
+        <Includepaths>
+          <Includepath path="."/>
+          <Includepath path="stm_lib/inc"/>
+        </Includepaths>
+        <DefinedSymbols>
+          <Define name="STM32F103RE"/>
+          <Define name="STM32F10X_HD"/>
+          <Define name="USE_STDPERIPH_DRIVER"/>
+          <Define name="__ASSEMBLY__"/>
+          <Define name="STM32F103RET6"/>
+        </DefinedSymbols>
+      </Compile>
+      <Link useDefault="0">
+        <Option name="DiscardUnusedSection" value="0"/>
+        <Option name="UserEditLinkder" value=""/>
+        <Option name="UseMemoryLayout" value="1"/>
+        <Option name="LTO" value="0"/>
+        <Option name="IsNewStartupCode" value="1"/>
+        <Option name="Library" value="Not use C Library"/>
+        <Option name="UserEditLinker" value=""/>
+        <LinkedLibraries>
+          <Libset dir="" libs="m"/>
+        </LinkedLibraries>
+        <MemoryAreas debugInFlashNotRAM="1">
+          <Memory name="IROM1" type="ReadOnly" size="0x00080000" startValue="0x08000000"/>
+          <Memory name="IRAM1" type="ReadWrite" size="0x00010000" startValue="0x20000000"/>
+          <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
+          <Memory name="IRAM2" type="ReadWrite" size="" startValue=""/>
+        </MemoryAreas>
+        <LocateLinkFile path="../../../../../../../../coocox/coide/configuration/programdata/armada/arm-gcc-link.ld" type="0"/>
+      </Link>
+      <Output>
+        <Option name="OutputFileType" value="0"/>
+        <Option name="Path" value="./"/>
+        <Option name="Name" value="rtos"/>
+        <Option name="HEX" value="1"/>
+        <Option name="BIN" value="1"/>
+      </Output>
+      <User>
+        <UserRun name="Run#1" type="Before" checked="0" value=""/>
+        <UserRun name="Run#1" type="After" checked="0" value=""/>
+      </User>
+    </BuildOption>
+    <DebugOption>
+      <Option name="org.coocox.codebugger.gdbjtag.core.adapter" value="ST-Link"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.debugMode" value="SWD"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.clockDiv" value="1M"/>
+      <Option name="org.coocox.codebugger.gdbjtag.corerunToMain" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkgdbserver" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.userDefineGDBScript" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.targetEndianess" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkResetMode" value="Type 0: Normal"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.resetMode" value="SYSRESETREQ"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifSemihost" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifCacheRom" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ipAddress" value="127.0.0.1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.portNumber" value="2009"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.autoDownload" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.verify" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.downloadFuction" value="Erase Effected"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="./stm32f10x_hd_512.elf"/>
+    </DebugOption>
+    <ExcludeFile/>
+  </Target>
+  <Components path="./"/>
+  <Files>
+    <File name="MENU/inc" path="" type="2"/>
+    <File name="SDIO_SD" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c" path="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c" type="1"/>
+    <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/queue.c" path="FRT_Library/FreeRTOS/Source/queue.c" type="1"/>
+    <File name="NOKIA5110_LCD/inc/font6x8.h" path="NOKIA5110_LCD/font6x8.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/mpu_wrappers.h" path="FRT_Library/FreeRTOS/Source/include/mpu_wrappers.h" type="1"/>
+    <File name="stm_lib/src/misc.c" path="stm_lib/src/misc.c" type="1"/>
+    <File name="cmsis_boot/stm32f10x.h" path="cmsis_boot/stm32f10x.h" type="1"/>
+    <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
+    <File name="Armada/src/main.c" path="main.c" type="1"/>
+    <File name="LCD_ILI9163/src" path="" type="2"/>
+    <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_spi.h" path="stm_lib/inc/stm32f10x_spi.h" type="1"/>
+    <File name="Armada/inc/types.h" path="types.h" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_dma.h" path="stm_lib/inc/stm32f10x_dma.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
+    <File name="BLUETOOTH/src/bluetooth.c" path="BLUETOOTH/bluetooth.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/StackMacros.h" path="FRT_Library/FreeRTOS/Source/include/StackMacros.h" type="1"/>
+    <File name="BLUETOOTH/src" path="" type="2"/>
+    <File name="Armada/inc/cipher.h" path="CIPHER/cipher.h" type="1"/>
+    <File name="Armada/inc/commands.h" path="commands.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_bkp.c" path="stm_lib/src/stm32f10x_bkp.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h" path="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_gpio.c" path="stm_lib/src/stm32f10x_gpio.c" type="1"/>
+    <File name="FATFS/src/integer.h" path="FATFS/src/integer.h" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_usart.h" path="stm_lib/inc/stm32f10x_usart.h" type="1"/>
+    <File name="BLUETOOTH" path="" type="2"/>
+    <File name="cmsis_boot/system_stm32f10x.c" path="cmsis_boot/system_debug/system_stm32f10x.c" type="1"/>
+    <File name="stm_lib/inc/misc.h" path="stm_lib/inc/misc.h" type="1"/>
+    <File name="NOKIA5110_LCD" path="" type="2"/>
+    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
+    <File name="LCD_ILI9163/src/GFXC.c" path="LCD_ILI9163/GFXC.c" type="1"/>
+    <File name="FATFS/src/diskio.c" path="FATFS/src/diskio.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_rcc.c" path="stm_lib/src/stm32f10x_rcc.c" type="1"/>
+    <File name="Armada/inc/miles_protocol.h" path="miles_protocol.h" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_bkp.h" path="stm_lib/inc/stm32f10x_bkp.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/croutine.c" path="FRT_Library/FreeRTOS/Source/croutine.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/task.h" path="FRT_Library/FreeRTOS/Source/include/task.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_dma.c" path="stm_lib/src/stm32f10x_dma.c" type="1"/>
+    <File name="stm_lib/src" path="" type="2"/>
+    <File name="cmsis" path="" type="2"/>
+    <File name="stm_lib" path="" type="2"/>
+    <File name="stm_lib/inc/stm32f10x_exti.h" path="stm_lib/inc/stm32f10x_exti.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/MemMang" path="" type="2"/>
+    <File name="stm_lib/inc/stm32f10x_adc.h" path="stm_lib/inc/stm32f10x_adc.h" type="1"/>
+    <File name="cmsis_boot/system_stm32f10x.h" path="cmsis_boot/system_stm32f10x.h" type="1"/>
+    <File name="LCD_ILI9163" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/FreeRTOS.h" path="FRT_Library/FreeRTOS/Source/include/FreeRTOS.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/list.c" path="FRT_Library/FreeRTOS/Source/list.c" type="1"/>
+    <File name="LCD_ILI9163/inc/GFXC.h" path="LCD_ILI9163/GFXC.h" type="1"/>
+    <File name="FATFS/src/ff.c" path="FATFS/src/ff.c" type="1"/>
+    <File name="FATFS/src/option/syscall.c" path="FATFS/src/option/syscall.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_rtc.c" path="stm_lib/src/stm32f10x_rtc.c" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_pwr.c" path="stm_lib/src/stm32f10x_pwr.c" type="1"/>
+    <File name="Armada/inc/global_variables.h" path="global_variables.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_sdio.c" path="stm_lib/src/stm32f10x_sdio.c" type="1"/>
+    <File name="SDIO_SD/sdio_sd.h" path="SDIO_SD/sdio_sd.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/readme.txt" path="FRT_Library/FreeRTOS/Source/readme.txt" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_tim.h" path="stm_lib/inc/stm32f10x_tim.h" type="1"/>
+    <File name="NOKIA5110_LCD/inc/f10x-pcd8544.h" path="NOKIA5110_LCD/f10x-pcd8544.h" type="1"/>
+    <File name="cmsis_boot" path="" type="2"/>
+    <File name="Armada" path="" type="2"/>
+    <File name="stm_lib/src/stm32f10x_tim.c" path="stm_lib/src/stm32f10x_tim.c" type="1"/>
+    <File name="Armada/inc/slots.h" path="slots.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
+    <File name="FATFS" path="" type="2"/>
+    <File name="FATFS/src/ff.h" path="FATFS/src/ff.h" type="1"/>
+    <File name="FATFS/src/diskio.h" path="FATFS/src/diskio.h" type="1"/>
+    <File name="cmsis_boot/startup/startup_stm32f10x_hd.c" path="cmsis_boot/startup/startup_stm32f10x_hd.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/MemMang/heap_2.c" path="FRT_Library/FreeRTOS/Source/portable/MemMang/heap_2.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_spi.c" path="stm_lib/src/stm32f10x_spi.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS" path="" type="2"/>
+    <File name="stm_lib/inc/stm32f10x_dac.h" path="stm_lib/inc/stm32f10x_dac.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_dac.c" path="stm_lib/src/stm32f10x_dac.c" type="1"/>
+    <File name="NOKIA5110_LCD/inc" path="" type="2"/>
+    <File name="Armada/inc/usart.h" path="usart.h" type="1"/>
+    <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3" path="" type="2"/>
+    <File name="MENU" path="" type="2"/>
+    <File name="FRT_Library" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/common.c" path="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/common.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_usart.c" path="stm_lib/src/stm32f10x_usart.c" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_rtc.h" path="stm_lib/inc/stm32f10x_rtc.h" type="1"/>
+    <File name="MENU/src" path="" type="2"/>
+    <File name="FATFS/src/ffconf.h" path="FATFS/src/ffconf.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_pwr.c" path="stm_lib/src/stm32f10x_pwr.c" type="1"/>
+    <File name="MENU/inc/menu.h" path="MENU/menu.h" type="1"/>
+    <File name="Armada/src/usart.c" path="usart.c" type="1"/>
+    <File name="Armada/inc/hardware_init.h" path="hardware_init.h" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_gpio.h" path="stm_lib/inc/stm32f10x_gpio.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/portable.h" path="FRT_Library/FreeRTOS/Source/include/portable.h" type="1"/>
+    <File name="NOKIA5110_LCD/src/f10x-pcd8544.c" path="NOKIA5110_LCD/f10x-pcd8544.c" type="1"/>
+    <File name="FATFS/src/option" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/queue.h" path="FRT_Library/FreeRTOS/Source/include/queue.h" type="1"/>
+    <File name="BLUETOOTH/inc" path="" type="2"/>
+    <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_exti.c" path="stm_lib/src/stm32f10x_exti.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/semphr.h" path="FRT_Library/FreeRTOS/Source/include/semphr.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/readme.txt" path="FRT_Library/FreeRTOS/Source/portable/readme.txt" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/projdefs.h" path="FRT_Library/FreeRTOS/Source/include/projdefs.h" type="1"/>
+    <File name="FATFS/src" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/tasks.c" path="FRT_Library/FreeRTOS/Source/tasks.c" type="1"/>
+    <File name="Armada/src/slots.c" path="slots.c" type="1"/>
+    <File name="Armada/inc/armada.h" path="armada.h" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_sdio.h" path="stm_lib/inc/stm32f10x_sdio.h" type="1"/>
+    <File name="BLUETOOTH/inc/bluetooth.h" path="BLUETOOTH/bluetooth.h" type="1"/>
+    <File name="Armada/src" path="" type="2"/>
+    <File name="MENU/src/menu.c" path="MENU/menu.c" type="1"/>
+    <File name="Armada/src/cipher.c" path="CIPHER/chipher.c" type="1"/>
+    <File name="Armada/src/global_variables.c" path="global_variables.c" type="1"/>
+    <File name="LCD_ILI9163/inc" path="" type="2"/>
+    <File name="Armada/inc" path="" type="2"/>
+    <File name="stm_lib/inc/stm32f10x_rcc.h" path="stm_lib/inc/stm32f10x_rcc.h" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable/GCC" path="" type="2"/>
+    <File name="SDIO_SD/sdio_sd.c" path="SDIO_SD/sdio_sd.c" type="1"/>
+    <File name="syscalls" path="" type="2"/>
+    <File name="components" path="" type="2"/>
+    <File name="LCD_ILI9163/inc/ILI9163.h" path="LCD_ILI9163/ILI9163.h" type="1"/>
+    <File name="NOKIA5110_LCD/src" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/portable" path="" type="2"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/list.h" path="FRT_Library/FreeRTOS/Source/include/list.h" type="1"/>
+    <File name="Armada/src/tim_isr.c" path="tim_isr.c" type="1"/>
+    <File name="stm_lib/inc" path="" type="2"/>
+    <File name="FreeRTOSConfig.h" path="FreeRTOSConfig.h" type="1"/>
+    <File name="LCD_ILI9163/src/ILI9163.c" path="LCD_ILI9163/ILI9163.c" type="1"/>
+    <File name="FRT_Library/FreeRTOS/Source/include/croutine.h" path="FRT_Library/FreeRTOS/Source/include/croutine.h" type="1"/>
+  </Files>
+</Project>
