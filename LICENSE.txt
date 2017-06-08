@@ -17,7 +17,7 @@ Some other files located in other places also contains third party
 software as notified on top of its.
 
 PLEASE NOTE THAT THE THIRD PARTY SOFTWARE IS COPYRIGHTED BY OTHERS THAN THE
-Caustic Lasertag System AUTHORS, but is included by permission.
+ARMada Lasertag System AUTHORS, but is included by permission.
 For details, consult the stated licenses there.
 
 ----------------------------------------------------------------------
