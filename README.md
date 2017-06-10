@@ -12,9 +12,6 @@ Open project. Lasertag system based on ARM controller
 ![ARMada - smart lasertag bandana](https://pp.userapi.com/c837422/v837422584/30657/HjBPE4CzkXU.jpg "ARMada - smart lasertag bandana")
 
 
-![ARMada - smart lasertag bandana](http://www.open-tager.ru/forum/download/file.php?id=3720 "ARMada - smart lasertag bandana")
-
-
 ![ARMada - smart lasertag bandana](http://www.open-tager.ru/forum/download/file.php?id=3725 "ARMada - smart lasertag bandana")
 
 ![ARMada - smart lasertag bandana](http://forum.easyelectronics.ru/download/file.php?id=26604&t=1 "ARMada - smart lasertag bandana")
