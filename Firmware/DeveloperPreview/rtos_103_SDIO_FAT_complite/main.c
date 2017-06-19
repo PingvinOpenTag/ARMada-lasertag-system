@@ -1,11 +1,9 @@
-//http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-na-stm32f10x-chast-2-zapusk-cap.html
-//http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-na-stm32f10x-chast-2-zapusk-cap.html
-// подключаем библиотеку CMSIS
+// ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГі CMSIS
 
 #include "armada.h"
 #include "commands.h"
 
-#include "f10x-pcd8544.h" // смотрите этот файл для настройки дисплея !
+#include "f10x-pcd8544.h" // Г±Г¬Г®ГІГ°ГЁГІГҐ ГЅГІГ®ГІ ГґГ Г©Г« Г¤Г«Гї Г­Г Г±ГІГ°Г®Г©ГЄГЁ Г¤ГЁГ±ГЇГ«ГҐГї !
 //#include "math.h"
 
 
@@ -13,13 +11,13 @@
 //const uint32_t key_B [4] = {0xffeeddcc,0xbbaa9988,0x77665544,0x33221100};
 
 
-//передающий буфер
+//ГЇГҐГ°ГҐГ¤Г ГѕГ№ГЁГ© ГЎГіГґГҐГ°
 extern volatile unsigned char usart1_TxBuf[SIZE_BUF];
 extern volatile unsigned char usart1_txBufTail;
 extern volatile unsigned char usart1_txBufHead;
 extern volatile unsigned char usart1_txCount;
 
-//приемный буфер
+//ГЇГ°ГЁГҐГ¬Г­Г»Г© ГЎГіГґГҐГ°
 extern volatile unsigned char usart1_RxBuf[SIZE_BUF];
 extern volatile unsigned char usart1_rxBufTail;
 extern volatile unsigned char usart1_rxBufHead;
@@ -28,8 +26,8 @@ extern volatile unsigned char usart1_rxCount;
 
 
 /*******************************************************************/
-// Массивы входных и выходных данных и переменная для хранения данных
-// о нашей карте
+// ГЊГ Г±Г±ГЁГўГ» ГўГµГ®Г¤Г­Г»Гµ ГЁ ГўГ»ГµГ®Г¤Г­Г»Гµ Г¤Г Г­Г­Г»Гµ ГЁ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї ГµГ°Г Г­ГҐГ­ГЁГї Г¤Г Г­Г­Г»Гµ
+// Г® Г­Г ГёГҐГ© ГЄГ Г°ГІГҐ
 uint32_t writeBuffer[16];
 char readBuffer[256];
 SD_CardInfo SDCardInfo;
@@ -72,7 +70,7 @@ uint16_t DAC_Buff[SOUND_BUFFER_SIZE];
 DMA_InitTypeDef  DMA_InitStructure;
 DMA_InitTypeDef  DMA_to_SPI_InitStructure;
 
-//Массив для получения реального значения урона. Реальный урон = damage_value[Damage_xx]
+//ГЊГ Г±Г±ГЁГў Г¤Г«Гї ГЇГ®Г«ГіГ·ГҐГ­ГЁГї Г°ГҐГ Г«ГјГ­Г®ГЈГ® Г§Г­Г Г·ГҐГ­ГЁГї ГіГ°Г®Г­Г . ГђГҐГ Г«ГјГ­Г»Г© ГіГ°Г®Г­ = damage_value[Damage_xx]
 const uint8_t damage_value [] =
 {
 	1,   // 0000 = 1   (Damage_1)
@@ -110,11 +108,11 @@ int main(void)
 	EXTI_InitTypeDef exti;
 	NVIC_InitTypeDef nvic;
 
-	// запускаем тактирование GPIO порта F
+	// Г§Г ГЇГіГ±ГЄГ ГҐГ¬ ГІГ ГЄГІГЁГ°Г®ГўГ Г­ГЁГҐ GPIO ГЇГ®Г°ГІГ  F
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
-	// Устанавливаем пины PF6, PF7, PF8, PF9 как выходные
-	// использовать будем PF6 и PF7, но уж проинициализируем все четыре LED
+	// Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЇГЁГ­Г» PF6, PF7, PF8, PF9 ГЄГ ГЄ ГўГ»ГµГ®Г¤Г­Г»ГҐ
+	// ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ ГІГј ГЎГіГ¤ГҐГ¬ PF6 ГЁ PF7, Г­Г® ГіГ¦ ГЇГ°Г®ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГўГ±ГҐ Г·ГҐГІГ»Г°ГҐ LED
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;// | GPIO_Pin_8 | GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
@@ -123,15 +121,15 @@ int main(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |  GPIO_Pin_13;//
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 	GPIO_SetBits(GPIOC, GPIO_Pin_7);
-	GPIO_SetBits(GPIOC, GPIO_Pin_13);//выключаем подсветку ЖКИ
-	//подсветка выстрела
-	// запускаем тактирование GPIO порта B
+	GPIO_SetBits(GPIOC, GPIO_Pin_13);//ГўГ»ГЄГ«ГѕГ·Г ГҐГ¬ ГЇГ®Г¤Г±ГўГҐГІГЄГі Г†ГЉГ€
+	//ГЇГ®Г¤Г±ГўГҐГІГЄГ  ГўГ»Г±ГІГ°ГҐГ«Г 
+	// Г§Г ГЇГіГ±ГЄГ ГҐГ¬ ГІГ ГЄГІГЁГ°Г®ГўГ Г­ГЁГҐ GPIO ГЇГ®Г°ГІГ  B
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	GPIO_ResetBits(GPIOB, GPIO_Pin_1);
 
-	GPIO_ResetBits(GPIOC, GPIO_Pin_4);//"прижимаем" вывод RESET блютус модуля к земле
+	GPIO_ResetBits(GPIOC, GPIO_Pin_4);//"ГЇГ°ГЁГ¦ГЁГ¬Г ГҐГ¬" ГўГ»ГўГ®Г¤ RESET ГЎГ«ГѕГІГіГ± Г¬Г®Г¤ГіГ«Гї ГЄ Г§ГҐГ¬Г«ГҐ
 
 	/* Enable AFIO clock */
 	  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -161,15 +159,15 @@ int main(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-	        // Иницилизация карты
+	        // Г€Г­ГЁГ¶ГЁГ«ГЁГ§Г Г¶ГЁГї ГЄГ Г°ГІГ»
 	            Status = SD_Init();
-	        // Получаем информацию о карте
+	        // ГЏГ®Г«ГіГ·Г ГҐГ¬ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ Г® ГЄГ Г°ГІГҐ
 	            SD_GetCardInfo(&SDCardInfo);
-	                // Выбор карты и настройка режима работы
+	                // Г‚Г»ГЎГ®Г° ГЄГ Г°ГІГ» ГЁ Г­Г Г±ГІГ°Г®Г©ГЄГ  Г°ГҐГ¦ГЁГ¬Г  Г°Г ГЎГ®ГІГ»
 	                SD_SelectDeselect((uint32_t) (SDCardInfo.RCA << 16));
 	           //     SD_SetDeviceMode(SD_POLLING_MODE);
 	//                SD_SetDeviceMode(SD_INTERRUPT_MODE);
-	                // И вот наконец то запись и чтение
+	                // Г€ ГўГ®ГІ Г­Г ГЄГ®Г­ГҐГ¶ ГІГ® Г§Г ГЇГЁГ±Гј ГЁ Г·ГІГҐГ­ГЁГҐ
 
 	                get_uid(request_text);
 //	                xtea2_encipher(64,request_text,key_A);
@@ -211,11 +209,11 @@ int main(void)
 //size_t free;
 //	free=xPortGetFreeHeapSize();
 
-	/* Перед использованием семафор должен быть явно создан. В этом примере
-	     создается двоичный семафор. */
+	/* ГЏГҐГ°ГҐГ¤ ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГҐГ¬ Г±ГҐГ¬Г ГґГ®Г° Г¤Г®Г«Г¦ГҐГ­ ГЎГ»ГІГј ГїГўГ­Г® Г±Г®Г§Г¤Г Г­. Г‚ ГЅГІГ®Г¬ ГЇГ°ГЁГ¬ГҐГ°ГҐ
+	     Г±Г®Г§Г¤Г ГҐГІГ±Гї Г¤ГўГ®ГЁГ·Г­Г»Г© Г±ГҐГ¬Г ГґГ®Г°. */
 #ifdef COLOR_LCD
 	vSemaphoreCreateBinary( xColorLCD_DMA_Semaphore);
-	vSemaphoreCreateBinary(xColorLCDSemaphore);//семафор цветного LCD
+	vSemaphoreCreateBinary(xColorLCDSemaphore);//Г±ГҐГ¬Г ГґГ®Г° Г¶ГўГҐГІГ­Г®ГЈГ® LCD
 #endif
 
 
@@ -227,19 +225,19 @@ int main(void)
 	vSemaphoreCreateBinary(xWavPlayerManagerSemaphore);
 	vSemaphoreCreateBinary(xPlayWavSoundSemaphore);
 	vSemaphoreCreateBinary(xHitSemaphore);
-	vSemaphoreCreateBinary( xKeysSemaphore );//семафор для задачи, опрашивающей клавиши
-	vSemaphoreCreateBinary(xSoundBuffHTSemaphore);//семафор указывает, что половина звукового буфера прочитана, пора её обновить данными
-	vSemaphoreCreateBinary(xSoundBuffTCSemaphore);//семафор указывает, что весь звуковой буфер считан, пора обновить данные во второй половине звукового буфера
+	vSemaphoreCreateBinary( xKeysSemaphore );//Г±ГҐГ¬Г ГґГ®Г° Г¤Г«Гї Г§Г Г¤Г Г·ГЁ, Г®ГЇГ°Г ГёГЁГўГ ГѕГ№ГҐГ© ГЄГ«Г ГўГЁГёГЁ
+	vSemaphoreCreateBinary(xSoundBuffHTSemaphore);//Г±ГҐГ¬Г ГґГ®Г° ГіГЄГ Г§Г»ГўГ ГҐГІ, Г·ГІГ® ГЇГ®Г«Г®ГўГЁГ­Г  Г§ГўГіГЄГ®ГўГ®ГЈГ® ГЎГіГґГҐГ°Г  ГЇГ°Г®Г·ГЁГІГ Г­Г , ГЇГ®Г°Г  ГҐВё Г®ГЎГ­Г®ГўГЁГІГј Г¤Г Г­Г­Г»Г¬ГЁ
+	vSemaphoreCreateBinary(xSoundBuffTCSemaphore);//Г±ГҐГ¬Г ГґГ®Г° ГіГЄГ Г§Г»ГўГ ГҐГІ, Г·ГІГ® ГўГҐГ±Гј Г§ГўГіГЄГ®ГўГ®Г© ГЎГіГґГҐГ° Г±Г·ГЁГІГ Г­, ГЇГ®Г°Г  Г®ГЎГ­Г®ГўГЁГІГј Г¤Г Г­Г­Г»ГҐ ГўГ® ГўГІГ®Г°Г®Г© ГЇГ®Г«Г®ГўГЁГ­ГҐ Г§ГўГіГЄГ®ГўГ®ГЈГ® ГЎГіГґГҐГ°Г 
 
-	vSemaphoreCreateBinary(xZone4Semaphore);//семафор 4-ой зоны поражения
-	vSemaphoreCreateBinary(xZone3Semaphore);//семафор 3-ой зоны поражения
-	vSemaphoreCreateBinary(xZone2Semaphore);//семафор 2-ой зоны поражения
-	vSemaphoreCreateBinary(xZone1Semaphore);//семафор 1-ой зоны поражения
+	vSemaphoreCreateBinary(xZone4Semaphore);//Г±ГҐГ¬Г ГґГ®Г° 4-Г®Г© Г§Г®Г­Г» ГЇГ®Г°Г Г¦ГҐГ­ГЁГї
+	vSemaphoreCreateBinary(xZone3Semaphore);//Г±ГҐГ¬Г ГґГ®Г° 3-Г®Г© Г§Г®Г­Г» ГЇГ®Г°Г Г¦ГҐГ­ГЁГї
+	vSemaphoreCreateBinary(xZone2Semaphore);//Г±ГҐГ¬Г ГґГ®Г° 2-Г®Г© Г§Г®Г­Г» ГЇГ®Г°Г Г¦ГҐГ­ГЁГї
+	vSemaphoreCreateBinary(xZone1Semaphore);//Г±ГҐГ¬Г ГґГ®Г° 1-Г®Г© Г§Г®Г­Г» ГЇГ®Г°Г Г¦ГҐГ­ГЁГї
 
-	vSemaphoreCreateBinary(xUsart1Semaphore);//семафор UASRT1
-	vSemaphoreCreateBinary(xBluetoothSemaphore);//семафор Blutooth
-	vSemaphoreCreateBinary(xGameOverSemaphore);//семафор Blutooth
-	vSemaphoreCreateBinary(xSDcardLockSemaphore);//семафор указывает, что с SD картой работает какой-то таск
+	vSemaphoreCreateBinary(xUsart1Semaphore);//Г±ГҐГ¬Г ГґГ®Г° UASRT1
+	vSemaphoreCreateBinary(xBluetoothSemaphore);//Г±ГҐГ¬Г ГґГ®Г° Blutooth
+	vSemaphoreCreateBinary(xGameOverSemaphore);//Г±ГҐГ¬Г ГґГ®Г° Blutooth
+	vSemaphoreCreateBinary(xSDcardLockSemaphore);//Г±ГҐГ¬Г ГґГ®Г° ГіГЄГ Г§Г»ГўГ ГҐГІ, Г·ГІГ® Г± SD ГЄГ Г°ГІГ®Г© Г°Г ГЎГ®ГІГ ГҐГІ ГЄГ ГЄГ®Г©-ГІГ® ГІГ Г±ГЄ
 
 /*
 	xTaskCreate( vTaskLED1, ( signed char * ) "LED1", configMINIMAL_STACK_SIZE/2, NULL, 0,
@@ -375,7 +373,7 @@ void BluetoothTask(void *pvParameters) {
 //	bt_reset();
 
 #ifndef 	COLOR_LCD
-		lcd8544_init(); // инициализация чёрно-белого дисплея
+		lcd8544_init(); // ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї Г·ВёГ°Г­Г®-ГЎГҐГ«Г®ГЈГ® Г¤ГЁГ±ГЇГ«ГҐГї
 #else
 
 		ILI9163Init();//
@@ -420,11 +418,11 @@ void BluetoothTask(void *pvParameters) {
 
 #ifndef 	COLOR_LCD
 						clear_screen();
-						  lcd8544_putstr(0, 0, "Настр. блютус", 0); // вывод первой строки
-						  if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
+						  lcd8544_putstr(0, 0, "ГЌГ Г±ГІГ°. ГЎГ«ГѕГІГіГ±", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+						  if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
 #else
 
-							 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+							 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 							 {
 							 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 							 	while (SPI3->SR & SPI_SR_BSY);
@@ -450,7 +448,7 @@ void BluetoothTask(void *pvParameters) {
 
 					}
 				}
-				else {//параметры успешно прочитаны из бинарного файла
+				else {//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГіГ±ГЇГҐГёГ­Г® ГЇГ°Г®Г·ГЁГІГ Г­Г» ГЁГ§ ГЎГЁГ­Г Г°Г­Г®ГЈГ® ГґГ Г©Г«Г 
 						armadaSystem.wav_player.type_of_reproduced_sound=NOTHING;
 						armadaSystem.wav_player.type_of_sound_to_play=NOTHING;
 						set_player_id(armadaSystem.player.id);
@@ -494,15 +492,15 @@ void BluetoothTask(void *pvParameters) {
 
 #ifndef 	COLOR_LCD
 		clear_screen();
-		xSemaphoreTake( xKeysSemaphore, 30 );//очищаем симафор
-		xSemaphoreTake(xWavPlayerManagerSemaphore, 30);//очищаем симафор
-	  lcd8544_rect(1,1,83,40,1); // прямоугольник
-	  if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
+		xSemaphoreTake( xKeysSemaphore, 30 );//Г®Г·ГЁГ№Г ГҐГ¬ Г±ГЁГ¬Г ГґГ®Г°
+		xSemaphoreTake(xWavPlayerManagerSemaphore, 30);//Г®Г·ГЁГ№Г ГҐГ¬ Г±ГЁГ¬Г ГґГ®Г°
+	  lcd8544_rect(1,1,83,40,1); // ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄ
+	  if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
 	  LCD_BL_ON;
 
-	  lcd8544_putstr(24, 8, "ARMADA", 0); // вывод первой строки
-      lcd8544_putstr( 21, 20, "MADE IN", 0); // вывод второй строки
-      lcd8544_putstr( 24, 28, "RUSSIA", 0); // вывод второй строки
+	  lcd8544_putstr(24, 8, "ARMADA", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+      lcd8544_putstr( 21, 20, "MADE IN", 0); // ГўГ»ГўГ®Г¤ ГўГІГ®Г°Г®Г© Г±ГІГ°Г®ГЄГЁ
+      lcd8544_putstr( 24, 28, "RUSSIA", 0); // ГўГ»ГўГ®Г¤ ГўГІГ®Г°Г®Г© Г±ГІГ°Г®ГЄГЁ
 	  if (!screen_auto_refresh)lcd8544_dma_refresh();
 
 #else
@@ -535,7 +533,7 @@ void BluetoothTask(void *pvParameters) {
 
 
 //////#ifdef RTC_Enable
-	  if(xSemaphoreTake( xKeysSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ожидание событый клавиатуры
+	  if(xSemaphoreTake( xKeysSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//Г®Г¦ГЁГ¤Г Г­ГЁГҐ Г±Г®ГЎГ»ГІГ»Г© ГЄГ«Г ГўГЁГ ГІГіГ°Г»
 //		volatile tsystem_event_type sys_event_tmp;
 //		if(xQueueReceive( xEventQueue, &sys_event_tmp, (portTickType)(TIC_FQR*2))== pdTRUE);
 		{
@@ -578,7 +576,7 @@ void BluetoothTask(void *pvParameters) {
 #ifndef 	COLOR_LCD
 
 #else
-if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					 {
 
 						drawBMPfromFlashUseDMA(guns,0,0,128,128,Rotation_0);
@@ -614,7 +612,7 @@ if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRU
 //			configure_bluetooth();
 		}
 	}
-	else {//параметры успешно прочитаны из бинарного файла
+	else {//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГіГ±ГЇГҐГёГ­Г® ГЇГ°Г®Г·ГЁГІГ Г­Г» ГЁГ§ ГЎГЁГ­Г Г°Г­Г®ГЈГ® ГґГ Г©Г«Г 
 			set_player_id(armadaSystem.player.id);
 			set_team_color(armadaSystem.player.team_color);
 			set_gun_damage(armadaSystem.gun.damage);
@@ -690,15 +688,15 @@ void Zone1task(void *pvParameters) {
 	static portTickType xLastWakeTime;
 	static trx_packet rx_pack;
 	for (;;) {
-		  xSemaphoreTake(xZone1Semaphore, portMAX_DELAY );//ждем событий ИК приемника
+		  xSemaphoreTake(xZone1Semaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© Г€ГЉ ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 
 	       switch(Zone1RxEvent)
 	       {
 	         case RX_COMPLETE:
 	       	   {
 	       		   hit_processing(zone_1);
-	       		   Zone1RxEvent = NOT_EVENT;//сбрасываем событие
-	       		   tim4_rec_state = REC_Idle;//разрешаем прием на 1-ой зоне
+	       		   Zone1RxEvent = NOT_EVENT;//Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г±Г®ГЎГ»ГІГЁГҐ
+	       		   tim4_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  1-Г®Г© Г§Г®Г­ГҐ
 	           }
 	           break;
 	           case RX_ERROR:
@@ -707,12 +705,12 @@ void Zone1task(void *pvParameters) {
 	             //      		 tim5_rec_state = REC_Idle;
 	           }
 	           break;
-	           case RX_MESSAGE_COMPLETE://принято сообщение
+	           case RX_MESSAGE_COMPLETE://ГЇГ°ГЁГ­ГїГІГ® Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
 	         	{
 
 	         		message_processing(zone_1);
 	         		Zone1RxEvent = NOT_EVENT;
-	         		tim4_rec_state = REC_Idle;//разрешаем прием на 1-ой зоне
+	         		tim4_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  1-Г®Г© Г§Г®Г­ГҐ
 
 	         	}
 	         	break;
@@ -723,7 +721,7 @@ void Zone1task(void *pvParameters) {
 
 void Zone2task(void *pvParameters) {
 	 for (;;) {
-		  xSemaphoreTake(xZone2Semaphore, portMAX_DELAY );//ждем событий ИК приемника
+		  xSemaphoreTake(xZone2Semaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© Г€ГЉ ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 
 	       switch(Zone2RxEvent)
 	       {
@@ -737,8 +735,8 @@ void Zone2task(void *pvParameters) {
 	               sensors[zone_2]=BLACK;
 	           */
 	       		   hit_processing(zone_2);
-	       		   Zone2RxEvent = NOT_EVENT;//сбрасываем событие
-	               tim2_rec_state = REC_Idle;//разрешаем прием на 2-ой зоне
+	       		   Zone2RxEvent = NOT_EVENT;//Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г±Г®ГЎГ»ГІГЁГҐ
+	               tim2_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  2-Г®Г© Г§Г®Г­ГҐ
 
 	           }
 	        break;
@@ -748,11 +746,11 @@ void Zone2task(void *pvParameters) {
 	       //      		 tim5_rec_state = REC_Idle;
 	           }
 	        break;
-	        case RX_MESSAGE_COMPLETE://принято сообщение
+	        case RX_MESSAGE_COMPLETE://ГЇГ°ГЁГ­ГїГІГ® Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
 	        {
          		message_processing(zone_2);
 	        	Zone2RxEvent = NOT_EVENT;
-	            tim2_rec_state = REC_Idle;//разрешаем прием на 2-ой зоне
+	            tim2_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  2-Г®Г© Г§Г®Г­ГҐ
 	        }
 	        break;
 	        default: break;
@@ -762,7 +760,7 @@ void Zone2task(void *pvParameters) {
 
 void Zone3task(void *pvParameters) {
 	 for (;;) {
-		  xSemaphoreTake(xZone3Semaphore, portMAX_DELAY );//ждем событий ИК приемника
+		  xSemaphoreTake(xZone3Semaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© Г€ГЉ ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 		  switch(Zone3RxEvent)
 		        {
 		         case RX_COMPLETE:
@@ -775,8 +773,8 @@ void Zone3task(void *pvParameters) {
 		               	sensors[zone_3]=BLACK;
 		                */
 			       		hit_processing(zone_3);
-		                Zone3RxEvent = NOT_EVENT;//сбрасываем событие
-		                tim3_rec_state = REC_Idle;//разрешаем прием на 3-ей зоне
+		                Zone3RxEvent = NOT_EVENT;//Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г±Г®ГЎГ»ГІГЁГҐ
+		                tim3_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  3-ГҐГ© Г§Г®Г­ГҐ
 		            }
 		         break;
 		         case RX_ERROR:
@@ -785,11 +783,11 @@ void Zone3task(void *pvParameters) {
 		 //      		 tim5_rec_state = REC_Idle;
 		            }
 		         break;
-		         case RX_MESSAGE_COMPLETE://принято сообщение
+		         case RX_MESSAGE_COMPLETE://ГЇГ°ГЁГ­ГїГІГ® Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
 		        	{
 		        		message_processing(zone_3);
 		        		Zone3RxEvent = NOT_EVENT;
-		        		tim3_rec_state = REC_Idle;//разрешаем прием на 3-ей зоне
+		        		tim3_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  3-ГҐГ© Г§Г®Г­ГҐ
 		        	}
 		         default: break;
 		        }
@@ -799,7 +797,7 @@ void Zone3task(void *pvParameters) {
 void Zone4task(void *pvParameters) {
 //static trx_packet last_proc_pack;
         for (;;) {
-       xSemaphoreTake(xZone4Semaphore, portMAX_DELAY );//ждем событий ИК приемника
+       xSemaphoreTake(xZone4Semaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© Г€ГЉ ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
        switch(Zone4RxEvent)
        {
        case RX_COMPLETE:
@@ -812,8 +810,8 @@ void Zone4task(void *pvParameters) {
        		  sensors[zone_4]=BLACK;
        		  */
        		  hit_processing(zone_4);
-       		  Zone4RxEvent = NOT_EVENT;//сбрасываем событие
-       		  tim5_rec_state = REC_Idle;//разрешаем прием на 4-ой зоне
+       		  Zone4RxEvent = NOT_EVENT;//Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г±Г®ГЎГ»ГІГЁГҐ
+       		  tim5_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  4-Г®Г© Г§Г®Г­ГҐ
        	   }
        	   break;
        case RX_ERROR:
@@ -823,11 +821,11 @@ void Zone4task(void *pvParameters) {
  //      		 tim5_rec_state = REC_Idle;
        	   }
        	   break;
-       case RX_MESSAGE_COMPLETE://принято сообщение
+       case RX_MESSAGE_COMPLETE://ГЇГ°ГЁГ­ГїГІГ® Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
       	   {
       		   message_processing(zone_4);
       		   Zone4RxEvent = NOT_EVENT;
-      		   tim5_rec_state = REC_Idle;//разрешаем прием на 4-ой зоне
+      		   tim5_rec_state = REC_Idle;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГЁГҐГ¬ Г­Г  4-Г®Г© Г§Г®Г­ГҐ
       	   }
        default: break;
        }
@@ -840,7 +838,7 @@ void Zone4task(void *pvParameters) {
 #define heart_x_pos 0
 #define heart_y_pos 40
 void vTaskLED1(void *pvParameters) {
-//	SPISend(~(1<<4));//синий
+//	SPISend(~(1<<4));//Г±ГЁГ­ГЁГ©
 /*
 	int16_t a,b;
 	uint16_t c,d;
@@ -883,7 +881,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
             LCD_BL_ON;
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_1,heart_x_pos,heart_y_pos,55,48,Rotation_0);
            	xSemaphoreGive(xColorLCDSemaphore);
@@ -904,7 +902,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
 //            LCD_BL_ON;
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_2,heart_x_pos,heart_y_pos,55,48,Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -925,7 +923,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             drawBitmap(0,0,heart[2],16,16,1);
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_3,heart_x_pos,heart_y_pos,55,48,Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -947,7 +945,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             drawBitmap(0,0,heart[3],16,16,1);
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_4,heart_x_pos,heart_y_pos,55,48, Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -968,7 +966,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             drawBitmap(0,0,heart[2],16,16,1);
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_3,heart_x_pos,heart_y_pos,55,48, Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -987,7 +985,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             drawBitmap(0,0,heart[1],16,16,1);
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_2,heart_x_pos,heart_y_pos,55,48, Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -1006,7 +1004,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             drawBitmap(0,0,heart[0],16,16,1);
             if (!screen_auto_refresh)lcd8544_dma_refresh();
 #else
-            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+            if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
             {
             drawBMPfromFlashUseDMA(heart_1,heart_x_pos,heart_y_pos,55,48, Rotation_0);
             xSemaphoreGive(xColorLCDSemaphore);
@@ -1024,9 +1022,9 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
 
 #ifdef LOW_DROP_ENABLE
 
-            	voltage =100+(2400*(uint16_t)ADC_values[1])/ref_adc_val;//1200mV - опорное напряжение
+            	voltage =100+(2400*(uint16_t)ADC_values[1])/ref_adc_val;//1200mV - Г®ГЇГ®Г°Г­Г®ГҐ Г­Г ГЇГ°ГїГ¦ГҐГ­ГЁГҐ
 #else
-            	voltage = (1200*4096)/ref_adc_val;//1200mV - опорное напряжение
+            	voltage = (1200*4096)/ref_adc_val;//1200mV - Г®ГЇГ®Г°Г­Г®ГҐ Г­Г ГЇГ°ГїГ¦ГҐГ­ГЁГҐ
 #endif
 
 
@@ -1054,8 +1052,8 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             		color_lcd_battary_voltage_update(voltage);
 //            	}
 #endif
-            		 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 0){//если нет блютус соединения
-            			 armadaSystem.wav_player.type_of_sound_to_play = SONAR;//надо воспроизвести звук сонара
+            		 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 0){//ГҐГ±Г«ГЁ Г­ГҐГІ ГЎГ«ГѕГІГіГ± Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГї
+            			 armadaSystem.wav_player.type_of_sound_to_play = SONAR;//Г­Г Г¤Г® ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ Г§ГўГіГЄ Г±Г®Г­Г Г°Г 
             			 xSemaphoreGive(xWavPlayerManagerSemaphore);
             		 }
             		 else{
@@ -1087,9 +1085,9 @@ if (sys_event_tmp.event_source == TRIGGER_KEY){
    	break;
    	case key_pressing:
    	{
-   		if((countdown_shock_time)||(game_status==OUT_OF_GAME))//если время шока не прошло
-   																				// или внеигры
-   																				//игнорируем нажатие
+   		if((countdown_shock_time)||(game_status==OUT_OF_GAME))//ГҐГ±Г«ГЁ ГўГ°ГҐГ¬Гї ГёГ®ГЄГ  Г­ГҐ ГЇГ°Г®ГёГ«Г®
+   																				// ГЁГ«ГЁ ГўГ­ГҐГЁГЈГ°Г»
+   																				//ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ Г­Г Г¦Г ГІГЁГҐ
    		{
    			keyboard_event = no_key_pressing;
             break;
@@ -1112,7 +1110,7 @@ if (sys_event_tmp.event_source == TRIGGER_KEY){
 	   			    BKP_WriteBackupRegister(BKP_DR1, armadaSystem.gun.rounds);
 #endif
 
-if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убедимся, что мы точно в игре
+if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//ГіГЎГҐГ¤ГЁГ¬Г±Гї, Г·ГІГ® Г¬Г» ГІГ®Г·Г­Г® Гў ГЁГЈГ°ГҐ
 {
 #ifndef 	COLOR_LCD
 			lcd_rounds_update();
@@ -1153,7 +1151,7 @@ xSemaphoreGive(xGameOverSemaphore);
 #endif
 
 
-if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убедимся, что мы точно в игре
+if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//ГіГЎГҐГ¤ГЁГ¬Г±Гї, Г·ГІГ® Г¬Г» ГІГ®Г·Г­Г® Гў ГЁГЈГ°ГҐ
 {
 #ifndef 	COLOR_LCD
 	lcd_rounds_update();
@@ -1185,9 +1183,9 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 	   			key_status = test_keyboard( ADC_values[0]);
 	   			while (key_status==key_pressing)
 	   			{
-	   				if(game_status==OUT_OF_GAME)//если время шока не прошло
-	   				   																				// или внеигры
-	   				   																				//игнорируем нажатие
+	   				if(game_status==OUT_OF_GAME)//ГҐГ±Г«ГЁ ГўГ°ГҐГ¬Гї ГёГ®ГЄГ  Г­ГҐ ГЇГ°Г®ГёГ«Г®
+	   				   																				// ГЁГ«ГЁ ГўГ­ГҐГЁГЈГ°Г»
+	   				   																				//ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ Г­Г Г¦Г ГІГЁГҐ
 	   				   		{
 	   				   			keyboard_event = no_key_pressing;
 	   				            break;
@@ -1205,7 +1203,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 #endif
 
 
-if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убедимся, что мы точно в игре
+if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//ГіГЎГҐГ¤ГЁГ¬Г±Гї, Г·ГІГ® Г¬Г» ГІГ®Г·Г­Г® Гў ГЁГЈГ°ГҐ
 {
 #ifndef 	COLOR_LCD
 	lcd_rounds_update();
@@ -1267,9 +1265,9 @@ else if(sys_event_tmp.event_source == RELOAD_KEY){
 
        //       		vTaskDelay(1);
        //         		GPIO_SetBits(GPIOC, GPIO_Pin_3);
-if(game_status==OUT_OF_GAME)//если время шока не прошло
-   												// или внеигры
-												//игнорируем нажатие
+if(game_status==OUT_OF_GAME)//ГҐГ±Г«ГЁ ГўГ°ГҐГ¬Гї ГёГ®ГЄГ  Г­ГҐ ГЇГ°Г®ГёГ«Г®
+   												// ГЁГ«ГЁ ГўГ­ГҐГЁГЈГ°Г»
+												//ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ Г­Г Г¦Г ГІГЁГҐ
 {
 	reload_key_event = no_key_pressing;
     break;
@@ -1293,7 +1291,7 @@ if(game_status==OUT_OF_GAME)//если время шока не прошло
 
 
 
-if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убедимся, что мы точно в игре
+if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//ГіГЎГҐГ¤ГЁГ¬Г±Гї, Г·ГІГ® Г¬Г» ГІГ®Г·Г­Г® Гў ГЁГЈГ°ГҐ
 {
 #ifndef 	COLOR_LCD
 	lcd_rounds_update();
@@ -1311,7 +1309,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 
 
 
-							keyboard_event = no_key_pressing;//если во время перезарядки был нажат курк - сбросим это событие
+							keyboard_event = no_key_pressing;//ГҐГ±Г«ГЁ ГўГ® ГўГ°ГҐГ¬Гї ГЇГҐГ°ГҐГ§Г Г°ГїГ¤ГЄГЁ ГЎГ»Г« Г­Г Г¦Г ГІ ГЄГіГ°ГЄ - Г±ГЎГ°Г®Г±ГЁГ¬ ГЅГІГ® Г±Г®ГЎГ»ГІГЁГҐ
                    		}
 
                    		reload_key_event = no_key_pressing;
@@ -1327,11 +1325,11 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 
 else if(sys_event_tmp.event_source == FIRE_MODE_SWITCH){
 
-if(game_status!=OUT_OF_GAME)//если внеигры
-													//игнорируем
+if(game_status!=OUT_OF_GAME)//ГҐГ±Г«ГЁ ГўГ­ГҐГЁГЈГ°Г»
+													//ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬
 {
 
-if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убедимся, что мы точно в игре
+if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//ГіГЎГҐГ¤ГЁГ¬Г±Гї, Г·ГІГ® Г¬Г» ГІГ®Г·Г­Г® Гў ГЁГЈГ°ГҐ
 {
 #ifndef 	COLOR_LCD
 			lcd_fire_mode_update(curr_fire_mode);
@@ -1347,7 +1345,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 
 else if(sys_event_tmp.event_source == BLUETOOTH){
 
-		    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
+		    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г®
 		        {
 
 #if DEVICE_ROLE == BANDANA
@@ -1380,19 +1378,19 @@ else if(sys_event_tmp.event_source == BLUETOOTH){
 if(game_status!=OUT_OF_GAME){
 #if DEVICE_ROLE==TAG
 #else
-	drawDigit(52+2,0,10,1);//рисуем эмблемку блютус
+	drawDigit(52+2,0,10,1);//Г°ГЁГ±ГіГҐГ¬ ГЅГ¬ГЎГ«ГҐГ¬ГЄГі ГЎГ«ГѕГІГіГ±
 	 if (!screen_auto_refresh)lcd8544_dma_refresh();
 #endif
 }
 	#else //COLOR_LCD
-		    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 		    		{
 		    		drawBMPfromFlash(bluetooth1,16,32);
 		    		xSemaphoreGive(xColorLCDSemaphore);
 		    		}
 	#endif
 		        }
-		    else//если соединение разорвано
+		    else//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ Г°Г Г§Г®Г°ГўГ Г­Г®
 		        {
 #ifndef COLOR_LCD
 
@@ -1405,7 +1403,7 @@ if(game_status!=OUT_OF_GAME){
 	drawBitmap(0,0,black_gun_image,84,48,1);
 	}
 #else
-	fillRect(52+2,0,12,16,0);//удаляем эмблемку блютус
+	fillRect(52+2,0,12,16,0);//ГіГ¤Г Г«ГїГҐГ¬ ГЅГ¬ГЎГ«ГҐГ¬ГЄГі ГЎГ«ГѕГІГіГ±
 #endif
 	 if (!screen_auto_refresh)lcd8544_dma_refresh();
 }
@@ -1415,7 +1413,7 @@ if(game_status!=OUT_OF_GAME){
 #if DEVICE_ROLE==TAG
 	if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE){
 	game_status=OUT_OF_GAME;
-	if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+	if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 						 {
 
 							drawBMPfromFlashUseDMA(guns,0,0,128,128,Rotation_0);
@@ -1432,7 +1430,7 @@ if(game_status!=OUT_OF_GAME){
 
 #endif
 }
-	    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+	    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 	    		{
 
 		    	FillRect(iBlack,0,0,16,32);
@@ -1454,7 +1452,7 @@ if(game_status!=OUT_OF_GAME){
 void Wav_Player_Manager(void *pvParameters){
 for (;;)
 	{
-		xSemaphoreTake(xWavPlayerManagerSemaphore, portMAX_DELAY );//ждем задания для wav-плеера
+		xSemaphoreTake(xWavPlayerManagerSemaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г§Г Г¤Г Г­ГЁГї Г¤Г«Гї wav-ГЇГ«ГҐГҐГ°Г 
 		switch(armadaSystem.wav_player.type_of_sound_to_play)
 				{
 					case SHOT:
@@ -1476,7 +1474,7 @@ for (;;)
 					break;
 					case HIT:
 					{
-						if(armadaSystem.wav_player.type_of_reproduced_sound==HIT) break;//если звук ранения уже воспроизводитcя
+						if(armadaSystem.wav_player.type_of_reproduced_sound==HIT) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ Г°Г Г­ГҐГ­ГЁГї ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 						else {
 							while (!stopWavPlayer()){};
 							xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1485,7 +1483,7 @@ for (;;)
 					break;
 					case EMPTY_CLIP:
 					{
-//						if(armadaSystem.wav_player.type_of_reproduced_sound==EMPTY_CLIP) break;//если звук "пустая обойма" уже воспроизводитcя
+//						if(armadaSystem.wav_player.type_of_reproduced_sound==EMPTY_CLIP) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ "ГЇГіГ±ГІГ Гї Г®ГЎГ®Г©Г¬Г " ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 //						else {
 								stopWavPlayer();
 								xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1495,7 +1493,7 @@ for (;;)
 
 					case RELOAD:
 					{
-//						if(armadaSystem.wav_player.type_of_reproduced_sound==RELOAD) break;//если звук "пустая обойма" уже воспроизводитcя
+//						if(armadaSystem.wav_player.type_of_reproduced_sound==RELOAD) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ "ГЇГіГ±ГІГ Гї Г®ГЎГ®Г©Г¬Г " ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 //						else {
 								stopWavPlayer();
 								xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1504,7 +1502,7 @@ for (;;)
 					break;
 					case MESSAGE:
 					{
-//						if(armadaSystem.wav_player.type_of_reproduced_sound==RELOAD) break;//если звук "пустая обойма" уже воспроизводитcя
+//						if(armadaSystem.wav_player.type_of_reproduced_sound==RELOAD) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ "ГЇГіГ±ГІГ Гї Г®ГЎГ®Г©Г¬Г " ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 //						else {
 								stopWavPlayer();
 								xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1514,7 +1512,7 @@ for (;;)
 
 					case START_GAME:
 					{
-						if(armadaSystem.wav_player.type_of_reproduced_sound==START_GAME) break;//если звук "пустая обойма" уже воспроизводитcя
+						if(armadaSystem.wav_player.type_of_reproduced_sound==START_GAME) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ "ГЇГіГ±ГІГ Гї Г®ГЎГ®Г©Г¬Г " ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 						else {
 								stopWavPlayer();
 								xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1524,7 +1522,7 @@ for (;;)
 
 					case SONAR:
 					{
-						if(armadaSystem.wav_player.type_of_reproduced_sound==SONAR) break;//если звук "пустая обойма" уже воспроизводитcя
+						if(armadaSystem.wav_player.type_of_reproduced_sound==SONAR) break;//ГҐГ±Г«ГЁ Г§ГўГіГЄ "ГЇГіГ±ГІГ Гї Г®ГЎГ®Г©Г¬Г " ГіГ¦ГҐ ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІcГї
 						else {
 								stopWavPlayer();
 								xSemaphoreGive(xPlayWavSoundSemaphore);
@@ -1547,8 +1545,8 @@ void Wav_Player(void *pvParameters){
 
 	for (;;) {
 
-		xSemaphoreTake(xPlayWavSoundSemaphore, portMAX_DELAY );//ждем задания для wav-плеера
-		if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если SD карта занята, ждем 2 с
+		xSemaphoreTake(xPlayWavSoundSemaphore, portMAX_DELAY );//Г¦Г¤ГҐГ¬ Г§Г Г¤Г Г­ГЁГї Г¤Г«Гї wav-ГЇГ«ГҐГҐГ°Г 
+		if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ SD ГЄГ Г°ГІГ  Г§Г Г­ГїГІГ , Г¦Г¤ГҐГ¬ 2 Г±
 		{
 
 		switch(armadaSystem.wav_player.type_of_sound_to_play)
@@ -1632,9 +1630,9 @@ void Wav_Player(void *pvParameters){
 		//		DMA_DeInit(DMA2_Channel3);
 //		init_dma();
 //		vTaskDelay(500);
-//		DMA2_Channel3->CCR &= (uint16_t)(~DMA_CCR1_EN);//Выключаем DMA.
-//		DMA2_Channel3->CNDTR = 512;//Устанавливаем размер передаваемого буфера заново.
-//		DMA2_Channel3->CCR |= DMA_CCR1_EN;//Включаем DMA
+//		DMA2_Channel3->CCR &= (uint16_t)(~DMA_CCR1_EN);//Г‚Г»ГЄГ«ГѕГ·Г ГҐГ¬ DMA.
+//		DMA2_Channel3->CNDTR = 512;//Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г°Г Г§Г¬ГҐГ° ГЇГҐГ°ГҐГ¤Г ГўГ ГҐГ¬Г®ГЈГ® ГЎГіГґГҐГ°Г  Г§Г Г­Г®ГўГ®.
+//		DMA2_Channel3->CCR |= DMA_CCR1_EN;//Г‚ГЄГ«ГѕГ·Г ГҐГ¬ DMA
 //		wave_playback("murakami.wav");
 //		vTaskDelay(500);
 /*
@@ -1741,7 +1739,7 @@ void init_dma( uint16_t bitsPerSample) {
 
 	DMA_Init(DMA2_Channel3, &DMA_InitStructure);
 
-	/* Разрешаем прерывание по окончанию передачи данных */
+	/* ГђГ Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГҐГ°Г»ГўГ Г­ГЁГҐ ГЇГ® Г®ГЄГ®Г­Г·Г Г­ГЁГѕ ГЇГҐГ°ГҐГ¤Г Г·ГЁ Г¤Г Г­Г­Г»Гµ */
 	DMA_ITConfig(DMA2_Channel3, DMA_IT_TC , ENABLE);
 	DMA_ITConfig(DMA2_Channel3, DMA_IT_HT , ENABLE);
 
@@ -1751,7 +1749,7 @@ void init_dma( uint16_t bitsPerSample) {
 
 }
 
-void init_dma_to_spi2(void)//настраиваем DMA для работы с SPI2 (датчиками)
+void init_dma_to_spi2(void)//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ DMA Г¤Г«Гї Г°Г ГЎГ®ГІГ» Г± SPI2 (Г¤Г ГІГ·ГЁГЄГ Г¬ГЁ)
 {
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -1768,7 +1766,7 @@ void init_dma_to_spi2(void)//настраиваем DMA для работы с SPI2 (датчиками)
 	DMA_to_SPI_InitStructure.DMA_M2M = DMA_M2M_Disable;
 
 	DMA_Init(DMA1_Channel5, &DMA_to_SPI_InitStructure);
-	/* Разрешаем прерывание по окончанию передачи данных */
+	/* ГђГ Г§Г°ГҐГёГ ГҐГ¬ ГЇГ°ГҐГ°Г»ГўГ Г­ГЁГҐ ГЇГ® Г®ГЄГ®Г­Г·Г Г­ГЁГѕ ГЇГҐГ°ГҐГ¤Г Г·ГЁ Г¤Г Г­Г­Г»Гµ */
 	DMA_ITConfig(DMA1_Channel5, DMA_IT_TC , ENABLE);
 	DMA_ITConfig(DMA1_Channel5, DMA_IT_HT , ENABLE);
 
@@ -1857,39 +1855,39 @@ void DMA2_Channel2_IRQHandler(void)
 #endif
 
 //*********************************************************************************************
-//function воспроизвести wave-файл                                                           //
-//argument имя файла                                                                         //
-//result   0 - все нормально, иначе - ошибка                                                 //
+//function ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ wave-ГґГ Г©Г«                                                           //
+//argument ГЁГ¬Гї ГґГ Г©Г«Г                                                                          //
+//result   0 - ГўГ±ГҐ Г­Г®Г°Г¬Г Г«ГјГ­Г®, ГЁГ­Г Г·ГҐ - Г®ГёГЁГЎГЄГ                                                  //
 //*********************************************************************************************
 char wave_playback(const char *FileName)
 {
 
-//	FRESULT res;                                //для возвращаемого функциями результата
+//	FRESULT res;                                //Г¤Г«Гї ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г®ГЈГ® ГґГіГ­ГЄГ¶ГЁГїГ¬ГЁ Г°ГҐГ§ГіГ«ГјГІГ ГІГ 
 
 	armadaSystem.wav_player.stop = false;
 	DMA_DeInit(DMA2_Channel3);
 	TIM_DeInit(TIM6);
 
-	FIL file;    //файловый объект
-	  UINT cnt;                                   //количество реально прочитанных байт
+	FIL file;    //ГґГ Г©Г«Г®ГўГ»Г© Г®ГЎГєГҐГЄГІ
+	  UINT cnt;                                   //ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г°ГҐГ Г«ГјГ­Г® ГЇГ°Г®Г·ГЁГІГ Г­Г­Г»Гµ ГЎГ Г©ГІ
 	  uint32_t sampleRate;
 	  uint16_t bitsPerSample;
-	  volatile uint32_t subchunk2Size;//количество байт данных
+	  volatile uint32_t subchunk2Size;//ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЎГ Г©ГІ Г¤Г Г­Г­Г»Гµ
 
-	res = f_open( &file, FileName, FA_READ );   //открыть файл FileName для чтения
+	res = f_open( &file, FileName, FA_READ );   //Г®ГІГЄГ°Г»ГІГј ГґГ Г©Г« FileName Г¤Г«Гї Г·ГІГҐГ­ГЁГї
 
-	   if(res)//не смогли открыть файл
+	   if(res)//Г­ГҐ Г±Г¬Г®ГЈГ«ГЁ Г®ГІГЄГ°Г»ГІГј ГґГ Г©Г«
 	   {
 		   f_close(&file);
-	        // Иницилизация карты
+	        // Г€Г­ГЁГ¶ГЁГ«ГЁГ§Г Г¶ГЁГї ГЄГ Г°ГІГ»
 	            Status = SD_Init();
-	        // Получаем информацию о карте
+	        // ГЏГ®Г«ГіГ·Г ГҐГ¬ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ Г® ГЄГ Г°ГІГҐ
 	            SD_GetCardInfo(&SDCardInfo);
-	                // Выбор карты и настройка режима работы
+	                // Г‚Г»ГЎГ®Г° ГЄГ Г°ГІГ» ГЁ Г­Г Г±ГІГ°Г®Г©ГЄГ  Г°ГҐГ¦ГЁГ¬Г  Г°Г ГЎГ®ГІГ»
 	                SD_SelectDeselect((uint32_t) (SDCardInfo.RCA << 16));
 	           //     SD_SetDeviceMode(SD_POLLING_MODE);
 	//                SD_SetDeviceMode(SD_INTERRUPT_MODE);
-	                // И вот наконец то запись и чтение
+	                // Г€ ГўГ®ГІ Г­Г ГЄГ®Г­ГҐГ¶ ГІГ® Г§Г ГЇГЁГ±Гј ГЁ Г·ГІГҐГ­ГЁГҐ
 
 //	                get_uid(request_text);
 //	                xtea2_encipher(64,request_text,key_A);
@@ -1897,21 +1895,21 @@ char wave_playback(const char *FileName)
 
 	                f_mount(0,&fs);
 
-	                res = f_open( &file, FileName, FA_READ );   //открыть файл FileName для чтения
+	                res = f_open( &file, FileName, FA_READ );   //Г®ГІГЄГ°Г»ГІГј ГґГ Г©Г« FileName Г¤Г«Гї Г·ГІГҐГ­ГЁГї
 
-	                if(res)//не смогли открыть файл
+	                if(res)//Г­ГҐ Г±Г¬Г®ГЈГ«ГЁ Г®ГІГЄГ°Г»ГІГј ГґГ Г©Г«
 	                {
 	                	armadaSystem.wav_player.stop = true;
 	                	return 1;
 	                }
 	   }
-	//   res = f_lseek(&file,0x2c);                  //переместить указатель на начало полезных данных
+	//   res = f_lseek(&file,0x2c);                  //ГЇГҐГ°ГҐГ¬ГҐГ±ГІГЁГІГј ГіГЄГ Г§Г ГІГҐГ«Гј Г­Г  Г­Г Г·Г Г«Г® ГЇГ®Г«ГҐГ§Г­Г»Гµ Г¤Г Г­Г­Г»Гµ
 
 	   res = f_lseek(&file,24);
 
 	   if(res)
 	   {
-		   f_close(&file);                             //закрыть файл
+		   f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 		   armadaSystem.wav_player.stop = true;
 		   return 2;
 	   }
@@ -1920,7 +1918,7 @@ char wave_playback(const char *FileName)
 
 	   if (cnt<4)
 	   {
-		   f_close(&file);                             //закрыть файл
+		   f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 		   armadaSystem.wav_player.stop = true;
 		   return 3;
 	   }
@@ -1932,7 +1930,7 @@ char wave_playback(const char *FileName)
 
 	   if(res)
 	   {
-		   f_close(&file);                             //закрыть файл
+		   f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 		   armadaSystem.wav_player.stop = true;
 		   return 2;
 	   }
@@ -1942,7 +1940,7 @@ char wave_playback(const char *FileName)
 		res = f_lseek(&file,40);
 		if(res)
 		{
-			f_close(&file);                             //закрыть файл
+			f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 			armadaSystem.wav_player.stop = true;
 			return 2;
 		}
@@ -1952,17 +1950,17 @@ char wave_playback(const char *FileName)
 
 		if(res)
 		{
-			f_close(&file);                             //закрыть файл
+			f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 			armadaSystem.wav_player.stop = true;
 			return 2;
 		}
 
-	   res=f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE*2,&cnt);       //загрузить буфер ЦАПа данными
+	   res=f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE*2,&cnt);       //Г§Г ГЈГ°ГіГ§ГЁГІГј ГЎГіГґГҐГ° Г–ГЂГЏГ  Г¤Г Г­Г­Г»Г¬ГЁ
 
 
 	   if(res)
 	   {
-		   f_close(&file);                             //закрыть файл
+		   f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 //		   armadaSystem.wav_player.stop = true;
 //		   xSemaphoreGive(xWavPlayerSemaphore);//
 		   return 3;
@@ -1989,9 +1987,9 @@ char wave_playback(const char *FileName)
 
 //		   	   	 taskENTER_CRITICAL();
 
-		   		 f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE/*256*/,&cnt);    //загрузить ее данными
+		   		 f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE/*256*/,&cnt);    //Г§Г ГЈГ°ГіГ§ГЁГІГј ГҐГҐ Г¤Г Г­Г­Г»Г¬ГЁ
 //		   		 taskEXIT_CRITICAL();
-		   		 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //если конец файла
+		   		 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
 
 //		   		 taskENTER_CRITICAL();
 		   		 pointer = (uint16_t *)&DAC_Buff[0];
@@ -2010,11 +2008,11 @@ char wave_playback(const char *FileName)
 		   		 xSemaphoreTake( xSoundBuffTCSemaphore, portMAX_DELAY );
 
 //		   		taskENTER_CRITICAL();
-	   	   	     f_read (&file,&DAC_Buff[SOUND_BUFFER_SIZE/2],SOUND_BUFFER_SIZE,&cnt);  //загрузить ее данными
+	   	   	     f_read (&file,&DAC_Buff[SOUND_BUFFER_SIZE/2],SOUND_BUFFER_SIZE,&cnt);  //Г§Г ГЈГ°ГіГ§ГЁГІГј ГҐГҐ Г¤Г Г­Г­Г»Г¬ГЁ
 //	   	   	    taskEXIT_CRITICAL();
 
-	   	   	     //если конец файла
-   	   	     	 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //если конец файла
+	   	   	     //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
+   	   	     	 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
 //   	   	     	 pointer = (uint16_t *)&DAC_Buff[SOUND_BUFFER_SIZE/2];
 
 //	   	   	    taskENTER_CRITICAL();
@@ -2031,25 +2029,25 @@ char wave_playback(const char *FileName)
    	   	  //   	 if(subchunk2Size>cnt) subchunk2Size-=cnt;
    	   	  //   	 else break;// subchunk2Size = 0;
 	    }
-	   } else {//если 8 бит
+	   } else {//ГҐГ±Г«ГЁ 8 ГЎГЁГІ
 		   TIM_Cmd(TIM6, ENABLE);
 		   while(1/*subchunk2Size>0*/)
 		  	    {
 
 		  				 xSemaphoreTake( xSoundBuffHTSemaphore, portMAX_DELAY );
 	//	  				taskENTER_CRITICAL();
-		  				 f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE/*256*/,&cnt);    //загрузить ее данными
+		  				 f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE/*256*/,&cnt);    //Г§Г ГЈГ°ГіГ§ГЁГІГј ГҐГҐ Г¤Г Г­Г­Г»Г¬ГЁ
 //		  				taskEXIT_CRITICAL();
-		  				 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //если конец файла
+		  				 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break;                        //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
 		 // 		   		 if(subchunk2Size>cnt) subchunk2Size-=cnt;
 		 // 		   		 else subchunk2Size = 0;
 		  	   	   	     xSemaphoreTake( xSoundBuffTCSemaphore, portMAX_DELAY );
 
 //		  	   	   	taskENTER_CRITICAL();
-		  	   	   	     f_read (&file,&DAC_Buff[SOUND_BUFFER_SIZE/2],SOUND_BUFFER_SIZE,&cnt);  //загрузить ее данными
+		  	   	   	     f_read (&file,&DAC_Buff[SOUND_BUFFER_SIZE/2],SOUND_BUFFER_SIZE,&cnt);  //Г§Г ГЈГ°ГіГ§ГЁГІГј ГҐГҐ Г¤Г Г­Г­Г»Г¬ГЁ
 //		  	   		taskEXIT_CRITICAL();
-		  	   	   	     //если конец файла
-		     	   	     	 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break; //если конец файла
+		  	   	   	     //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
+		     	   	     	 if((cnt<SOUND_BUFFER_SIZE)||(armadaSystem.wav_player.stop))break; //ГҐГ±Г«ГЁ ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г 
 		  //   	   	     if(subchunk2Size>cnt) subchunk2Size-=cnt;
 		  //   	   	     else subchunk2Size = 0;
 		  	    }
@@ -2060,9 +2058,9 @@ char wave_playback(const char *FileName)
 	}
 
 
-	   TIM_Cmd(TIM6, DISABLE);						//остановить преобразование
+	   TIM_Cmd(TIM6, DISABLE);						//Г®Г±ГІГ Г­Г®ГўГЁГІГј ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ
 
-	   f_close(&file);                             //закрыть файл
+	   f_close(&file);                             //Г§Г ГЄГ°Г»ГІГј ГґГ Г©Г«
 
 /*
 	   uint16_t i;
@@ -2076,7 +2074,7 @@ char wave_playback(const char *FileName)
 
 	   xSemaphoreGive(xWavPlayerSemaphore);//
 
-	   return 0;                                   //успешное завершение ф-ии
+	   return 0;                                   //ГіГ±ГЇГҐГёГ­Г®ГҐ Г§Г ГўГҐГ°ГёГҐГ­ГЁГҐ Гґ-ГЁГЁ
 
 }
 
@@ -2084,31 +2082,31 @@ char wave_playback(const char *FileName)
 
 
 
-void ir_tx_cursor_home(void){//устанавливаем курсор в начало буфера
+void ir_tx_cursor_home(void){//ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЄГіГ°Г±Г®Г° Гў Г­Г Г·Г Г«Г® ГЎГіГґГҐГ°Г 
 ir_tx_buffer_cursor.byte_pos = 0;
 ir_tx_buffer_cursor.heder_been_sent = false;
 ir_tx_buffer_cursor.bit_mask = (1<<7);
-//ir_pulse_counter = IR_START; //передадим заголовоке
-//ir_space_counter = IR_SPACE;// и заголовок
+//ir_pulse_counter = IR_START; //ГЇГҐГ°ГҐГ¤Г Г¤ГЁГ¬ Г§Г ГЈГ®Г«Г®ГўГ®ГЄГҐ
+//ir_space_counter = IR_SPACE;// ГЁ Г§Г ГЈГ®Г«Г®ГўГ®ГЄ
 }
 
 
 
-bool get_buffer_bit(uint8_t index){		//Считываем значение бита в буфере ИК-приемника
+bool get_buffer_bit(uint8_t index){		//Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЎГЁГІГ  Гў ГЎГіГґГҐГ°ГҐ Г€ГЉ-ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 uint8_t byte_index;
 uint8_t bit_index;
-byte_index = index/8; //Определяем, в каком байте нахадится нужный бит
-bit_index = index - (byte_index*8);//Определяем номер бита в байте
+byte_index = index/8; //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Гў ГЄГ ГЄГ®Г¬ ГЎГ Г©ГІГҐ Г­Г ГµГ Г¤ГЁГІГ±Гї Г­ГіГ¦Г­Г»Г© ГЎГЁГІ
+bit_index = index - (byte_index*8);//ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г­Г®Г¬ГҐГ° ГЎГЁГІГ  Гў ГЎГ Г©ГІГҐ
 if(rx_buffer[byte_index]&(1<<(7-bit_index))) return true;
 else return false;
 }
 
 
-bool get_zone_buffer_bit(TDamageZone zone, uint8_t index){		//Считываем значение бита в буфере ИК-приемника
+bool get_zone_buffer_bit(TDamageZone zone, uint8_t index){		//Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЎГЁГІГ  Гў ГЎГіГґГҐГ°ГҐ Г€ГЉ-ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 	uint8_t byte_index;
 	uint8_t bit_index;
-	byte_index = index/8; //Определяем, в каком байте нахадится нужный бит
-	bit_index = index - (byte_index*8);//Определяем номер бита в байте
+	byte_index = index/8; //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Гў ГЄГ ГЄГ®Г¬ ГЎГ Г©ГІГҐ Г­Г ГµГ Г¤ГЁГІГ±Гї Г­ГіГ¦Г­Г»Г© ГЎГЁГІ
+	bit_index = index - (byte_index*8);//ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г­Г®Г¬ГҐГ° ГЎГЁГІГ  Гў ГЎГ Г©ГІГҐ
 	switch(zone)
 	{
 		case zone_1:
@@ -2139,11 +2137,11 @@ bool get_zone_buffer_bit(TDamageZone zone, uint8_t index){		//Считываем значение
 
 }
 
-void set_buffer_bit(uint8_t index, bool value){	//Задаем значение биту в буфере ИК-приемника
+void set_buffer_bit(uint8_t index, bool value){	//Г‡Г Г¤Г ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЎГЁГІГі Гў ГЎГіГґГҐГ°ГҐ Г€ГЉ-ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ 
 uint8_t byte_index;
 uint8_t bit_index;
-byte_index = index/8; //Определяем, в каком байте нахадится нужный бит
-bit_index = index - (byte_index*8);//Определяем номер бита в байте
+byte_index = index/8; //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Гў ГЄГ ГЄГ®Г¬ ГЎГ Г©ГІГҐ Г­Г ГµГ Г¤ГЁГІГ±Гї Г­ГіГ¦Г­Г»Г© ГЎГЁГІ
+bit_index = index - (byte_index*8);//ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г­Г®Г¬ГҐГ° ГЎГЁГІГ  Гў ГЎГ Г©ГІГҐ
 if(value)
 		{
 			rx_buffer[byte_index] |= (1<<(7-bit_index));
@@ -2157,8 +2155,8 @@ else	{
 void set_zone_buffer_bit (TDamageZone zone, uint8_t index, bool value){
 	uint8_t byte_index;
 	uint8_t bit_index;
-	byte_index = index/8; //Определяем, в каком байте нахадится нужный бит
-	bit_index = index - (byte_index*8);//Определяем номер бита в байте
+	byte_index = index/8; //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Гў ГЄГ ГЄГ®Г¬ ГЎГ Г©ГІГҐ Г­Г ГµГ Г¤ГЁГІГ±Гї Г­ГіГ¦Г­Г»Г© ГЎГЁГІ
+	bit_index = index - (byte_index*8);//ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г­Г®Г¬ГҐГ° ГЎГЁГІГ  Гў ГЎГ Г©ГІГҐ
 
 
 				switch(zone)
@@ -2199,7 +2197,7 @@ void set_zone_buffer_bit (TDamageZone zone, uint8_t index, bool value){
 
 }
 
-void init_var(void){//инициализируем переменные
+void init_var(void){//ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ
 
 #if DEVICE_ROLE==BANDANA
 bt_connect_hase_done=false;
@@ -2210,7 +2208,7 @@ hit_mask = 0;
 hit_timeout_counter = 0xFF;
 #endif
 	bt_configured=false;
-	screen_auto_refresh=false;//запрещаем автоматическое обновление экрана
+	screen_auto_refresh=false;//Г§Г ГЇГ°ГҐГ№Г ГҐГ¬ Г ГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГ®ГҐ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЅГЄГ°Г Г­Г 
 #ifdef SENSORS_BECKLIGHT
 	set_sensor_color(BLACK,0,zone_1);
 	set_sensor_vibro(0,zone_1);
@@ -2227,7 +2225,7 @@ hit_timeout_counter = 0xFF;
 	sensors[zone_3] = BLACK;
 	sensors[zone_4] = BLACK;
 #endif
-	countdown_shock_time=0;//обратный счетчик времени шока
+	countdown_shock_time=0;//Г®ГЎГ°Г ГІГ­Г»Г© Г±Г·ГҐГІГ·ГЁГЄ ГўГ°ГҐГ¬ГҐГ­ГЁ ГёГ®ГЄГ 
 
 	armadaSystem.battary.full_voltage = DEFAULT_BATTARY_FULL_VOLTAGE;
 	armadaSystem.battary.low_voltage = DEFAULT_BATTARY_LOW_VOLTAGE;
@@ -2282,7 +2280,7 @@ else
 
 
 //	bool hit_in_processing = false;
-//	armadaSystem.wav_player.stop = true;//выключаем wav-плеер
+//	armadaSystem.wav_player.stop = true;//ГўГ»ГЄГ«ГѕГ·Г ГҐГ¬ wav-ГЇГ«ГҐГҐГ°
 	safe_counter = 0;
 	tim2_rec_state=REC_Idle;
 	tim3_rec_state=REC_Idle;
@@ -2300,14 +2298,14 @@ else
 	set_player_id(armadaSystem.player.id);
 	set_team_color(armadaSystem.player.team_color/*Blue*/);
 	set_gun_damage(armadaSystem.gun.damage);
-	key_pressing_duration.key_1    =0;//обнуляем счетчики
-							  //длительности
-							  //непрерывного нажатия кнопок
-	key_pressing_duration.key_1_inc=1;//разрешаем отсчет длительности
-	key_pressing_duration.key_2    =0;//обнуляем счетчики
-							  //длительности
-							  //непрерывного нажатия кнопок
-	key_pressing_duration.key_2_inc=1;//разрешаем отсчет длительности
+	key_pressing_duration.key_1    =0;//Г®ГЎГ­ГіГ«ГїГҐГ¬ Г±Г·ГҐГІГ·ГЁГЄГЁ
+							  //Г¤Г«ГЁГІГҐГ«ГјГ­Г®Г±ГІГЁ
+							  //Г­ГҐГЇГ°ГҐГ°Г»ГўГ­Г®ГЈГ® Г­Г Г¦Г ГІГЁГї ГЄГ­Г®ГЇГ®ГЄ
+	key_pressing_duration.key_1_inc=1;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ Г®ГІГ±Г·ГҐГІ Г¤Г«ГЁГІГҐГ«ГјГ­Г®Г±ГІГЁ
+	key_pressing_duration.key_2    =0;//Г®ГЎГ­ГіГ«ГїГҐГ¬ Г±Г·ГҐГІГ·ГЁГЄГЁ
+							  //Г¤Г«ГЁГІГҐГ«ГјГ­Г®Г±ГІГЁ
+							  //Г­ГҐГЇГ°ГҐГ°Г»ГўГ­Г®ГЈГ® Г­Г Г¦Г ГІГЁГї ГЄГ­Г®ГЇГ®ГЄ
+	key_pressing_duration.key_2_inc=1;//Г°Г Г§Г°ГҐГёГ ГҐГ¬ Г®ГІГ±Г·ГҐГІ Г¤Г«ГЁГІГҐГ«ГјГ­Г®Г±ГІГЁ
 	keyboard_event=no_key_pressing;
 	reload_key_event = no_key_pressing;
 
@@ -2319,19 +2317,19 @@ else
 
 
 /**************************************************************************************
-* Функця производит "выстрел"
-* устанавлвает курсор на позицию начала блока данных data_packet.data[0]
-* и разрешает передачу данных
-* функция возвращает управление  только после отправки всех данных
+* Г”ГіГ­ГЄГ¶Гї ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІ "ГўГ»Г±ГІГ°ГҐГ«"
+* ГіГ±ГІГ Г­Г ГўГ«ГўГ ГҐГІ ГЄГіГ°Г±Г®Г° Г­Г  ГЇГ®Г§ГЁГ¶ГЁГѕ Г­Г Г·Г Г«Г  ГЎГ«Г®ГЄГ  Г¤Г Г­Г­Г»Гµ data_packet.data[0]
+* ГЁ Г°Г Г§Г°ГҐГёГ ГҐГІ ГЇГҐГ°ГҐГ¤Г Г·Гі Г¤Г Г­Г­Г»Гµ
+* ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГіГЇГ°Г ГўГ«ГҐГ­ГЁГҐ  ГІГ®Г«ГјГЄГ® ГЇГ®Г±Г«ГҐ Г®ГІГЇГ°Г ГўГЄГЁ ГўГ±ГҐГµ Г¤Г Г­Г­Г»Гµ
 ***************************************************************************************/
-void send_ir_shot_package(void){ //Отправляем пакет ("стреляем")
+void send_ir_shot_package(void){ //ГЋГІГЇГ°Г ГўГ«ГїГҐГ¬ ГЇГ ГЄГҐГІ ("Г±ГІГ°ГҐГ«ГїГҐГ¬")
 
 	FLASH_LED_ON;
 	ir_tx_buffer_cursor.byte_pos = 0;
 	ir_tx_buffer_cursor.bit_mask = (1<<7);
-	ir_tx_buffer_cursor.bits_for_tx=14;//"выстрел" состоит из 14 бит
+	ir_tx_buffer_cursor.bits_for_tx=14;//"ГўГ»Г±ГІГ°ГҐГ«" Г±Г®Г±ГІГ®ГЁГІ ГЁГ§ 14 ГЎГЁГІ
 	ir_tx_buffer_cursor.heder_been_sent = false;
-	TIM_DeInit(TIM8);//сбрасываем настройки таймера на дефолтовые
+	TIM_DeInit(TIM8);//Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г­Г Г±ГІГ°Г®Г©ГЄГЁ ГІГ Г©Г¬ГҐГ°Г  Г­Г  Г¤ГҐГґГ®Г«ГІГ®ГўГ»ГҐ
 //	TIM4->CCR1 = 50;
 	init_pwm_TIM8();
 }
@@ -2339,41 +2337,41 @@ void send_ir_shot_package(void){ //Отправляем пакет ("стреляем")
 
 
 /**************************************************************************************
-* Установка идентификатора игрока
-* в качестве аргумента функции указывается идентификационный номер игрока (от 1 до 127)
-* в результате выполнения функции в глобальной переменной data_packet.player_id
-* будут соответствующим образом инициированы  data_packet.player_id.(bit_0 ... bit_7)
+* Г“Г±ГІГ Г­Г®ГўГЄГ  ГЁГ¤ГҐГ­ГІГЁГґГЁГЄГ ГІГ®Г°Г  ГЁГЈГ°Г®ГЄГ 
+* Гў ГЄГ Г·ГҐГ±ГІГўГҐ Г Г°ГЈГіГ¬ГҐГ­ГІГ  ГґГіГ­ГЄГ¶ГЁГЁ ГіГЄГ Г§Г»ГўГ ГҐГІГ±Гї ГЁГ¤ГҐГ­ГІГЁГґГЁГЄГ Г¶ГЁГ®Г­Г­Г»Г© Г­Г®Г¬ГҐГ° ГЁГЈГ°Г®ГЄГ  (Г®ГІ 1 Г¤Г® 127)
+* Гў Г°ГҐГ§ГіГ«ГјГІГ ГІГҐ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЈГ«Г®ГЎГ Г«ГјГ­Г®Г© ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© data_packet.player_id
+* ГЎГіГ¤ГіГІ Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№ГЁГ¬ Г®ГЎГ°Г Г§Г®Г¬ ГЁГ­ГЁГ¶ГЁГЁГ°Г®ГўГ Г­Г»  data_packet.player_id.(bit_0 ... bit_7)
 ***************************************************************************************/
 void set_player_id(uint8_t ID){
 tx_buffer[0]= ID;
-tx_buffer[0] &=~(1<<7);//седьмой бит в выстреле всегда равен "0"
+tx_buffer[0] &=~(1<<7);//Г±ГҐГ¤ГјГ¬Г®Г© ГЎГЁГІ Гў ГўГ»Г±ГІГ°ГҐГ«ГҐ ГўГ±ГҐГЈГ¤Г  Г°Г ГўГҐГ­ "0"
 
 }
 
 
 
 /**************************************************************************************
-* Установка идентификатора (цвета) команды
-* в качестве аргумента функции указывается идентификационный номер (цвет) команды (от 0 до 3)
-* в результате выполнения функции в глобальной переменной data_packet.team_id
-* будут соответствующим образом инициированы  data_packet.team_id.(bit_0 и bit_1)
+* Г“Г±ГІГ Г­Г®ГўГЄГ  ГЁГ¤ГҐГ­ГІГЁГґГЁГЄГ ГІГ®Г°Г  (Г¶ГўГҐГІГ ) ГЄГ®Г¬Г Г­Г¤Г»
+* Гў ГЄГ Г·ГҐГ±ГІГўГҐ Г Г°ГЈГіГ¬ГҐГ­ГІГ  ГґГіГ­ГЄГ¶ГЁГЁ ГіГЄГ Г§Г»ГўГ ГҐГІГ±Гї ГЁГ¤ГҐГ­ГІГЁГґГЁГЄГ Г¶ГЁГ®Г­Г­Г»Г© Г­Г®Г¬ГҐГ° (Г¶ГўГҐГІ) ГЄГ®Г¬Г Г­Г¤Г» (Г®ГІ 0 Г¤Г® 3)
+* Гў Г°ГҐГ§ГіГ«ГјГІГ ГІГҐ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЈГ«Г®ГЎГ Г«ГјГ­Г®Г© ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© data_packet.team_id
+* ГЎГіГ¤ГіГІ Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№ГЁГ¬ Г®ГЎГ°Г Г§Г®Г¬ ГЁГ­ГЁГ¶ГЁГЁГ°Г®ГўГ Г­Г»  data_packet.team_id.(bit_0 ГЁ bit_1)
 ***************************************************************************************/
 void set_team_color(tteam_color  color){
-tx_buffer[1] &=~((1<<7)|(1<<6));//обнуляем два старших бита
-tx_buffer[1] |=(color <<6);//устанавливаем 6 и 7 биты в соответствии с цветом команды
+tx_buffer[1] &=~((1<<7)|(1<<6));//Г®ГЎГ­ГіГ«ГїГҐГ¬ Г¤ГўГ  Г±ГІГ Г°ГёГЁГµ ГЎГЁГІГ 
+tx_buffer[1] |=(color <<6);//ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ 6 ГЁ 7 ГЎГЁГІГ» Гў Г±Г®Г®ГІГўГҐГІГ±ГІГўГЁГЁ Г± Г¶ГўГҐГІГ®Г¬ ГЄГ®Г¬Г Г­Г¤Г»
 }
 
 
 /**************************************************************************************
-* Установка установка мощьности нашего оружия (наносимый урон)
-* в качестве аргумента функции указывается наносимый урон
-* в результате выполнения функции в глобальной переменной data_packet.damage
-* будут соответствующим образом инициированы  data_packet.damage.(bit_0 и bit_3)
+* Г“Г±ГІГ Г­Г®ГўГЄГ  ГіГ±ГІГ Г­Г®ГўГЄГ  Г¬Г®Г№ГјГ­Г®Г±ГІГЁ Г­Г ГёГҐГЈГ® Г®Г°ГіГ¦ГЁГї (Г­Г Г­Г®Г±ГЁГ¬Г»Г© ГіГ°Г®Г­)
+* Гў ГЄГ Г·ГҐГ±ГІГўГҐ Г Г°ГЈГіГ¬ГҐГ­ГІГ  ГґГіГ­ГЄГ¶ГЁГЁ ГіГЄГ Г§Г»ГўГ ГҐГІГ±Гї Г­Г Г­Г®Г±ГЁГ¬Г»Г© ГіГ°Г®Г­
+* Гў Г°ГҐГ§ГіГ«ГјГІГ ГІГҐ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЈГ«Г®ГЎГ Г«ГјГ­Г®Г© ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© data_packet.damage
+* ГЎГіГ¤ГіГІ Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№ГЁГ¬ Г®ГЎГ°Г Г§Г®Г¬ ГЁГ­ГЁГ¶ГЁГЁГ°Г®ГўГ Г­Г»  data_packet.damage.(bit_0 ГЁ bit_3)
 ***************************************************************************************/
 
 
 void set_gun_damage(tgun_damage damage){
-tx_buffer[1] &=~((1<<5)|(1<<4)|(1<<3)|(1<<2));//обнуляем биты урона
+tx_buffer[1] &=~((1<<5)|(1<<4)|(1<<3)|(1<<2));//Г®ГЎГ­ГіГ«ГїГҐГ¬ ГЎГЁГІГ» ГіГ°Г®Г­Г 
 tx_buffer[1] |=(damage << 2);
 }
 
@@ -2390,13 +2388,13 @@ volatile	TKEYBOARD_STATUS s_ret;
 
 
 //adc_value = ADC_GetConversionValue(ADC1); // value from 0 to 4095i++;
-if (adc_value < 1000) //если нажат курок (trigger)
+if (adc_value < 1000) //ГҐГ±Г«ГЁ Г­Г Г¦Г ГІ ГЄГіГ°Г®ГЄ (trigger)
 	{
 		s_ret=key_pressed ;
 //		sensors[zone_1]=RED;
 
 	}
-else // курок не нажат
+else // ГЄГіГ°Г®ГЄ Г­ГҐ Г­Г Г¦Г ГІ
 	{
 		s_ret=no_key_pressed;
 //		sensors[zone_1]=BLACK;
@@ -2405,12 +2403,12 @@ return s_ret;
 }
 
 
-TKEYBOARD_EVENT test_keyboard(int adc_value)//Проверяем события клавиатуры
+TKEYBOARD_EVENT test_keyboard(int adc_value)//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬ Г±Г®ГЎГ»ГІГЁГї ГЄГ«Г ГўГЁГ ГІГіГ°Г»
 {
 	TKEYBOARD_STATUS key_status;
 	TKEYBOARD_EVENT ret_ev;
 	key_status=get_keyboard_status(adc_value);
-	switch(key_status)  //проверяем, что нажато
+	switch(key_status)  //ГЇГ°Г®ГўГҐГ°ГїГҐГ¬, Г·ГІГ® Г­Г Г¦Г ГІГ®
 	{
 		case no_key_pressed:
 		{
@@ -2433,7 +2431,7 @@ TKEYBOARD_EVENT test_keyboard(int adc_value)//Проверяем события клавиатуры
 
 		}
 		break;
-	 	case key_pressed  : //нажата кнопка 1
+	 	case key_pressed  : //Г­Г Г¦Г ГІГ  ГЄГ­Г®ГЇГЄГ  1
 		{
 			if(key_pressing_duration.key_1>= SHORT_DURATION)
 			{
@@ -2457,19 +2455,19 @@ return   ret_ev;
 
 }
 
-TKEYBOARD_STATUS get_reload_key_status(int adc_value)//Проверяем, нажата ли клавиша "Перезарядить"
+TKEYBOARD_STATUS get_reload_key_status(int adc_value)//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, Г­Г Г¦Г ГІГ  Г«ГЁ ГЄГ«Г ГўГЁГёГ  "ГЏГҐГ°ГҐГ§Г Г°ГїГ¤ГЁГІГј"
 {
 	volatile	TKEYBOARD_STATUS s_ret;
 
 //	int adc_value;
 
 //	adc_value = ADC_GetConversionValue(ADC1); // value from 0 to 4095i++;
-	if (adc_value > 3000) //если нажат курок (reload)
+	if (adc_value > 3000) //ГҐГ±Г«ГЁ Г­Г Г¦Г ГІ ГЄГіГ°Г®ГЄ (reload)
 		{
 			s_ret=key_pressed ;
 
 		}
-	else // курок не нажат
+	else // ГЄГіГ°Г®ГЄ Г­ГҐ Г­Г Г¦Г ГІ
 		{
 			s_ret=no_key_pressed;
 		}
@@ -2477,11 +2475,11 @@ TKEYBOARD_STATUS get_reload_key_status(int adc_value)//Проверяем, нажата ли клав
 }
 
 
-TKEYBOARD_EVENT test_reload_key(int adc_value){//Проверяем события клавиши "Перезарядить"
+TKEYBOARD_EVENT test_reload_key(int adc_value){//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬ Г±Г®ГЎГ»ГІГЁГї ГЄГ«Г ГўГЁГёГЁ "ГЏГҐГ°ГҐГ§Г Г°ГїГ¤ГЁГІГј"
 	TKEYBOARD_STATUS key_status;
 		TKEYBOARD_EVENT ret_ev;
 		key_status=get_reload_key_status(adc_value);
-		switch(key_status)  //проверяем, что нажато
+		switch(key_status)  //ГЇГ°Г®ГўГҐГ°ГїГҐГ¬, Г·ГІГ® Г­Г Г¦Г ГІГ®
 		{
 			case no_key_pressed:
 			{
@@ -2504,7 +2502,7 @@ TKEYBOARD_EVENT test_reload_key(int adc_value){//Проверяем события клавиши "Пере
 
 			}
 			break;
-		 	case key_pressed  : //нажата кнопка "Перезарядить"
+		 	case key_pressed  : //Г­Г Г¦Г ГІГ  ГЄГ­Г®ГЇГЄГ  "ГЏГҐГ°ГҐГ§Г Г°ГїГ¤ГЁГІГј"
 			{
 				if(key_pressing_duration.key_2>= SHORT_DURATION)
 				{
@@ -2535,8 +2533,8 @@ TKEYBOARD_EVENT test_reload_key(int adc_value){//Проверяем события клавиши "Пере
 void SPISend(uint16_t data) {
 
 	GPIO_ResetBits(GPIOC, GPIO_Pin_3); // SS = 0
-	SPI_I2S_SendData(SPI2, data);  // отправили данные
-    while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET); // ждём, пока данные не отправятся
+	SPI_I2S_SendData(SPI2, data);  // Г®ГІГЇГ°Г ГўГЁГ«ГЁ Г¤Г Г­Г­Г»ГҐ
+    while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET); // Г¦Г¤ВёГ¬, ГЇГ®ГЄГ  Г¤Г Г­Г­Г»ГҐ Г­ГҐ Г®ГІГЇГ°Г ГўГїГІГ±Гї
     GPIO_SetBits(GPIOC, GPIO_Pin_3);
 }
 
@@ -2544,8 +2542,8 @@ void SPISend(uint16_t data) {
 bool get_buffer_bit(uint8_t index, TDamageZone zone){
 	uint8_t byte_index;
 	uint8_t bit_index;
-	byte_index = index/8; //Определяем, в каком байте нахадится нужный бит
-	bit_index = index - (byte_index*8);//Определяем номер бита в байте
+	byte_index = index/8; //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Гў ГЄГ ГЄГ®Г¬ ГЎГ Г©ГІГҐ Г­Г ГµГ Г¤ГЁГІГ±Гї Г­ГіГ¦Г­Г»Г© ГЎГЁГІ
+	bit_index = index - (byte_index*8);//ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г­Г®Г¬ГҐГ° ГЎГЁГІГ  Гў ГЎГ Г©ГІГҐ
 	switch (zone){
 			case zone_1:{
 				if(zone1_rx_buffer[byte_index]&(1<<(7-bit_index))) return true;
@@ -2575,35 +2573,35 @@ bool get_buffer_bit(uint8_t index, TDamageZone zone){
 
 */
 
-tir_message get_ir_message_from_buffer(TDamageZone zone) //извлекаем из буфера ИК приемника полученное сообщение
+tir_message get_ir_message_from_buffer(TDamageZone zone) //ГЁГ§ГўГ«ГҐГЄГ ГҐГ¬ ГЁГ§ ГЎГіГґГҐГ°Г  Г€ГЉ ГЇГ°ГЁГҐГ¬Г­ГЁГЄГ  ГЇГ®Г«ГіГ·ГҐГ­Г­Г®ГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
 {
 	tir_message result;
 	switch (zone){
 		case zone_1:{
-			result.ID = zone1_rx_buffer[0];//имя функции в первом принятом байте (индекс 0)
-			result.param = zone1_rx_buffer[1];//параметры функции во втором принятом байте (индекс 1)
-			result.control_byte = zone1_rx_buffer[2];//контрольный байт
+			result.ID = zone1_rx_buffer[0];//ГЁГ¬Гї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЇГҐГ°ГўГ®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 0)
+			result.param = zone1_rx_buffer[1];//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГґГіГ­ГЄГ¶ГЁГЁ ГўГ® ГўГІГ®Г°Г®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 1)
+			result.control_byte = zone1_rx_buffer[2];//ГЄГ®Г­ГІГ°Г®Г«ГјГ­Г»Г© ГЎГ Г©ГІ
 			return result;
 		}
 		break;
 		case zone_2:{
-			result.ID = zone2_rx_buffer[0];//имя функции в первом принятом байте (индекс 0)
-			result.param = zone2_rx_buffer[1];//параметры функции во втором принятом байте (индекс 1)
-			result.control_byte = zone2_rx_buffer[2];//контрольный байт
+			result.ID = zone2_rx_buffer[0];//ГЁГ¬Гї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЇГҐГ°ГўГ®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 0)
+			result.param = zone2_rx_buffer[1];//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГґГіГ­ГЄГ¶ГЁГЁ ГўГ® ГўГІГ®Г°Г®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 1)
+			result.control_byte = zone2_rx_buffer[2];//ГЄГ®Г­ГІГ°Г®Г«ГјГ­Г»Г© ГЎГ Г©ГІ
 			return result;
 			}
 		break;
 		case zone_3:{
-			result.ID = zone3_rx_buffer[0];//имя функции в первом принятом байте (индекс 0)
-			result.param = zone3_rx_buffer[1];//параметры функции во втором принятом байте (индекс 1)
-			result.control_byte = zone3_rx_buffer[2];//контрольный байт
+			result.ID = zone3_rx_buffer[0];//ГЁГ¬Гї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЇГҐГ°ГўГ®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 0)
+			result.param = zone3_rx_buffer[1];//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГґГіГ­ГЄГ¶ГЁГЁ ГўГ® ГўГІГ®Г°Г®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 1)
+			result.control_byte = zone3_rx_buffer[2];//ГЄГ®Г­ГІГ°Г®Г«ГјГ­Г»Г© ГЎГ Г©ГІ
 			return result;
 			}
 		break;
 		case zone_4:{
-			result.ID = zone4_rx_buffer[0];//имя функции в первом принятом байте (индекс 0)
-			result.param = zone4_rx_buffer[1];//параметры функции во втором принятом байте (индекс 1)
-			result.control_byte = zone4_rx_buffer[2];//контрольный байт
+			result.ID = zone4_rx_buffer[0];//ГЁГ¬Гї ГґГіГ­ГЄГ¶ГЁГЁ Гў ГЇГҐГ°ГўГ®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 0)
+			result.param = zone4_rx_buffer[1];//ГЇГ Г°Г Г¬ГҐГІГ°Г» ГґГіГ­ГЄГ¶ГЁГЁ ГўГ® ГўГІГ®Г°Г®Г¬ ГЇГ°ГЁГ­ГїГІГ®Г¬ ГЎГ Г©ГІГҐ (ГЁГ­Г¤ГҐГЄГ± 1)
+			result.control_byte = zone4_rx_buffer[2];//ГЄГ®Г­ГІГ°Г®Г«ГјГ­Г»Г© ГЎГ Г©ГІ
 			return result;
 			}
 			break;
@@ -2613,7 +2611,7 @@ tir_message get_ir_message_from_buffer(TDamageZone zone) //извлекаем из буфера И
 }
 
 
-trx_packet get_packet_value(TDamageZone zone){ //Считываем данные из полученного пакета
+trx_packet get_packet_value(TDamageZone zone){ //Г‘Г·ГЁГІГ»ГўГ ГҐГ¬ Г¤Г Г­Г­Г»ГҐ ГЁГ§ ГЇГ®Г«ГіГ·ГҐГ­Г­Г®ГЈГ® ГЇГ ГЄГҐГІГ 
 trx_packet result;
 uint8_t byte_tmp;
 
@@ -2621,7 +2619,7 @@ switch (zone){
 	case zone_1:{
 		result.player_id = zone1_rx_buffer[0];
 		byte_tmp = zone1_rx_buffer[1];
-		byte_tmp = byte_tmp << 2; //избавляемся от бит цвета команды
+		byte_tmp = byte_tmp << 2; //ГЁГ§ГЎГ ГўГ«ГїГҐГ¬Г±Гї Г®ГІ ГЎГЁГІ Г¶ГўГҐГІГ  ГЄГ®Г¬Г Г­Г¤Г»
 		byte_tmp = byte_tmp >> 4;
 		result.damage = damage_value[byte_tmp];
 		result.team_id = zone1_rx_buffer[1]>>6;
@@ -2631,7 +2629,7 @@ switch (zone){
 	case zone_2:{
 			result.player_id = zone2_rx_buffer[0];
 			byte_tmp = zone2_rx_buffer[1];
-			byte_tmp = byte_tmp << 2; //избавляемся от бит цвета команды
+			byte_tmp = byte_tmp << 2; //ГЁГ§ГЎГ ГўГ«ГїГҐГ¬Г±Гї Г®ГІ ГЎГЁГІ Г¶ГўГҐГІГ  ГЄГ®Г¬Г Г­Г¤Г»
 			byte_tmp = byte_tmp >> 4;
 			result.damage = damage_value[byte_tmp];
 			result.team_id = zone2_rx_buffer[1]>>6;
@@ -2641,7 +2639,7 @@ switch (zone){
 	case zone_3:{
 			result.player_id = zone3_rx_buffer[0];
 			byte_tmp = zone3_rx_buffer[1];
-			byte_tmp = byte_tmp << 2; //избавляемся от бит цвета команды
+			byte_tmp = byte_tmp << 2; //ГЁГ§ГЎГ ГўГ«ГїГҐГ¬Г±Гї Г®ГІ ГЎГЁГІ Г¶ГўГҐГІГ  ГЄГ®Г¬Г Г­Г¤Г»
 			byte_tmp = byte_tmp >> 4;
 			result.damage = damage_value[byte_tmp];
 			result.team_id = zone3_rx_buffer[1]>>6;
@@ -2651,7 +2649,7 @@ switch (zone){
 	case zone_4:{
 			result.player_id = zone4_rx_buffer[0];
 			byte_tmp = zone4_rx_buffer[1];
-			byte_tmp = byte_tmp << 2; //избавляемся от бит цвета команды
+			byte_tmp = byte_tmp << 2; //ГЁГ§ГЎГ ГўГ«ГїГҐГ¬Г±Гї Г®ГІ ГЎГЁГІ Г¶ГўГҐГІГ  ГЄГ®Г¬Г Г­Г¤Г»
 			byte_tmp = byte_tmp >> 4;
 			result.damage = damage_value[byte_tmp];
 			result.team_id = zone4_rx_buffer[1]>>6;
@@ -2675,19 +2673,19 @@ void Sinus_calculate()
 
 bool stopWavPlayer(void){
 
-	if ( armadaSystem.wav_player.stop) return true;//плеер уже остановлен
-	else armadaSystem.wav_player.stop = true;//останавливаем плеер
-	if (xSemaphoreTake( xWavPlayerSemaphore, (portTickType)600/*50*/ /*portMAX_DELAY*/)== pdTRUE)//ждём, пока плеер остановится
+	if ( armadaSystem.wav_player.stop) return true;//ГЇГ«ГҐГҐГ° ГіГ¦ГҐ Г®Г±ГІГ Г­Г®ГўГ«ГҐГ­
+	else armadaSystem.wav_player.stop = true;//Г®Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЇГ«ГҐГҐГ°
+	if (xSemaphoreTake( xWavPlayerSemaphore, (portTickType)600/*50*/ /*portMAX_DELAY*/)== pdTRUE)//Г¦Г¤ВёГ¬, ГЇГ®ГЄГ  ГЇГ«ГҐГҐГ° Г®Г±ГІГ Г­Г®ГўГЁГІГ±Гї
 	{
-		return true;//получили семафор, плеер корректно остановился
+		return true;//ГЇГ®Г«ГіГ·ГЁГ«ГЁ Г±ГҐГ¬Г ГґГ®Г°, ГЇГ«ГҐГҐГ° ГЄГ®Г°Г°ГҐГЄГІГ­Г® Г®Г±ГІГ Г­Г®ГўГЁГ«Г±Гї
 	}
 	else {
-		return false;//за 50 тиков плеер не остановился (семафор не получен)
+		return false;//Г§Г  50 ГІГЁГЄГ®Гў ГЇГ«ГҐГҐГ° Г­ГҐ Г®Г±ГІГ Г­Г®ГўГЁГ«Г±Гї (Г±ГҐГ¬Г ГґГ®Г° Г­ГҐ ГЇГ®Г«ГіГ·ГҐГ­)
 	}
 }
 
 
-void hit_processing(TDamageZone zone)//обрабатываем попадания
+void hit_processing(TDamageZone zone)//Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬ ГЇГ®ГЇГ Г¤Г Г­ГЁГї
 {
 
 
@@ -2696,25 +2694,25 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 	hit.time_stamp = xTaskGetTickCount();
 	rx_pack = get_packet_value(zone);
 
-	if(game_status==OUT_OF_GAME)return;//игрок вне игры, игнорируем пакет
-	if((armadaSystem.player.team_color==rx_pack.team_id)&&(armadaSystem.friendly_fire==false)) return;//пакет от игрока своей же команды, а дружественный огонь ыключен - игнорируем пакет
+	if(game_status==OUT_OF_GAME)return;//ГЁГЈГ°Г®ГЄ ГўГ­ГҐ ГЁГЈГ°Г», ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГЇГ ГЄГҐГІ
+	if((armadaSystem.player.team_color==rx_pack.team_id)&&(armadaSystem.friendly_fire==false)) return;//ГЇГ ГЄГҐГІ Г®ГІ ГЁГЈГ°Г®ГЄГ  Г±ГўГ®ГҐГ© Г¦ГҐ ГЄГ®Г¬Г Г­Г¤Г», Г  Г¤Г°ГіГ¦ГҐГ±ГІГўГҐГ­Г­Г»Г© Г®ГЈГ®Г­Гј Г»ГЄГ«ГѕГ·ГҐГ­ - ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГЇГ ГЄГҐГІ
 	hit.rx_package = rx_pack;
 //	sensors[zone]=WHITE;
-	if (xSemaphoreTake( xHitSemaphore, (portTickType) HIT_PROCESSING_TIMEOUT /*portMAX_DELAY*/)== pdTRUE)//ждём, пока плеер остановится
-		{//получили семафор
+	if (xSemaphoreTake( xHitSemaphore, (portTickType) HIT_PROCESSING_TIMEOUT /*portMAX_DELAY*/)== pdTRUE)//Г¦Г¤ВёГ¬, ГЇГ®ГЄГ  ГЇГ«ГҐГҐГ° Г®Г±ГІГ Г­Г®ГўГЁГІГ±Гї
+		{//ГЇГ®Г«ГіГ·ГЁГ«ГЁ Г±ГҐГ¬Г ГґГ®Г°
 
 //		taskENTER_CRITICAL();
 		{
-		    // Здесь тот самый код, выполнение которого не должно быть прервано.
-		if(safe_counter==0) //если нет обрабатываемого попадание
+		    // Г‡Г¤ГҐГ±Гј ГІГ®ГІ Г±Г Г¬Г»Г© ГЄГ®Г¤, ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЄГ®ГІГ®Г°Г®ГЈГ® Г­ГҐ Г¤Г®Г«Г¦Г­Г® ГЎГ»ГІГј ГЇГ°ГҐГ°ГўГ Г­Г®.
+		if(safe_counter==0) //ГҐГ±Г«ГЁ Г­ГҐГІ Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬Г®ГЈГ® ГЇГ®ГЇГ Г¤Г Г­ГЁГҐ
 			{
 				safe_counter=SAFE_TIME;
 				hit_in_processing = hit;
 
-				if(armadaSystem.player.health > hit.rx_package.damage)//урон меньше, чем остаток здоровья
+				if(armadaSystem.player.health > hit.rx_package.damage)//ГіГ°Г®Г­ Г¬ГҐГ­ГјГёГҐ, Г·ГҐГ¬ Г®Г±ГІГ ГІГ®ГЄ Г§Г¤Г®Г°Г®ГўГјГї
 				{
 					armadaSystem.player.health =  armadaSystem.player.health - hit.rx_package.damage;
-					armadaSystem.wav_player.type_of_sound_to_play = HIT;//надо воспроизвести звук ранения
+					armadaSystem.wav_player.type_of_sound_to_play = HIT;//Г­Г Г¤Г® ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ Г§ГўГіГЄ Г°Г Г­ГҐГ­ГЁГї
 
 
 #if DEVICE_ROLE==BANDANA
@@ -2729,7 +2727,7 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 				else {
 					armadaSystem.player.health = 0;
 					game_status = OUT_OF_GAME;
-					armadaSystem.wav_player.type_of_sound_to_play = GAME_OVER;//надо воспроизвести звук "игра закончена"
+					armadaSystem.wav_player.type_of_sound_to_play = GAME_OVER;//Г­Г Г¤Г® ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ Г§ГўГіГЄ "ГЁГЈГ°Г  Г§Г ГЄГ®Г­Г·ГҐГ­Г "
 #if DEVICE_ROLE==BANDANA
 					bt_tag_init_with_game_status(OUT_OF_GAME,STOP_GAME);
 #elif DEVICE_ROLE==TAG
@@ -2742,7 +2740,7 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 
 
 #ifndef 	COLOR_LCD
-//здесь нужно добавить код вывода картинки "GAME_OVER" для чёрно-белого экранчика
+//Г§Г¤ГҐГ±Гј Г­ГіГ¦Г­Г® Г¤Г®ГЎГ ГўГЁГІГј ГЄГ®Г¤ ГўГ»ГўГ®Г¤Г  ГЄГ Г°ГІГЁГ­ГЄГЁ "GAME_OVER" Г¤Г«Гї Г·ВёГ°Г­Г®-ГЎГҐГ«Г®ГЈГ® ГЅГЄГ°Г Г­Г·ГЁГЄГ 
 
 						clear_screen();
 						drawBitmap(0,0,game_over_black_image,84,48,1);
@@ -2751,7 +2749,7 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 #else
 
 
-						if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+						if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					 {
 
 
@@ -2773,14 +2771,14 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 					}
 
 
-					 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
+					 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г®
 			        {
 
 
 #ifndef COLOR_LCD
-			    		drawDigit(52+2,0,10,1);//рисуем эмблемку блютус
+			    		drawDigit(52+2,0,10,1);//Г°ГЁГ±ГіГҐГ¬ ГЅГ¬ГЎГ«ГҐГ¬ГЄГі ГЎГ«ГѕГІГіГ±
 #else
-			    		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+			    		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 						{
 							drawBMPfromFlash(bluetooth1,16,32);
 							xSemaphoreGive(xColorLCDSemaphore);
@@ -2790,7 +2788,7 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 					/*
 					volatile tsystem_event_type sys_event_tmp;
 					sys_event_tmp.event_source = BLUETOOTH;
-					xQueueSendToBack(xEventQueue, &sys_event_tmp, (portTickType)(TIC_FQR));//не забудим обновить статус блютус соединения
+					xQueueSendToBack(xEventQueue, &sys_event_tmp, (portTickType)(TIC_FQR));//Г­ГҐ Г§Г ГЎГіГ¤ГЁГ¬ Г®ГЎГ­Г®ГўГЁГІГј Г±ГІГ ГІГіГ± ГЎГ«ГѕГІГіГ± Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГї
 */
 					xSemaphoreGive(xWavPlayerManagerSemaphore);
 
@@ -2811,8 +2809,8 @@ if(game_status != OUT_OF_GAME)
 			}
 		}
 //		taskEXIT_CRITICAL();
-		xSemaphoreGive(xHitSemaphore);//отдаем семафор
-		if (compareHits(hit,hit_in_processing))//если обрабатывается тот же пакет
+		xSemaphoreGive(xHitSemaphore);//Г®ГІГ¤Г ГҐГ¬ Г±ГҐГ¬Г ГґГ®Г°
+		if (compareHits(hit,hit_in_processing))//ГҐГ±Г«ГЁ Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГІГ±Гї ГІГ®ГІ Г¦ГҐ ГЇГ ГЄГҐГІ
 		{
 		//	 portTickType xLastWakeTime;
 
@@ -2823,7 +2821,7 @@ hit_timeout_counter=0;
 taskEXIT_CRITICAL();
 #endif
 
-			//включим индикацию
+			//ГўГЄГ«ГѕГ·ГЁГ¬ ГЁГ­Г¤ГЁГЄГ Г¶ГЁГѕ
 #ifdef SENSORS_BECKLIGHT
 			set_sensor_color(index_to_color[hit.rx_package.team_id]|HIGH_BRIDHTNESS,NUMBER_OF_SENSORS_FRAMES,zone);
 #ifndef DIRECTION_CALCULATION
@@ -2832,9 +2830,9 @@ taskEXIT_CRITICAL();
 #else
 			sensors[zone]=index_to_color[hit.rx_package.team_id]|VIBRO_HP;
 #endif
-			//Инициализируем переменную xLastWakeTime текущим временем.
+			//Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГЇГҐГ°ГҐГ¬ГҐГ­Г­ГіГѕ xLastWakeTime ГІГҐГЄГіГ№ГЁГ¬ ГўГ°ГҐГ¬ГҐГ­ГҐГ¬.
 		//	xLastWakeTime = xTaskGetTickCount ();
-			vTaskDelay(TIC_FQR);//на секунду включим светодиод зоны
+			vTaskDelay(TIC_FQR);//Г­Г  Г±ГҐГЄГіГ­Г¤Гі ГўГЄГ«ГѕГ·ГЁГ¬ Г±ГўГҐГІГ®Г¤ГЁГ®Г¤ Г§Г®Г­Г»
 //			vTaskDelayUntil( &xLastWakeTime, TIC_FQR );
 //			sensors[zone]=index_to_color[rx_pack.team_id];
 //			vTaskDelay(TIC_FQR/2);
@@ -2852,7 +2850,7 @@ taskEXIT_CRITICAL();
 		else {
 //			vTaskDelay(TIC_FQR);
 //			sensors[zone]=BLACK;
-		//	return false;//за 50 тиков плеер не остановился (семафор не получен)
+		//	return false;//Г§Г  50 ГІГЁГЄГ®Гў ГЇГ«ГҐГҐГ° Г­ГҐ Г®Г±ГІГ Г­Г®ГўГЁГ«Г±Гї (Г±ГҐГ¬Г ГґГ®Г° Г­ГҐ ГЇГ®Г«ГіГ·ГҐГ­)
 		}
 /*
 
@@ -2865,38 +2863,38 @@ taskEXIT_CRITICAL();
 }
 
 
-void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульта)
+void message_processing(TDamageZone zone)//Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬ Г±Г®Г®ГЎГ№ГҐГ­ГЁГї (ГЄГ®Г¬Г Г­Г¤Г» ГЇГіГ«ГјГІГ )
 {
 	trx_captured_message cap_message;
 	tir_message ir_message;
 	cap_message.time_stamp = xTaskGetTickCount();
-	if (get_zone_buffer_bit(zone,0))//если этот бит равен 1, то это пакет с командой
+	if (get_zone_buffer_bit(zone,0))//ГҐГ±Г«ГЁ ГЅГІГ®ГІ ГЎГЁГІ Г°Г ГўГҐГ­ 1, ГІГ® ГЅГІГ® ГЇГ ГЄГҐГІ Г± ГЄГ®Г¬Г Г­Г¤Г®Г©
 	{
 		ir_message = get_ir_message_from_buffer(zone);
 		cap_message.rx_message = ir_message;
-		if (xSemaphoreTake( xHitSemaphore, (portTickType) HIT_PROCESSING_TIMEOUT /*portMAX_DELAY*/)== pdTRUE)//ждём, пока плеер остановится
-		{//получили семафор
+		if (xSemaphoreTake( xHitSemaphore, (portTickType) HIT_PROCESSING_TIMEOUT /*portMAX_DELAY*/)== pdTRUE)//Г¦Г¤ВёГ¬, ГЇГ®ГЄГ  ГЇГ«ГҐГҐГ° Г®Г±ГІГ Г­Г®ГўГЁГІГ±Гї
+		{//ГЇГ®Г«ГіГ·ГЁГ«ГЁ Г±ГҐГ¬Г ГґГ®Г°
 			taskENTER_CRITICAL();
 			{
 				if (!compareMessages(cap_message, message_in_processing))
 				{
 					message_in_processing = cap_message;
 
-					switch(cap_message.rx_message.ID)//если имя команды
+					switch(cap_message.rx_message.ID)//ГҐГ±Г«ГЁ ГЁГ¬Гї ГЄГ®Г¬Г Г­Г¤Г»
                		{
-                   		case Add_Health: //добавить "жизни"
+                   		case Add_Health: //Г¤Г®ГЎГ ГўГЁГІГј "Г¦ГЁГ§Г­ГЁ"
                    		{
-                   			//код для добавления жизни
+                   			//ГЄГ®Г¤ Г¤Г«Гї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї Г¦ГЁГ§Г­ГЁ
 					        break;
                    		}
-					    case Add_Rounds://добавить "патронов"
+					    case Add_Rounds://Г¤Г®ГЎГ ГўГЁГІГј "ГЇГ ГІГ°Г®Г­Г®Гў"
 					    {
-					 		//код для добавления патронов
+					 		//ГЄГ®Г¤ Г¤Г«Гї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГЇГ ГІГ°Г®Г­Г®Гў
                       		break;
                    		}
                    		case Change_color:
 						{
-							//код для смены цвета
+							//ГЄГ®Г¤ Г¤Г«Гї Г±Г¬ГҐГ­Г» Г¶ГўГҐГІГ 
 							if((cap_message.rx_message.param>=0)&&(cap_message.rx_message.param<=3))
 							{
 								armadaSystem.player.team_color=cap_message.rx_message.param;
@@ -2974,16 +2972,16 @@ void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульт
 							}
 							else
 							{
-								//ошибка смены цвета
+								//Г®ГёГЁГЎГЄГ  Г±Г¬ГҐГ­Г» Г¶ГўГҐГІГ 
 
 							}
 							break;
 						}
-						case Command://какая то дополнительноя команда
+						case Command://ГЄГ ГЄГ Гї ГІГ® Г¤Г®ГЇГ®Г«Г­ГЁГІГҐГ«ГјГ­Г®Гї ГЄГ®Г¬Г Г­Г¤Г 
 					    {
-							switch(cap_message.rx_message.param)//выясним, какая это командв
+							switch(cap_message.rx_message.param)//ГўГ»ГїГ±Г­ГЁГ¬, ГЄГ ГЄГ Гї ГЅГІГ® ГЄГ®Г¬Г Г­Г¤Гў
 							{
-								case 0x05://начать новую игру немедленно
+								case 0x05://Г­Г Г·Г ГІГј Г­Г®ГўГіГѕ ГЁГЈГ°Гі Г­ГҐГ¬ГҐГ¤Г«ГҐГ­Г­Г®
 								{
 									taskEXIT_CRITICAL();
 
@@ -3024,7 +3022,7 @@ void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульт
 #endif
 */
 									initGUI();
-									xSemaphoreGive(xGameOverSemaphore);//отдаем семафор
+									xSemaphoreGive(xGameOverSemaphore);//Г®ГІГ¤Г ГҐГ¬ Г±ГҐГ¬Г ГґГ®Г°
 	  	  	  	  	  	  	  	  	armadaSystem.wav_player.type_of_sound_to_play = START_GAME;
 									xSemaphoreGive(xWavPlayerManagerSemaphore);
 //									taskEXIT_CRITICAL();
@@ -3093,10 +3091,10 @@ void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульт
 #endif
 							taskENTER_CRITICAL();
 									game_status = true;
-//									xSemaphoreGive(xGameOverSemaphore);//отдаем семафор
+//									xSemaphoreGive(xGameOverSemaphore);//Г®ГІГ¤Г ГҐГ¬ Г±ГҐГ¬Г ГґГ®Г°
 									break;
 								}
-								case 0x00://"выключить" игрока
+								case 0x00://"ГўГ»ГЄГ«ГѕГ·ГЁГІГј" ГЁГЈГ°Г®ГЄГ 
 								{
 
 									break;
@@ -3110,12 +3108,12 @@ void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульт
 
 		}
 			taskEXIT_CRITICAL();
-			xSemaphoreGive(xHitSemaphore);//отдаем семафор
+			xSemaphoreGive(xHitSemaphore);//Г®ГІГ¤Г ГҐГ¬ Г±ГҐГ¬Г ГґГ®Г°
 		}
 	}
 }
 
-bool get_settings_from_ini_file(void)//получение натроек из
+bool get_settings_from_ini_file(void)//ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ Г­Г ГІГ°Г®ГҐГЄ ГЁГ§
 {
 //	FRESULT res;
 	 res = f_open( &fsrc , "0:/armada.ini" ,/* FA_CREATE_NEW*/FA_READ /*| FA_WRITE*/);
@@ -3132,7 +3130,7 @@ bool get_settings_from_ini_file(void)//получение натроек из
 }
 
 
-void parsing_string(char* record)//анализ строки
+void parsing_string(char* record)//Г Г­Г Г«ГЁГ§ Г±ГІГ°Г®ГЄГЁ
 {
 	if (*record =='#') return;
 	switch(get_parameter_index(record))
@@ -3171,7 +3169,7 @@ void parsing_string(char* record)//анализ строки
 	}
 }
 
-uint8_t get_parameter_index(char* record)//проверим, что за параметр
+uint8_t get_parameter_index(char* record)//ГЇГ°Г®ГўГҐГ°ГЁГ¬, Г·ГІГ® Г§Г  ГЇГ Г°Г Г¬ГҐГІГ°
 {
 	volatile char* cursor_pos;
 	uint8_t param_len;
@@ -3242,14 +3240,14 @@ bool read_parameters_from_sd_card(void)
 
 extern volatile unsigned char usart1_rxBufHead;
 bool send_set_at_command(char* cmd, char* param){
-	USART1_FlushTxBuf(); //очистить передающий буфер
-	USART1_FlushRxBuf(); //очистить приемный буфер
-	xSemaphoreTake(xUsart1Semaphore, 300);//Очистим семафор
+	USART1_FlushTxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГҐГ°ГҐГ¤Г ГѕГ№ГЁГ© ГЎГіГґГҐГ°
+	USART1_FlushRxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГ°ГЁГҐГ¬Г­Г»Г© ГЎГіГґГҐГ°
+	xSemaphoreTake(xUsart1Semaphore, 300);//ГЋГ·ГЁГ±ГІГЁГ¬ Г±ГҐГ¬Г ГґГ®Г°
 	USART1_SendStr(cmd);
 	USART1_SendStr("=");
 	USART1_SendStr(param);
 	USART1_SendStr("\r\n");
-	if(xSemaphoreTake(xUsart1Semaphore, USART_PROCESSING_TIMEOUT )== pdTRUE)//ждем событий приема строки
+	if(xSemaphoreTake(xUsart1Semaphore, USART_PROCESSING_TIMEOUT )== pdTRUE)//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© ГЇГ°ГЁГҐГ¬Г  Г±ГІГ°Г®ГЄГЁ
 	{
 		if (memmem(&usart1_RxBuf[usart1_rxBufHead],USART1_GetRxCount(),"OK",2)!=NULL)
 				{
@@ -3269,12 +3267,12 @@ bool send_set_at_command(char* cmd, char* param){
 
 bool send_test_at_command(void)
 {
-	USART1_FlushTxBuf(); //очистить передающий буфер
-		USART1_FlushRxBuf(); //очистить приемный буфер
-		xSemaphoreTake(xUsart1Semaphore, 30);//Очистим семафор
+	USART1_FlushTxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГҐГ°ГҐГ¤Г ГѕГ№ГЁГ© ГЎГіГґГҐГ°
+		USART1_FlushRxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГ°ГЁГҐГ¬Г­Г»Г© ГЎГіГґГҐГ°
+		xSemaphoreTake(xUsart1Semaphore, 30);//ГЋГ·ГЁГ±ГІГЁГ¬ Г±ГҐГ¬Г ГґГ®Г°
 		USART1_SendStr("AT");
 		USART1_SendStr("\r\n");
-		if(xSemaphoreTake(xUsart1Semaphore, USART_PROCESSING_TIMEOUT )== pdTRUE)//ждем событий приема строки
+		if(xSemaphoreTake(xUsart1Semaphore, USART_PROCESSING_TIMEOUT )== pdTRUE)//Г¦Г¤ГҐГ¬ Г±Г®ГЎГ»ГІГЁГ© ГЇГ°ГЁГҐГ¬Г  Г±ГІГ°Г®ГЄГЁ
 		{
 			if (memmem(&usart1_RxBuf[usart1_rxBufHead],USART1_GetRxCount(),"OK",2)!=NULL)
 					{
@@ -3282,16 +3280,16 @@ bool send_test_at_command(void)
 					}
 			else
 			{
-				lcd8544_putstr(0, 32, "Нет OK ", 0); // вывод первой строки
-				if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
+				lcd8544_putstr(0, 32, "ГЌГҐГІ OK ", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+				if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
 				vTaskDelay(600);
 				return false;
 			}
 		}
 		else
 		{
-			  lcd8544_putstr(0, 32, "Нет симафора ", 0); // вывод первой строки
-			  if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
+			  lcd8544_putstr(0, 32, "ГЌГҐГІ Г±ГЁГ¬Г ГґГ®Г°Г  ", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+			  if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
 			  vTaskDelay(600);
 			  return false;
 		}
@@ -3299,7 +3297,7 @@ bool send_test_at_command(void)
 void send_package_by_bluetooth(trx_packet package)
 {
   uint8_t mask = (1<<7);
-  USART1_FlushTxBuf(); //очистить передающий буфер
+  USART1_FlushTxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГҐГ°ГҐГ¤Г ГѕГ№ГЁГ© ГЎГіГґГҐГ°
   USART1_SendStr("h");
   while (mask)
   {
@@ -3332,7 +3330,7 @@ void send_package_by_bluetooth(trx_packet package)
 
 
 
-bool configure_bluetooth(void)//настраиваем блютус модуль
+bool configure_bluetooth(void)//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ ГЎГ«ГѕГІГіГ± Г¬Г®Г¤ГіГ«Гј
 {
 
 	bool at_res;
@@ -3357,12 +3355,12 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 	 at_res = send_test_at_command();
 	 if(!at_res){
 #ifndef 	COLOR_LCD
-		 lcd8544_putstr(0, 8, "38400 тест не прошел", 0); // вывод первой строки
-		 if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
+		 lcd8544_putstr(0, 8, "38400 ГІГҐГ±ГІ Г­ГҐ ГЇГ°Г®ГёГҐГ«", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+		 if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
 #else
 
 
-		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 		 {
 		 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 		 	while (SPI3->SR & SPI_SR_BSY);
@@ -3381,15 +3379,15 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 		 InitCOM1(9600);
 		 vTaskDelay(100);
 	 }
-	if(strlen(armadaSystem.bluetooth.name))//если строка с именем не пустая
+	if(strlen(armadaSystem.bluetooth.name))//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  Г± ГЁГ¬ГҐГ­ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ Гї
 	{
 
 #ifndef 	COLOR_LCD
-		 lcd8544_putstr(0, 16, "Имя: ", 0); // вывод первой строки
-		 lcd8544_putstr(8, 16, armadaSystem.bluetooth.name, 0); // вывод первой строки
+		 lcd8544_putstr(0, 16, "Г€Г¬Гї: ", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+		 lcd8544_putstr(8, 16, armadaSystem.bluetooth.name, 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
 		 if (!screen_auto_refresh) lcd8544_dma_refresh(); //
 #else
-		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 		 {
 		 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 		 	while (SPI3->SR & SPI_SR_BSY);
@@ -3411,7 +3409,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 		at_res = send_set_at_command(at_name,armadaSystem.bluetooth.name);
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3433,7 +3431,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 		if (at_res)
 				{
 
-					lcd8544_putstr(0, 24, "Имя успешно задано ", 0); // вывод первой строки
+					lcd8544_putstr(0, 24, "Г€Г¬Гї ГіГ±ГЇГҐГёГ­Г® Г§Г Г¤Г Г­Г® ", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
 					if (!screen_auto_refresh) lcd8544_dma_refresh(); //
 
 
@@ -3441,10 +3439,10 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 #endif
 	}
-	if(strlen(armadaSystem.bluetooth.cmode))//если строка с именем не пустая
+	if(strlen(armadaSystem.bluetooth.cmode))//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  Г± ГЁГ¬ГҐГ­ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ Гї
 	{
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3466,7 +3464,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 		at_res = send_set_at_command(at_cmode,armadaSystem.bluetooth.cmode);
 
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3488,10 +3486,10 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 
 	}
-	if(strlen(armadaSystem.bluetooth.role))//если строка с именем не пустая
+	if(strlen(armadaSystem.bluetooth.role))//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  Г± ГЁГ¬ГҐГ­ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ Гї
 	{
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3514,7 +3512,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 		at_res = send_set_at_command(at_role,armadaSystem.bluetooth.role);
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3536,11 +3534,11 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 
 	}
-	if(strlen(armadaSystem.bluetooth.mac_adress_for_bind))//если строка с именем не пустая
+	if(strlen(armadaSystem.bluetooth.mac_adress_for_bind))//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  Г± ГЁГ¬ГҐГ­ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ Гї
 	{
 
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3561,7 +3559,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 #endif
 		at_res = send_set_at_command(at_bind,armadaSystem.bluetooth.mac_adress_for_bind);
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3581,10 +3579,10 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 #endif
 
 	}
-	if(strlen(armadaSystem.bluetooth.pswd))//если строка с именем не пустая
+	if(strlen(armadaSystem.bluetooth.pswd))//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  Г± ГЁГ¬ГҐГ­ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ Гї
 		{
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3606,7 +3604,7 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 
 			at_res = send_set_at_command(at_pswd,armadaSystem.bluetooth.pswd);
 #ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 					{
 					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
 					 	while (SPI3->SR & SPI_SR_BSY);
@@ -3638,14 +3636,14 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 #endif
 }
 
-void bt_set_at_commands_mode(bool mode)//переводим блютус модуль в режим at-команд
+void bt_set_at_commands_mode(bool mode)//ГЇГҐГ°ГҐГўГ®Г¤ГЁГ¬ ГЎГ«ГѕГІГіГ± Г¬Г®Г¤ГіГ«Гј Гў Г°ГҐГ¦ГЁГ¬ at-ГЄГ®Г¬Г Г­Г¤
 {
 	if (mode) GPIO_SetBits(GPIOB, GPIO_Pin_10);
 	else GPIO_ResetBits(GPIOB, GPIO_Pin_10);
 }
 
 
-void bt_reset(void)//аппаратный сброс блютус-модуля
+void bt_reset(void)//Г ГЇГЇГ Г°Г ГІГ­Г»Г© Г±ГЎГ°Г®Г± ГЎГ«ГѕГІГіГ±-Г¬Г®Г¤ГіГ«Гї
 {
 	GPIO_ResetBits(GPIOC, GPIO_Pin_4);
 	 vTaskDelay(200);
@@ -3691,7 +3689,7 @@ int ADC_result;
 	}
 }
 
-extern unsigned char lcd8544_buff[84*6]; // буфер дисплея
+extern unsigned char lcd8544_buff[84*6]; // ГЎГіГґГҐГ° Г¤ГЁГ±ГЇГ«ГҐГї
 
 void copy_to_lcd_buffer(char* src)
 {
@@ -3716,7 +3714,7 @@ void clear_screen(void)
 
 
 
-void EXTI9_5_IRQHandler()//поменялся статус блютус соединения
+void EXTI9_5_IRQHandler()//ГЇГ®Г¬ГҐГ­ГїГ«Г±Гї Г±ГІГ ГІГіГ± ГЎГ«ГѕГІГіГ± Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГї
 	{
 	static portBASE_TYPE xHigherPriorityTaskWoken;
 	  xHigherPriorityTaskWoken = pdFALSE;
@@ -3760,23 +3758,23 @@ void lock_firmware(void)
 }
 
 
-void bt_hit_processing(trx_packet new_rx_bt_packet)//обрабатываем попадания, принятые по блютус
+void bt_hit_processing(trx_packet new_rx_bt_packet)//Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬ ГЇГ®ГЇГ Г¤Г Г­ГЁГї, ГЇГ°ГЁГ­ГїГІГ»ГҐ ГЇГ® ГЎГ«ГѕГІГіГ±
 {
-	if(game_status==OUT_OF_GAME)return;//игрок вне игры, игнорируем пакет
-	if((armadaSystem.player.team_color==new_rx_bt_packet.team_id)&&(armadaSystem.friendly_fire==false)) return;//пакет от игрока своей же команды, а дружественный огонь ыключен - игнорируем пакет
-	if(safe_counter==0) //если нет обрабатываемого попадание
+	if(game_status==OUT_OF_GAME)return;//ГЁГЈГ°Г®ГЄ ГўГ­ГҐ ГЁГЈГ°Г», ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГЇГ ГЄГҐГІ
+	if((armadaSystem.player.team_color==new_rx_bt_packet.team_id)&&(armadaSystem.friendly_fire==false)) return;//ГЇГ ГЄГҐГІ Г®ГІ ГЁГЈГ°Г®ГЄГ  Г±ГўГ®ГҐГ© Г¦ГҐ ГЄГ®Г¬Г Г­Г¤Г», Г  Г¤Г°ГіГ¦ГҐГ±ГІГўГҐГ­Г­Г»Г© Г®ГЈГ®Г­Гј Г»ГЄГ«ГѕГ·ГҐГ­ - ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГЇГ ГЄГҐГІ
+	if(safe_counter==0) //ГҐГ±Г«ГЁ Г­ГҐГІ Г®ГЎГ°Г ГЎГ ГІГ»ГўГ ГҐГ¬Г®ГЈГ® ГЇГ®ГЇГ Г¤Г Г­ГЁГҐ
 				{
 					safe_counter=SAFE_TIME;
-					if(armadaSystem.player.health > new_rx_bt_packet.damage)//урон меньше, чем остаток здоровья
+					if(armadaSystem.player.health > new_rx_bt_packet.damage)//ГіГ°Г®Г­ Г¬ГҐГ­ГјГёГҐ, Г·ГҐГ¬ Г®Г±ГІГ ГІГ®ГЄ Г§Г¤Г®Г°Г®ГўГјГї
 					{
 						armadaSystem.player.health =  armadaSystem.player.health - new_rx_bt_packet.damage;
-						armadaSystem.wav_player.type_of_sound_to_play = HIT;//надо воспроизвести звук ранения
+						armadaSystem.wav_player.type_of_sound_to_play = HIT;//Г­Г Г¤Г® ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ Г§ГўГіГЄ Г°Г Г­ГҐГ­ГЁГї
 						xSemaphoreGive(xWavPlayerManagerSemaphore);
 					}
 					else {
 						armadaSystem.player.health = 0;
 						game_status = OUT_OF_GAME;
-						armadaSystem.wav_player.type_of_sound_to_play = GAME_OVER;//надо воспроизвести звук "игра закончена"
+						armadaSystem.wav_player.type_of_sound_to_play = GAME_OVER;//Г­Г Г¤Г® ГўГ®Г±ГЇГ°Г®ГЁГ§ГўГҐГ±ГІГЁ Г§ГўГіГЄ "ГЁГЈГ°Г  Г§Г ГЄГ®Г­Г·ГҐГ­Г "
 						if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)
 						{
 
@@ -3785,7 +3783,7 @@ void bt_hit_processing(trx_packet new_rx_bt_packet)//обрабатываем попадания, при
 #else
 
 
-							if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+							if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
 							{
 								drawBMPfromFlashUseDMA(game_over_pic,0,0,128,128,Rotation_0);
 
@@ -3826,10 +3824,10 @@ if(game_status != OUT_OF_GAME)
 	sensors[zone_3]=index_to_color[new_rx_bt_packet.team_id];
 	sensors[zone_4]=index_to_color[new_rx_bt_packet.team_id];
 #endif
-//Инициализируем переменную xLastWakeTime текущим временем.
+//Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГЇГҐГ°ГҐГ¬ГҐГ­Г­ГіГѕ xLastWakeTime ГІГҐГЄГіГ№ГЁГ¬ ГўГ°ГҐГ¬ГҐГ­ГҐГ¬.
 //	xLastWakeTime = xTaskGetTickCount ();
 
-	vTaskDelay(TIC_FQR);//на секунду включим светодиод зоны
+	vTaskDelay(TIC_FQR);//Г­Г  Г±ГҐГЄГіГ­Г¤Гі ГўГЄГ«ГѕГ·ГЁГ¬ Г±ГўГҐГІГ®Г¤ГЁГ®Г¤ Г§Г®Г­Г»
 //			vTaskDelayUntil( &xLastWakeTime, TIC_FQR );
 //			sensors[zone]=index_to_color[rx_pack.team_id];
 //			vTaskDelay(TIC_FQR/2);
@@ -3924,7 +3922,7 @@ void RTC_IRQHandler(void)
 }
 
 
-// функция преобразования григорианской даты и времени в значение счетчика
+// ГґГіГ­ГЄГ¶ГЁГї ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГї ГЈГ°ГЁГЈГ®Г°ГЁГ Г­Г±ГЄГ®Г© Г¤Г ГІГ» ГЁ ГўГ°ГҐГ¬ГҐГ­ГЁ Гў Г§Г­Г Г·ГҐГ­ГЁГҐ Г±Г·ГҐГІГ·ГЁГЄГ 
 uint32_t FtimeToCounter(ftime_t * ftime)
 {
 uint8_t a;
@@ -3932,11 +3930,11 @@ uint16_t y;
 uint8_t m;
 uint32_t JDN;
 
-// Вычисление необходимых коэффициентов
+// Г‚Г»Г·ГЁГ±Г«ГҐГ­ГЁГҐ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г»Гµ ГЄГ®ГЅГґГґГЁГ¶ГЁГҐГ­ГІГ®Гў
 a=(14-ftime->month)/12;
 y=ftime->year+4800-a;
 m=ftime->month+(12*a)-3;
-// Вычисляем значение текущего Юлианского дня
+// Г‚Г»Г·ГЁГ±Г«ГїГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГІГҐГЄГіГ№ГҐГЈГ® ГћГ«ГЁГ Г­Г±ГЄГ®ГЈГ® Г¤Г­Гї
 JDN=ftime->day;
 JDN+=(153*m+2)/5;
 JDN+=365*y;
@@ -3944,16 +3942,16 @@ JDN+=y/4;
 JDN+=-y/100;
 JDN+=y/400;
 JDN+=-32045;
-JDN+=-JD0; // так как счетчик у нас нерезиновый, уберем дни которые прошли до 01 янв 2001
-JDN*=86400;     // переводим дни в секунды
-JDN+=(ftime->hour*3600); // и дополняем его скундами текущего дня
+JDN+=-JD0; // ГІГ ГЄ ГЄГ ГЄ Г±Г·ГҐГІГ·ГЁГЄ Гі Г­Г Г± Г­ГҐГ°ГҐГ§ГЁГ­Г®ГўГ»Г©, ГіГЎГҐГ°ГҐГ¬ Г¤Г­ГЁ ГЄГ®ГІГ®Г°Г»ГҐ ГЇГ°Г®ГёГ«ГЁ Г¤Г® 01 ГїГ­Гў 2001
+JDN*=86400;     // ГЇГҐГ°ГҐГўГ®Г¤ГЁГ¬ Г¤Г­ГЁ Гў Г±ГҐГЄГіГ­Г¤Г»
+JDN+=(ftime->hour*3600); // ГЁ Г¤Г®ГЇГ®Г«Г­ГїГҐГ¬ ГҐГЈГ® Г±ГЄГіГ­Г¤Г Г¬ГЁ ГІГҐГЄГіГ№ГҐГЈГ® Г¤Г­Гї
 JDN+=(ftime->minute*60);
 JDN+=(ftime->second);
-// итого имеем количество секунд с 00-00 01 янв 2001
+// ГЁГІГ®ГЈГ® ГЁГ¬ГҐГҐГ¬ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±ГҐГЄГіГ­Г¤ Г± 00-00 01 ГїГ­Гў 2001
 return JDN;
 }
 
-// функция преобразования значение счетчика в григорианскую дату и время
+// ГґГіГ­ГЄГ¶ГЁГї ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГї Г§Г­Г Г·ГҐГ­ГЁГҐ Г±Г·ГҐГІГ·ГЁГЄГ  Гў ГЈГ°ГЁГЈГ®Г°ГЁГ Г­Г±ГЄГіГѕ Г¤Г ГІГі ГЁ ГўГ°ГҐГ¬Гї
 void CounterToFtime(uint32_t counter,ftime_t * ftime)
 {
 uint32_t ace;
@@ -3962,7 +3960,7 @@ uint8_t d;
 uint8_t m;
 
 ace=(counter/86400)+32044+JD0;
-b=(4*ace+3)/146097; // может ли произойти потеря точности из-за переполнения 4*ace ??
+b=(4*ace+3)/146097; // Г¬Г®Г¦ГҐГІ Г«ГЁ ГЇГ°Г®ГЁГ§Г®Г©ГІГЁ ГЇГ®ГІГҐГ°Гї ГІГ®Г·Г­Г®Г±ГІГЁ ГЁГ§-Г§Г  ГЇГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГї 4*ace ??
 ace=ace-((146097*b)/4);
 d=(4*ace+3)/1461;
 ace=ace-((1461*d)/4);
@@ -3990,7 +3988,7 @@ const unsigned char item_pos [][2] =
     };
 
 void go_to_next_menu_item (uint8_t* item){
-	fillRect(item_pos[*item][0],item_pos[*item][1],item_symbolWidth,item_height,0);//удаляем курсор с текущей позиции
+	fillRect(item_pos[*item][0],item_pos[*item][1],item_symbolWidth,item_height,0);//ГіГ¤Г Г«ГїГҐГ¬ ГЄГіГ°Г±Г®Г° Г± ГІГҐГЄГіГ№ГҐГ© ГЇГ®Г§ГЁГ¶ГЁГЁ
 	if (*item!=5)
 	{*item = (*item)+1;}
 	else{
@@ -4011,14 +4009,14 @@ void getDateClockSettings (void){
 	uint8_t curr_item = 0;
 	bool apply = false;
 	clear_screen();
-	lcd8544_putstr(0, 0, "*Date & clock*", 0); // вывод заголовка
-	lcd8544_putstr(0, item_height,   "> month:   00", 0); // вывод первой строки
-	lcd8544_putstr(0, item_height*2, "  day:     00", 0); // вывод второй строки
-	lcd8544_putstr(0, item_height*3, "  hour:    00", 0); // вывод третьей строки
-	lcd8544_putstr(0, item_height*4, "  minutes: 00", 0); // вывод первой строки
-	lcd8544_putstr(0, item_height*5, " APPLY  CANSEL", 0); // вывод первой строки
-	if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
-	xSemaphoreTake( xKeysSemaphore, 30 );//очищаем симафор
+	lcd8544_putstr(0, 0, "*Date & clock*", 0); // ГўГ»ГўГ®Г¤ Г§Г ГЈГ®Г«Г®ГўГЄГ 
+	lcd8544_putstr(0, item_height,   "> month:   00", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+	lcd8544_putstr(0, item_height*2, "  day:     00", 0); // ГўГ»ГўГ®Г¤ ГўГІГ®Г°Г®Г© Г±ГІГ°Г®ГЄГЁ
+	lcd8544_putstr(0, item_height*3, "  hour:    00", 0); // ГўГ»ГўГ®Г¤ ГІГ°ГҐГІГјГҐГ© Г±ГІГ°Г®ГЄГЁ
+	lcd8544_putstr(0, item_height*4, "  minutes: 00", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+	lcd8544_putstr(0, item_height*5, " APPLY  CANSEL", 0); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
+	if (!screen_auto_refresh) lcd8544_dma_refresh(); // ГўГ»ГўГ®Г¤ ГЎГіГґГҐГ°Г  Г­Г  ГЅГЄГ°Г Г­ ! ГЎГҐГ§ ГЅГІГ®ГЈГ® Г­ГЁГ·ГҐГЈГ® ГўГЁГ¤Г­Г® Г­ГҐ ГЎГіГ¤ГҐГІ !
+	xSemaphoreTake( xKeysSemaphore, 30 );//Г®Г·ГЁГ№Г ГҐГ¬ Г±ГЁГ¬Г ГґГ®Г°
 	keyboard_event = no_key_pressing;
 	reload_key_event = no_key_pressing;
 	while (! apply ){
@@ -4051,7 +4049,7 @@ void getDateClockSettings (void){
 
 void send_message_by_bluetooth(tir_message message){
 	 uint8_t mask = (1<<7);
-	  USART1_FlushTxBuf(); //очистить передающий буфер
+	  USART1_FlushTxBuf(); //Г®Г·ГЁГ±ГІГЁГІГј ГЇГҐГ°ГҐГ¤Г ГѕГ№ГЁГ© ГЎГіГґГҐГ°
 	  USART1_SendStr("h");
 	  while (mask)
 	  {
@@ -4117,7 +4115,7 @@ void send_message_by_bluetooth(tir_message message){
 
 			  uint8_t* p_tmp;
 			  p_tmp = (uint8_t*)&message.clone_data_union.tag_init_data.game_session_ID;
-			  for(int i=0;i<4;i++){//передаем 4 байта данных
+			  for(int i=0;i<4;i++){//ГЇГҐГ°ГҐГ¤Г ГҐГ¬ 4 ГЎГ Г©ГІГ  Г¤Г Г­Г­Г»Гµ
 				  mask = (1<<7);
 				  while (mask){
 			  					if ((*p_tmp)&(mask))  USART1_SendStr("1");
@@ -4182,7 +4180,7 @@ uint8_t checksum_for_tag_init_data(ttag_init_data tag_init_data){
 
 
 
-void initGUI(void){//вывод на экран элементов пользовательского интерфейса
+void initGUI(void){//ГўГ»ГўГ®Г¤ Г­Г  ГЅГЄГ°Г Г­ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«ГјГ±ГЄГ®ГЈГ® ГЁГ­ГІГҐГ°ГґГҐГ©Г±Г 
 #ifndef 	COLOR_LCD
 	  LCD_BL_OFF;
 	  clear_screen();
@@ -4202,9 +4200,9 @@ void initGUI(void){//вывод на экран элементов пользовательского интерфейса
 	  //drawDigit(40,0,0,1);
 	  drawSmallDigit(0,41,1,1);
 	  drawSmallDigit(5,41,5,1);
-//	fillRect(84-6*4 -1,48-8-1,6*4+1,8+1,1);//удаляем изображение прогресс-бара в батарейке
+//	fillRect(84-6*4 -1,48-8-1,6*4+1,8+1,1);//ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐ ГЇГ°Г®ГЈГ°ГҐГ±Г±-ГЎГ Г°Г  Гў ГЎГ ГІГ Г°ГҐГ©ГЄГҐ
 /*
-	  lcd8544_putstr(84-6*4-2,48-8 ,"SAFE", 1); // вывод первой строки
+	  lcd8544_putstr(84-6*4-2,48-8 ,"SAFE", 1); // ГўГ»ГўГ®Г¤ ГЇГҐГ°ГўГ®Г© Г±ГІГ°Г®ГЄГЁ
 	  drawFastHLine(84-6*4-3,48-1,6*4+2,1);
 	  drawFastVLine(84-1,48-8-1,9,1);
 	  drawFastVLine(84-2,48-8-1,9,1);
@@ -4224,14 +4222,14 @@ void initGUI(void){//вывод на экран элементов пользовательского интерфейса
 	lcd_fire_mode_update(test_fire_mode_switch());
 
 
-	  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
+	  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г®
 	        {
-		  	  drawDigit(52+2,0,10,1);//рисуем эмблемку блютус
+		  	  drawDigit(52+2,0,10,1);//Г°ГЁГ±ГіГҐГ¬ ГЅГ¬ГЎГ«ГҐГ¬ГЄГі ГЎГ«ГѕГІГіГ±
 
 	        }
-	    else//если соединение разорвано
+	    else//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ Г°Г Г§Г®Г°ГўГ Г­Г®
 	        {
-	    	fillRect(52+2,0,12,16,0);//удаляем эмблемку блютус
+	    	fillRect(52+2,0,12,16,0);//ГіГ¤Г Г«ГїГҐГ¬ ГЅГ¬ГЎГ«ГҐГ¬ГЄГі ГЎГ«ГѕГІГіГ±
 	        }
 
 	  if (!screen_auto_refresh)lcd8544_dma_refresh();
@@ -4252,18 +4250,18 @@ void initGUI(void){//вывод на экран элементов пользовательского интерфейса
 
 
 
-    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
+    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г®
         {
 
-    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+    		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
     		{
     		drawBMPfromFlash(bluetooth1,16,32);
     		xSemaphoreGive(xColorLCDSemaphore);
     		}
         }
-    else//если соединение разорвано
+    else//ГҐГ±Г«ГЁ Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ Г°Г Г§Г®Г°ГўГ Г­Г®
         {
-    	 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+    	 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//ГҐГ±Г«ГЁ LCD Г§Г Г­ГїГІ, Г¦Г¤ГҐГ¬ 2 Г±
     	  {
 
     		 FillRect(iBlack,0,0,16,32);
@@ -4293,7 +4291,7 @@ void initGUI(void){//вывод на экран элементов пользовательского интерфейса
 
 #ifdef SENSORS_BECKLIGHT
 void set_sensor_color(uint8_t color, uint8_t brightness_level, TDamageZone zone){
-//заполняем черным
+//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ Г·ГҐГ°Г­Г»Г¬
 if (brightness_level > NUMBER_OF_SENSORS_FRAMES)brightness_level=NUMBER_OF_SENSORS_FRAMES;
 for(uint8_t i=0; i<NUMBER_OF_SENSORS_FRAMES; i++ ){
 	sensors[i][zone] = BLACK;
@@ -4310,7 +4308,7 @@ case GREEN|HIGH_BRIDHTNESS :
 case YELLOW|HIGH_BRIDHTNESS:
 	{
 		volatile bool skip = false;
-//заполняем цветом фреймы согласно уровню яркости
+//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ Г¶ГўГҐГІГ®Г¬ ГґГ°ГҐГ©Г¬Г» Г±Г®ГЈГ«Г Г±Г­Г® ГіГ°Г®ГўГ­Гѕ ГїГ°ГЄГ®Г±ГІГЁ
 		for(uint8_t i=0; i<brightness_level; i++){
 			if (!skip){sensors[i][zone] = color;}
 			else
@@ -4373,7 +4371,7 @@ void set_sensor_vibro(uint8_t power_level, TDamageZone zone){
 	}
 	if(!power_level)return;
 	volatile bool skip = false;
-	//заполняем цветом фреймы согласно уровню яркости
+	//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ Г¶ГўГҐГІГ®Г¬ ГґГ°ГҐГ©Г¬Г» Г±Г®ГЈГ«Г Г±Г­Г® ГіГ°Г®ГўГ­Гѕ ГїГ°ГЄГ®Г±ГІГЁ
 			for(uint8_t i=0; i<power_level; i++){
 				if (!skip){sensors[i][zone] |= VIBRO_HP;}
 				else
