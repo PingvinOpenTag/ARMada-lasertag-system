@@ -25,6 +25,8 @@ const unsigned char parameter_20[] = "clips_after_start";//количество обойм посл
 const unsigned char parameter_21[] = "clips_capacity";//Ємкость обоймы
 const unsigned char parameter_22[] = "autostart_game";//автоматически запускать игру после подочи питани€
 const unsigned char parameter_23[] = "backlight_level";//€ркость фоновой подсветки датчиков
+const unsigned char parameter_24[] = "ir_power_offset";//смещение на операционном усилителе
+const unsigned char parameter_25[] = "sonar_sound_file_name";//звук сонара, будем воспроизводить пока не будет соединени€ по блютус
 const unsigned char* parametersPointers[] =
 {	parameter_0,
 	parameter_1,
@@ -49,7 +51,9 @@ const unsigned char* parametersPointers[] =
 	parameter_20,
 	parameter_21,
 	parameter_22,
-	parameter_23
+	parameter_23,
+	parameter_24,
+	parameter_25
 };
 
 const unsigned char at_name[] = "AT+NAME";  //

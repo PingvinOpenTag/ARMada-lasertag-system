@@ -91,6 +91,7 @@ extern xSemaphoreHandle xHitSemaphore;
 extern xSemaphoreHandle xUsart1Semaphore;
 extern xSemaphoreHandle xBluetoothSemaphore;
 extern xSemaphoreHandle xGameOverSemaphore;
+extern xSemaphoreHandle xSDcardLockSemaphore;
 extern xQueueHandle xEventQueue;
 #ifdef COLOR_LCD
 extern volatile xSemaphoreHandle xColorLCDSemaphore;

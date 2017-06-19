@@ -65,6 +65,7 @@ tir_message rx_message;
 #define DEFAULT_BATTARY_FULL_VOLTAGE 4200 //напр€жение полностью зар€женной батареи по умолчанию
 #define DEFAULT_BATTARY_LOW_VOLTAGE 3400 //напр€жение полностью разр€женной батареи по умолчанию
 #define DEFAULT_IR_POWER 30 //мощность »  излучени€ по умолчанию
+#define DEFAULT_IR_POWER_OFFSET 0 //смещение на операционном усилителе
 #define DEFAULT_AUTOSTART_GAME true //запускать игру после подачи питани€
 #define DEFAULT_BACKLIGHT_LEVEL 2
 

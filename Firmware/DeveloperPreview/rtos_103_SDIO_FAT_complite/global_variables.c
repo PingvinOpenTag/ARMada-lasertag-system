@@ -100,6 +100,7 @@ xSemaphoreHandle xHitSemaphore;
 xSemaphoreHandle xUsart1Semaphore;
 xSemaphoreHandle xBluetoothSemaphore;
 xSemaphoreHandle xGameOverSemaphore;
+xSemaphoreHandle xSDcardLockSemaphore;
 xQueueHandle xEventQueue;
 
 #ifdef COLOR_LCD

@@ -311,8 +311,14 @@ void test_bt_data()
 											armadaSystem.game_session_ID = bt_message.clone_data_union.tag_init_data.game_session_ID;
 
 											armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
-											stopWavPlayer();
-											save_parameters_to_sd_card();
+//											stopWavPlayer();
+											armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
+											xSemaphoreGive(xWavPlayerManagerSemaphore);
+											if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если SD карта занята, ждем 2 с
+											{
+												save_parameters_to_sd_card();
+												xSemaphoreGive(xSDcardLockSemaphore);
+											}
 											armadaSystem.gun.rounds=0;
 											armadaSystem.player.health=bt_message.clone_data_union.tag_init_data.health;
 
@@ -366,8 +372,13 @@ void test_bt_data()
 									{
 										armadaSystem.game_session_ID = bt_message.clone_data_union.tag_init_data.game_session_ID;
 										armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
-										stopWavPlayer();
-										save_parameters_to_sd_card();
+										armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
+										xSemaphoreGive(xWavPlayerManagerSemaphore);
+										if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если SD карта занята, ждем 2 с
+										{
+											save_parameters_to_sd_card();
+											xSemaphoreGive(xSDcardLockSemaphore);
+										}
 										armadaSystem.gun.rounds=0;
 										armadaSystem.player.health=bt_message.clone_data_union.tag_init_data.health;
 										initGUI();

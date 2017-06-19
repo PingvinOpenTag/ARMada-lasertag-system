@@ -47,7 +47,7 @@ const char ir_page_header_text[] =    {"<< IR power >>"};
 
 volatile uint16_t new_ir_power_value;
 const tsetting_item ir_setting_item_1 =  {
-		{_WORD}, //var type
+		{_BYTE/*_WORD*/}, //var type
 		{symbol_width,symbol_height},//symbol size
 		{"Power"},//text
 		{symbol_width*1,header_height},// position (x,y)
@@ -58,7 +58,18 @@ const tsetting_item ir_setting_item_1 =  {
 		{(uint32_t)&new_ir_power_value} // new value address
 };
 
-
+volatile uint16_t new_ir_power_offset_value;
+const tsetting_item ir_setting_item_2 =  {
+		{_BYTE/*_WORD*/}, //var type
+		{symbol_width,symbol_height},//symbol size
+		{"Offset"},//text
+		{symbol_width*1,header_height+symbol_height*1},// position (x,y)
+		{(uint32_t)&armadaSystem.gun.ir_power_offset}, // var adress
+		{(uint32_t) 30}, //max value
+		{(uint32_t) 0}, //min value
+		{(uint8_t) 3},//digits to display
+		{(uint32_t)&new_ir_power_offset_value} // new value address
+};
 
 
 volatile uint8_t new_day_value;
@@ -924,14 +935,15 @@ void init_clock_sett_list(void){
 void init_ir_sett_list(void){
 	sett_list_reset((tsetting_item_list*)& sett_item_list);
 	add_setting_item((tsetting_item_list*)& sett_item_list, (tsetting_item*)&ir_setting_item_1);
+	add_setting_item((tsetting_item_list*)& sett_item_list, (tsetting_item*)&ir_setting_item_2);
 	add_setting_item((tsetting_item_list*)& sett_item_list, (tsetting_item*)&setting_item_4);//apply item
 	add_setting_item((tsetting_item_list*)& sett_item_list, (tsetting_item*)&setting_item_5);//cansel item
 	sett_page.header_text=ir_page_header_text;
 	sett_page.height = header_height;
 	sett_page.item_list = (tsetting_item_list*)& sett_item_list;
 	sett_page.curr_item = 0;
-	sett_page.apply_index =1;
-	sett_page.cansel_index = 2;
+	sett_page.apply_index =2;
+	sett_page.cansel_index = 3;
 }
 
 void sett_list_reset(tsetting_item_list* sett_item_list){

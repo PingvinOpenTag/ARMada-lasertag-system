@@ -239,7 +239,7 @@ int main(void)
 	vSemaphoreCreateBinary(xUsart1Semaphore);//семафор UASRT1
 	vSemaphoreCreateBinary(xBluetoothSemaphore);//семафор Blutooth
 	vSemaphoreCreateBinary(xGameOverSemaphore);//семафор Blutooth
-
+	vSemaphoreCreateBinary(xSDcardLockSemaphore);//семафор указывает, что с SD картой работает какой-то таск
 
 /*
 	xTaskCreate( vTaskLED1, ( signed char * ) "LED1", configMINIMAL_STACK_SIZE/2, NULL, 0,
@@ -451,6 +451,8 @@ void BluetoothTask(void *pvParameters) {
 					}
 				}
 				else {//параметры успешно прочитаны из бинарного файла
+						armadaSystem.wav_player.type_of_reproduced_sound=NOTHING;
+						armadaSystem.wav_player.type_of_sound_to_play=NOTHING;
 						set_player_id(armadaSystem.player.id);
 						set_team_color(armadaSystem.player.team_color);
 						set_gun_damage(armadaSystem.gun.damage);
@@ -1052,7 +1054,13 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
             		color_lcd_battary_voltage_update(voltage);
 //            	}
 #endif
-
+            		 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 0){//если нет блютус соединения
+            			 armadaSystem.wav_player.type_of_sound_to_play = SONAR;//надо воспроизвести звук сонара
+            			 xSemaphoreGive(xWavPlayerManagerSemaphore);
+            		 }
+            		 else{
+            			 if (armadaSystem.wav_player.type_of_sound_to_play == SONAR) armadaSystem.wav_player.type_of_sound_to_play==NOTHING;
+            		 }
         }
 
 }
@@ -1091,7 +1099,7 @@ if (sys_event_tmp.event_source == TRIGGER_KEY){
    		{
    			case SINGLE:
    			{
-   				DAC->DHR8R2=armadaSystem.gun.ir_power;//100;
+   				DAC->DHR8R2=armadaSystem.gun.ir_power+armadaSystem.gun.ir_power_offset;//100;
 
    				//	data_tmp = BKP_ReadBackupRegister(BKP_DR1);
    				//	 BKP_WriteBackupRegister(BKP_DR1, BKP_ReadBackupRegister(BKP_DR1)+1 );
@@ -1125,7 +1133,7 @@ xSemaphoreGive(xGameOverSemaphore);
    			break;
    			case SEMI_AUTO:
    			{
-  				DAC->DHR8R2=armadaSystem.gun.ir_power;//100;
+  				DAC->DHR8R2=armadaSystem.gun.ir_power+armadaSystem.gun.ir_power_offset;//100;
    				volatile TKEYBOARD_EVENT key_status;
 	   			key_status = test_keyboard( ADC_values[0]);
 
@@ -1185,7 +1193,7 @@ if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(TIC_FQR/2))==pdTRUE)	//убед
 	   				            break;
 	   				   		}
 
-	   				DAC->DHR8R2=armadaSystem.gun.ir_power;//100;
+	   				DAC->DHR8R2=armadaSystem.gun.ir_power+armadaSystem.gun.ir_power_offset;//100;
 	   				if(armadaSystem.gun.rounds)
 	   				{
 
@@ -1463,7 +1471,7 @@ for (;;)
 					break;
 					case NOTHING:
 					{
-
+						stopWavPlayer();
 					}
 					break;
 					case HIT:
@@ -1513,6 +1521,16 @@ for (;;)
 							}
 					}
 					break;
+
+					case SONAR:
+					{
+						if(armadaSystem.wav_player.type_of_reproduced_sound==SONAR) break;//если звук "пустая обойма" уже воспроизводитcя
+						else {
+								stopWavPlayer();
+								xSemaphoreGive(xPlayWavSoundSemaphore);
+							}
+					}
+					break;
 				}
 	}
 }
@@ -1530,11 +1548,14 @@ void Wav_Player(void *pvParameters){
 	for (;;) {
 
 		xSemaphoreTake(xPlayWavSoundSemaphore, portMAX_DELAY );//ждем задания для wav-плеера
+		if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если SD карта занята, ждем 2 с
+		{
 
 		switch(armadaSystem.wav_player.type_of_sound_to_play)
 						{
 							case SHOT:
 							{
+
 								armadaSystem.wav_player.type_of_reproduced_sound = SHOT;
 				//				wave_playback("/gunsnd/shot.wav");
 								wave_playback(armadaSystem.wav_player.shot_sound_file_name);
@@ -1596,10 +1617,17 @@ void Wav_Player(void *pvParameters){
 								armadaSystem.wav_player.type_of_reproduced_sound = NOTHING;
 							}
 							break;
-
+							case SONAR:
+							{
+								armadaSystem.wav_player.type_of_reproduced_sound = SONAR;
+								wave_playback(armadaSystem.wav_player.sonar_sound_file_name);
+								armadaSystem.wav_player.type_of_reproduced_sound = NOTHING;
+							}
+							break;
 
 
 						}
+
 
 		//		DMA_DeInit(DMA2_Channel3);
 //		init_dma();
@@ -1657,8 +1685,10 @@ void Wav_Player(void *pvParameters){
 		 wave_playback("a1.wav");
 		 vTaskDelay(500);
 */
+		xSemaphoreGive(xSDcardLockSemaphore);
+		}//[if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)]
 
-	        }
+	}//[for(;;)]
 
 
 }
@@ -1850,8 +1880,30 @@ char wave_playback(const char *FileName)
 
 	   if(res)//не смогли открыть файл
 	   {
-		   armadaSystem.wav_player.stop = true;
-		   return 1;
+		   f_close(&file);
+	        // Иницилизация карты
+	            Status = SD_Init();
+	        // Получаем информацию о карте
+	            SD_GetCardInfo(&SDCardInfo);
+	                // Выбор карты и настройка режима работы
+	                SD_SelectDeselect((uint32_t) (SDCardInfo.RCA << 16));
+	           //     SD_SetDeviceMode(SD_POLLING_MODE);
+	//                SD_SetDeviceMode(SD_INTERRUPT_MODE);
+	                // И вот наконец то запись и чтение
+
+//	                get_uid(request_text);
+//	                xtea2_encipher(64,request_text,key_A);
+//	                xtea2_decipher(64,request_text,key_A);
+
+	                f_mount(0,&fs);
+
+	                res = f_open( &file, FileName, FA_READ );   //открыть файл FileName для чтения
+
+	                if(res)//не смогли открыть файл
+	                {
+	                	armadaSystem.wav_player.stop = true;
+	                	return 1;
+	                }
 	   }
 	//   res = f_lseek(&file,0x2c);                  //переместить указатель на начало полезных данных
 
@@ -1905,13 +1957,14 @@ char wave_playback(const char *FileName)
 			return 2;
 		}
 
-	   f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE*2,&cnt);       //загрузить буфер ЦАПа данными
+	   res=f_read (&file,&DAC_Buff[0],SOUND_BUFFER_SIZE*2,&cnt);       //загрузить буфер ЦАПа данными
 
 
 	   if(res)
 	   {
 		   f_close(&file);                             //закрыть файл
-		   armadaSystem.wav_player.stop = true;
+//		   armadaSystem.wav_player.stop = true;
+//		   xSemaphoreGive(xWavPlayerSemaphore);//
 		   return 3;
 	   }
 	   if(subchunk2Size>cnt) subchunk2Size-=cnt;
@@ -2191,6 +2244,7 @@ hit_timeout_counter = 0xFF;
 	armadaSystem.player.shock_time = DEFAULT_SHOCK_TIME;
 
 	armadaSystem.gun.ir_power = DEFAULT_IR_POWER;
+	armadaSystem.gun.ir_power_offset = DEFAULT_IR_POWER_OFFSET;
 	armadaSystem.gun.damage = DEFAULT_GUN_DAMAGE;
 	armadaSystem.gun.clips_after_start = DEFAULT_CLIPS;
 	armadaSystem.autostart_game = DEFAULT_AUTOSTART_GAME;
@@ -2224,11 +2278,11 @@ else
 	armadaSystem.gun.reload_time = DEFAULT_RELOAD_TIME;
 	armadaSystem.gun.rate  = DEFAULT_RATE;
 	armadaSystem.friendly_fire = DEFAULT_FRIENDLY_FIRE;
-	armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
+//	armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
 
 
-	bool hit_in_processing = false;
-	armadaSystem.wav_player.stop = true;//выключаем wav-плеер
+//	bool hit_in_processing = false;
+//	armadaSystem.wav_player.stop = true;//выключаем wav-плеер
 	safe_counter = 0;
 	tim2_rec_state=REC_Idle;
 	tim3_rec_state=REC_Idle;
@@ -3111,6 +3165,8 @@ void parsing_string(char* record)//анализ строки
 		case 21:{get_word_argument_value(record,&armadaSystem.gun.rounds_placed_in_clip,0,1000);} break;
 		case 22:{get_int_argument_value(record,&armadaSystem.autostart_game,0,1);} break;
 		case 23:{get_int_argument_value(record,&armadaSystem.backlight_level,0,NUMBER_OF_SENSORS_FRAMES);} break;
+		case 24:{get_int_argument_value(record,&armadaSystem.gun.ir_power_offset,0,30);} break;
+		case 25:{get_string_argument_value(record,armadaSystem.wav_player.sonar_sound_file_name);} break;
 		default: break;
 	}
 }

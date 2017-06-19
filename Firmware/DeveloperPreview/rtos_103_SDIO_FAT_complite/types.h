@@ -10,12 +10,12 @@
 #define TAG 0
 #define BANDANA 1
 //роль устройства: BANDANA или TAG
-#define DEVICE_ROLE BANDANA
-//#define DEVICE_ROLE TAG
-//#define RTC_Enable
+//#define DEVICE_ROLE BANDANA
+#define DEVICE_ROLE TAG
+#define RTC_Enable
 #define LOW_DROP_ENABLE
 
-//#define COLOR_LCD
+#define COLOR_LCD
 //определение направлени€, откуда прилетел пакет
 //#define DIRECTION_CALCULATION
 #define HIT_TIMEOUT 10
@@ -258,6 +258,7 @@ typedef struct  pgun_type{
 	uint16_t reload_time;//врем€ перезар€дки
 	uint16_t rate;//скорострельность (выстрелов/мин)
 	uint8_t ir_power;//мощность »  излучени€
+	uint8_t ir_power_offset;//смещение на операционном усилителе
 } tgun;
 
 
@@ -276,7 +277,8 @@ enum SystmSounds_Types {
 	GAME_OVER,//игрок вне игры
 	EMPTY_CLIP,//пуста€ обойма
 	RELOAD,//перезар€д
-	MESSAGE		//сообщение дл€ игрока
+	MESSAGE,		//сообщение дл€ игрока
+	SONAR//звук сонара
 	};
 typedef enum SystmSounds_Types tsysSoundType; //ќпределим перечисл€емый тип дл€ событий » -приемника
 
@@ -300,6 +302,7 @@ typedef struct wav_player_type{
 	char empty_clip_sound_file_name[32];
 	char reload_sound_file_name[32];
 	char message_sound_file_name[32];
+	char sonar_sound_file_name[32];
 } twav_player;
 
 //ќпределим источники ситемных событий
