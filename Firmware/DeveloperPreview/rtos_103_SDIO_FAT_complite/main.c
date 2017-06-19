@@ -1627,62 +1627,6 @@ void Wav_Player(void *pvParameters){
 						}
 
 
-		//		DMA_DeInit(DMA2_Channel3);
-//		init_dma();
-//		vTaskDelay(500);
-//		DMA2_Channel3->CCR &= (uint16_t)(~DMA_CCR1_EN);//Âûêëþ÷àåì DMA.
-//		DMA2_Channel3->CNDTR = 512;//Óñòàíàâëèâàåì ðàçìåð ïåðåäàâàåìîãî áóôåðà çàíîâî.
-//		DMA2_Channel3->CCR |= DMA_CCR1_EN;//Âêëþ÷àåì DMA
-//		wave_playback("murakami.wav");
-//		vTaskDelay(500);
-/*
-		wave_playback("angely.wav");
-		vTaskDelay(500);
-		wave_playback("RudeBoy1.wav");
-		vTaskDelay(500);
-//		wave_playback("mur16_4.wav");
-//		wave_playback("mur16.wav");
-		vTaskDelay(500);
-//		wave_playback("benny.wav");
-		vTaskDelay(500);
-//		wave_playback("sabaton.wav");
-//		DMA_DeInit(DMA2_Channel3);
-//		init_dma();
-		vTaskDelay(500);
-		wave_playback("murakami.wav");
-		vTaskDelay(500);
-//		DMA_DeInit(DMA2_Channel3);
-//		init_dma();
-		wave_playback("sound.wav");
-		vTaskDelay(500);
-//		init_dma();
-		wave_playback("s33.wav");
-		vTaskDelay(500);
-//		init_dma();
-		wave_playback("g1.wav");
-		 vTaskDelay(500);
-//		 init_dma();
-		wave_playback("g2.wav");
-		 vTaskDelay(500);
-//		 init_dma();
-		 wave_playback("g3.wav");
-		 vTaskDelay(500);
-//		 init_dma();
-		 wave_playback("s3.wav");
-		 vTaskDelay(500);
-//		  init_dma();
-		 wave_playback("s4.wav");
-		 vTaskDelay(500);
-//		 init_dma();
-//		 wave_playback("s5.wav");
-//		 vTaskDelay(500);
-//		 init_dma();
-//		 wave_playback("s6.wav");
-		 vTaskDelay(500);
-//		 init_dma();
-		 wave_playback("a1.wav");
-		 vTaskDelay(500);
-*/
 		xSemaphoreGive(xSDcardLockSemaphore);
 		}//[if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)]
 
