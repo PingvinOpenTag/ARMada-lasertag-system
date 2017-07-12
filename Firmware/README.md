@@ -52,7 +52,7 @@ http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
 Макрос актуален, если устройство используется в качестве повязки. Если макрос определён, RGB датчики будут светится цветом команды игрока. Яркость свечения задается в файле armada.ini на SD карте.
 
 
-
+***
 # EN
 
 To build the project, you need a IDE CooCox version 1.7
