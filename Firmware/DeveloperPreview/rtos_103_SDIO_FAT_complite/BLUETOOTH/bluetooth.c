@@ -359,6 +359,49 @@ void test_bt_data()
 												else//если вне игры
 												{
 
+
+
+#ifndef 	COLOR_LCD
+
+														clear_screen();
+														drawBitmap(0,0,game_over_black_image,84,48,1);
+											            if (!screen_auto_refresh)lcd8544_dma_refresh();
+#else
+													if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+													 {
+														drawBMPfromFlashUseDMA(game_over_pic,0,0,128,128,Rotation_0);
+
+														xSemaphoreGive(xColorLCDSemaphore);
+													 }
+#endif
+
+													 if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
+											        {
+
+
+#ifndef COLOR_LCD
+			//								    		drawDigit(52+2,0,10,1);//рисуем эмблемку блютус
+			//								    		if (!screen_auto_refresh)lcd8544_dma_refresh();
+#else
+											    		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+														{
+															drawBMPfromFlash(bluetooth1,16,32);
+															xSemaphoreGive(xColorLCDSemaphore);
+														}
+
+#endif
+													}//[ if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено]
+
+
+
+
+
+
+
+
+
+
+
 												}
 
 											}

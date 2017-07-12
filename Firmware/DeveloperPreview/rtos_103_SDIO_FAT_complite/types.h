@@ -9,6 +9,9 @@
 
 #define TAG 0
 #define BANDANA 1
+//если старая версия печатной платы
+//#define OLD_VERSION_PCB
+
 //роль устройства: BANDANA или TAG
 //#define DEVICE_ROLE BANDANA
 #define DEVICE_ROLE TAG

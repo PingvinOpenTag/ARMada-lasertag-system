@@ -186,8 +186,15 @@ void init_adc_for_multiscan(void)//настройка АЦП для последовательного сканирова
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AIN;
 		GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1 ;		// that's ADC1 IN1 (PA1 on STM32)
 		GPIO_Init(GPIOA, &GPIO_InitStructure);
+#ifndef OLD_VERSION_PCB
 		GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0 ;		// that's ADC1 IN2 (PС0 on STM32)
 		GPIO_Init(GPIOC, &GPIO_InitStructure);
+#else
+		GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2 ;		// that's ADC1 IN2 (PA2 on STM32)
+		GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+#endif
+
 		GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_2 ;		// that's ADC1 IN12 (PС2 on STM32)
 		GPIO_Init(GPIOC, &GPIO_InitStructure);
 		RCC_ADCCLKConfig (RCC_PCLK2_Div2);
@@ -211,8 +218,13 @@ void init_adc_for_multiscan(void)//настройка АЦП для последовательного сканирова
 		    //configure each channel
 //PA1 - trigger/reload
 		ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_41Cycles5);
-//PA2 - battary control
+#ifndef OLD_VERSION_PCB
+//PC0 - battary control
 		ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 2, ADC_SampleTime_41Cycles5);
+#else
+//PA2 - battary control
+		ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 2, ADC_SampleTime_41Cycles5);
+#endif
 //PC2 - fire mode switch
 		ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 3, ADC_SampleTime_41Cycles5);
 // internal Ref
