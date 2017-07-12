@@ -1,7 +1,6 @@
 # RU
 
-Для сборки проекта Вам потребуется IDE CooCox version 1.7
-
+Для сборки проекта Вам потребуется IDE CooCox version 1.7 
 http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
 Скачайте содержимое репозитория, разархивируйте.
 Установите и запустите CooCox 1.7.8
