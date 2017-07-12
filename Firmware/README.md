@@ -1,5 +1,5 @@
 # RU
-# Необходимое программное обеспечение
+## Необходимое программное обеспечение
 
 Для сборки проекта Вам потребуется IDE CooCox version 1.7 
 http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
@@ -7,7 +7,7 @@ http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
 Установите и запустите CooCox 1.7.8. 
 Откройте файл проекта по следующему пути:  Firmware/DeveloperPreview/rtos_103_SDIO_FAT_complite/rtos.coproj
 
-# Параметры сборки
+## Параметры сборки
 
 В файле /Firmware/DeveloperPreview/rtos_103_SDIO_FAT_complite/types.h
 есть несколько важных макросов:
