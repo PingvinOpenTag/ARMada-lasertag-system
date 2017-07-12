@@ -1,4 +1,5 @@
 # RU
+# Необходимое программное обеспечение
 
 Для сборки проекта Вам потребуется IDE CooCox version 1.7 
 http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
