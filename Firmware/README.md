@@ -41,11 +41,11 @@ http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
 Существуют две версии экранчиков - 1.1 и 2.2. 
 Если ваш экранчик версии 1.1, то макрос должен быть определён таким образом
 
-`#define COLOR_LCD 1`
+`#define LCD_MODUL_VERSION 1`
 
 Если ваш экранчик версии 2.2, то макрос должен быть определён таким образом
 
-`#define COLOR_LCD 2`
+`#define LCD_MODUL_VERSION 2`
 
 
 `#define SENSORS_BECKLIGHT` - использование фоновой подсветки RGB датчиков. 
