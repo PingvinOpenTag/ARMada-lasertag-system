@@ -7,7 +7,7 @@ http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
 https://launchpad.net/gcc-arm-embedded
 
 Скачайте содержимое репозитория, разархивируйте.
-Установите GNU ARM Embedded Toolchain.
+Установите GNU ARM Embedded Toolchain (к сожалению - в Windows Vista он не работает).
 При установке избегайте слишком длинных путей, кириллицы в названиях папок, пробелов и прочих служебных символов.
 Установите и запустите CooCox 1.7.8. 
 Укажите путь до папки, содержащей исполняемые файлы GNU ARM Embedded Toolchain.
