@@ -1,7 +1,5 @@
 # RU
-Для сборки загрузчика потребуется __System Workbench for STM32: free IDE on Windows, Linux and OS X __
-
-http://www.st.com/en/development-tools/sw4stm32.html
+Для сборки загрузчика потребуется __System Workbench for STM32__
 
 http://www.openstm32.org/Downloading+the+System+Workbench+for+STM32+installer
 
