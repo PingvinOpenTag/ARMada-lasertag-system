@@ -3,8 +3,18 @@
 
 Для сборки проекта Вам потребуется IDE CooCox version 1.7 
 http://www.coocox.org/download/Tools/CoIDE-1.7.8.exe
+и компилятор __GNU ARM Embedded Toolchain__
+https://launchpad.net/gcc-arm-embedded
+
 Скачайте содержимое репозитория, разархивируйте.
+Установите GNU ARM Embedded Toolchain.
+При установке избегате слишком длинных путей, кириллицы в названиях папок, пробелов и прочих служебных символов.
 Установите и запустите CooCox 1.7.8. 
+Укажите путь до папки, содержащей исполняемые файлы GNU ARM Embedded Toolchain.
+В CooCox IDE в вехнем меню выберите пункт Project и в выбадающеи списке пункт Select Toolchain Path.
+Например, если GNU ARM Embedded Toolchain был установлен по пути G:\ARM_GCC, то нужно будет указать папку G:\ARM_GCC\bin.
+Нажмите ОК - инструмент готов к работе.
+На всякий случай можно перезагрузить компьютер.
 Откройте файл проекта по следующему пути:  __Firmware/DeveloperPreview/rtos_103_SDIO_FAT_complite/rtos.coproj__
 
 ## Параметры сборки
