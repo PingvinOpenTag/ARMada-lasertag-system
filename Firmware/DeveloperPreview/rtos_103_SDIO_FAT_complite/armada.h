@@ -26,6 +26,9 @@
 #include "menu.h"
 #include <GFXC.h>
 
+
+#include "display.h"
+
 #define HIT_PROCESSING_TIMEOUT (TIC_FQR/2) //полсекунды на обработку попаданий
 #define USART_PROCESSING_TIMEOUT (TIC_FQR) //секунда на ожидание ответа
 

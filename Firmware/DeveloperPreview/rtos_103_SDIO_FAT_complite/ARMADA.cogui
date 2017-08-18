@@ -27,6 +27,16 @@
 <part id="9"/>
 <part id="10"/>
 <part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
+<part id="18"/>
+<part id="19"/>
+<part id="20"/>
+<part id="21"/>
 </presentation>
 </folder>
 </info>
@@ -35,9 +45,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/BLUETOOTH/src/bluetooth.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4253" selectionTopPixel="3180"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="types.h" partName="types.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/types.h" title="types.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/types.h" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="types.h" partName="types.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/types.h" title="types.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/types.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/inc/types.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="320" selectionTopPixel="60"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="392" selectionTopPixel="150"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="global_variables.h" partName="global_variables.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/global_variables.h" title="global_variables.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/global_variables.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/inc/global_variables.h"/>
@@ -47,13 +57,13 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/src/global_variables.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="457744" selectionTopPixel="65350"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="armada.h" partName="armada.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/armada.h" title="armada.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/armada.h" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="armada.h" partName="armada.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/armada.h" title="armada.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/armada.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/inc/armada.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="26" selectionOffset="5988" selectionTopPixel="2540"/>
+<editorState selectionHorizontalPixel="0" selectionLength="57" selectionOffset="508" selectionTopPixel="120"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="commands.h" partName="commands.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/commands.h" title="commands.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/commands.h" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="commands.h" partName="commands.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/commands.h" title="commands.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/commands.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/inc/commands.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2174" selectionTopPixel="810"/>
+<editorState selectionHorizontalPixel="0" selectionLength="7" selectionOffset="2297" selectionTopPixel="633"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="menu.c" partName="menu.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/MENU/menu.c" title="menu.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/MENU/menu.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/MENU/src/menu.c"/>
@@ -75,27 +85,70 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/FATFS/src/ff.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="7" selectionOffset="62142" selectionTopPixel="39240"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/main.c" title="main.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMadaBandanaV5/rtos_103_SDIO_FAT_complite/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/main.c" title="main.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/src/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3242" selectionTopPixel="1800"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="13319" selectionTopPixel="8160"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="display.h" partName="display.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/Middleware/Devices/Display/inc/display.h" title="display.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/Middleware/Devices/Display/inc/display.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Middleware/Devices/Display/inc/display.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="26" selectionOffset="314" selectionTopPixel="88"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="cipher.h" partName="cipher.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/CIPHER/cipher.h" title="cipher.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/CIPHER/cipher.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Armada/inc/cipher.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="41" selectionOffset="42" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="display.c" partName="display.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/Middleware/Devices/Display/src/display.c" title="display.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/Middleware/Devices/Display/src/display.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/Middleware/Devices/Display/src/display.c"/>
+<editorState selectionHorizontalPixel="214" selectionLength="0" selectionOffset="216" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="f10x-pcd8544.c" partName="f10x-pcd8544.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/f10x-pcd8544.c" title="f10x-pcd8544.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/f10x-pcd8544.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/NOKIA5110_LCD/src/f10x-pcd8544.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="15" selectionOffset="5089" selectionTopPixel="4100"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="GFXC.c" partName="GFXC.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/GFXC.c" title="GFXC.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/GFXC.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/LCD_ILI9163/src/GFXC.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="4" selectionOffset="6245" selectionTopPixel="3010"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="f10x-pcd8544.h" partName="f10x-pcd8544.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/f10x-pcd8544.h" title="f10x-pcd8544.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/f10x-pcd8544.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/NOKIA5110_LCD/inc/f10x-pcd8544.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="29" selectionOffset="1760" selectionTopPixel="450"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="GFXC.h" partName="GFXC.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/GFXC.h" title="GFXC.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/GFXC.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/LCD_ILI9163/inc/GFXC.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="15" selectionOffset="373" selectionTopPixel="430"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="font6x8.h" partName="font6x8.h" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/font6x8.h" title="font6x8.h" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/NOKIA5110_LCD/font6x8.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/NOKIA5110_LCD/inc/font6x8.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ILI9163.c" partName="ILI9163.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/ILI9163.c" title="ILI9163.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/LCD_ILI9163/ILI9163.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/LCD_ILI9163/src/ILI9163.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2950" selectionTopPixel="2430"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_hd.c" partName="startup_stm32f10x_hd.c" path="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/cmsis_boot/startup/startup_stm32f10x_hd.c" title="startup_stm32f10x_hd.c" tooltip="E:/Repositories/ARMaDa/FirmWare/trunk/Projects/LaserTag/ARMada_from_git/rtos_103_SDIO_FAT_complite/cmsis_boot/startup/startup_stm32f10x_hd.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ARMada/cmsis_boot/startup/startup_stm32f10x_hd.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12296" selectionTopPixel="4280"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="4">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="9">
 <expanded>
 <element path="/ARMada"/>
 <element path="/ARMada/Armada"/>
 <element path="/ARMada/Armada/inc"/>
-<element path="/ARMada/Armada/src"/>
-<element path="/ARMada/BLUETOOTH"/>
-<element path="/ARMada/BLUETOOTH/src"/>
-<element path="/ARMada/MENU"/>
-<element path="/ARMada/MENU/inc"/>
-<element path="/ARMada/MENU/src"/>
+<element path="/ARMada/LCD_ILI9163"/>
+<element path="/ARMada/LCD_ILI9163/src"/>
+<element path="/ARMada/Middleware"/>
+<element path="/ARMada/Middleware/Devices"/>
+<element path="/ARMada/Middleware/Devices/Display"/>
+<element path="/ARMada/Middleware/Devices/Display/inc"/>
+<element path="/ARMada/Middleware/Devices/Display/src"/>
+<element path="/ARMada/NOKIA5110_LCD"/>
+<element path="/ARMada/NOKIA5110_LCD/inc"/>
 </expanded>
 <selection>
-<element path="/ARMada/Armada/inc/types.h"/>
+<element path="/ARMada/LCD_ILI9163/src/ILI9163.c"/>
 </selection>
 </viewState>
 </view>
@@ -118,7 +171,8 @@
 </view>
 <view id="org.coocox.coassistant.view.CoAssistantView_debug" partName="Peripherals">
 <viewState horizontalPosition="0" verticalPosition="0">
-<selection>&#x0A;<element name="ADC1"/>
+<selection>
+<element name="ADC1"/>
 </selection>
 <registerValues baseAddress="Base Address: 0x40012400" description="Description:  Analog-Digital Converter 1 Registers"/>
 </viewState>
@@ -188,7 +242,7 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@5eb5b2" ratio="0.66555554" ratioLeft="599" ratioRight="301" relationship="4" relative="org.eclipse.ui.internal.ViewStack@18bd16f">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@5eb5b2" ratio="0.47111112" ratioLeft="424" ratioRight="476" relationship="4" relative="org.eclipse.ui.internal.ViewStack@18bd16f">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
@@ -199,7 +253,7 @@
 </folder>
 </info>
 <info part="org.coocox.builder.ui.exampleView" ratio="0.2194976" ratioLeft="367" ratioRight="1305" relationship="2" relative="org.eclipse.ui.internal.ViewStack@18bd16f"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@16f806f" ratio="0.71954024" ratioLeft="939" ratioRight="366" relationship="2" relative="org.coocox.builder.ui.exampleView">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@16f806f" ratio="0.9183988" ratioLeft="1193" ratioRight="106" relationship="2" relative="org.coocox.builder.ui.exampleView">
 <folder activePageID="org.coocox.component.ui.Help" appearance="2" expanded="2">
 <page content="org.coocox.component.ui.Help" label="Help"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
@@ -265,8 +319,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
@@ -278,40 +332,56 @@
 <view id="org.coocox.builder.ui.views.ProjectView"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@e45fbb">&#x0A;<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@e45fbb">
+<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@e45fbb">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@e45fbb">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1307c1d" ratio="0.7722222" ratioLeft="695" ratioRight="205" relationship="4" relative="org.eclipse.ui.internal.ViewStack@e45fbb">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1307c1d" ratio="0.7722222" ratioLeft="695" ratioRight="205" relationship="4" relative="org.eclipse.ui.internal.ViewStack@e45fbb">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@e30aad" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1307c1d">&#x0A;<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@e30aad" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1307c1d">
+<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">
+<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1de042d" ratio="0.9364889" ratioLeft="1563" ratioRight="106" relationship="2" relative="org.eclipse.ui.internal.ViewStack@e45fbb">&#x0A;<folder activePageID="org.coocox.coassistant.view.CoAssistantView_debug" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1de042d" ratio="0.9364889" ratioLeft="1563" ratioRight="106" relationship="2" relative="org.eclipse.ui.internal.ViewStack@e45fbb">
+<folder activePageID="org.coocox.coassistant.view.CoAssistantView_debug" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.coocox.coassistant.view.CoAssistantView_debug" label="Peripherals"/>
 <page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="Disassembly"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
@@ -325,160 +395,159 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/ARMada/BLUETOOTH/src/bluetooth.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/ARMada/Armada/src/main.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/ARMada/cmsis_boot/startup/startup_stm32f10x_hd.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/ARMada/Armada/inc/types.h"/>
 </editors>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4860" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99192" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="5288" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99235" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8707" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99258" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8852" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99280" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8956" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99386" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9060" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99468" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9129" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99578" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9185" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99714" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9328" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99714" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9371" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99737" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9436" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="99948" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9475" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100041" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9568" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100250" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10159" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100332" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10549" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100483" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="11772" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100483" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="11823" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100504" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10549" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100703" y="0"/>
 </item>
-<item historyLabel="startup_stm32f10x_hd.c" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100784" y="0"/>
 </item>
-<item historyLabel="main.c" index="1">
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="100982" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101066" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101203" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101203" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101225" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101426" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101460" y="0"/>
+</item>
+<item historyLabel="types.h" index="2">
+<position info="not_deleted" x="392" y="0"/>
+</item>
+<item historyLabel="startup_stm32f10x_hd.c" index="1">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="3242" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4211" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97209" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4569" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97110" y="0"/>
 </item>
-<item historyLabel="main.c" index="1">
+<item historyLabel="startup_stm32f10x_hd.c" index="1">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="3242" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4211" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97209" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4569" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97247" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4860" y="0"/>
+<item historyLabel="types.h" index="2">
+<position info="not_deleted" x="392" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="5288" y="0"/>
+<item historyLabel="startup_stm32f10x_hd.c" index="1">
+<position info="not_deleted" x="12296" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8707" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8852" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="8956" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9060" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9129" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9185" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9328" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9371" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9436" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9475" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="9568" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10159" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10747" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10887" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="10966" y="0"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="12559" y="0"/>
-</item>
-<item historyLabel="main.c" index="1">
-<position info="not_deleted" x="121430" y="7"/>
-</item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="11482" y="0"/>
-</item>
-<item historyLabel="startup_stm32f10x_hd.c" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="main.c" index="1">
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="3242" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4211" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97209" y="0"/>
 </item>
-<item historyLabel="bluetooth.c" index="0">
-<position info="not_deleted" x="4569" y="0"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="101690" y="0"/>
 </item>
-<item active="true" historyLabel="types.h" index="3">
-<position info="not_deleted" x="320" y="0"/>
+<item historyLabel="startup_stm32f10x_hd.c" index="1">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="3242" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97209" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97261" y="0"/>
+</item>
+<item historyLabel="types.h" index="2">
+<position info="not_deleted" x="392" y="0"/>
+</item>
+<item historyLabel="startup_stm32f10x_hd.c" index="1">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="3242" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="3450" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="97209" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="0">
+<position info="not_deleted" x="97247" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -487,52 +556,51 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_hd.c" tooltip="ARMada/cmsis_boot/startup/startup_stm32f10x_hd.c">
+<persistable path="/ARMada/cmsis_boot/startup/startup_stm32f10x_hd.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ILI9163.c" tooltip="ARMada/LCD_ILI9163/src/ILI9163.c">
+<persistable path="/ARMada/LCD_ILI9163/src/ILI9163.c"/>
+</file>
 <file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
 <persistable>
 <org.coocox.welcome.ui.WelcomePage/>
 </persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_regs.c" tooltip="stm32f1-usb-usbtest/usb_regs.c">
-<persistable path="/stm32f1-usb-usbtest/usb_regs.c"/>
+<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
+<persistable>
+<org.coocox.builder.ui.editors.ConfigEditor/>
+</persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ws2812b_conf.h" tooltip="stm32f0/ws2812/inc/ws2812b_conf.h">
-<persistable path="/stm32f0/ws2812/inc/ws2812b_conf.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.c" tooltip="ARMada/SDIO_SD/sdio_sd.c">
+<persistable path="/ARMada/SDIO_SD/sdio_sd.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="font6x8.h" tooltip="ARMada/NOKIA5110_LCD/inc/font6x8.h">
+<persistable path="/ARMada/NOKIA5110_LCD/inc/font6x8.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="GFXC.h" tooltip="ARMada/LCD_ILI9163/inc/GFXC.h">
+<persistable path="/ARMada/LCD_ILI9163/inc/GFXC.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="f10x-pcd8544.h" tooltip="ARMada/NOKIA5110_LCD/inc/f10x-pcd8544.h">
 <persistable path="/ARMada/NOKIA5110_LCD/inc/f10x-pcd8544.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_init.c" tooltip="stm32f1-usb-usbtest/usb_init.c">
-<persistable path="/stm32f1-usb-usbtest/usb_init.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_endp.c" tooltip="stm32f1-usb-usbtest/usb_endp.c">
-<persistable path="/stm32f1-usb-usbtest/usb_endp.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_sil.h" tooltip="stm32f1-usb-usbtest/usb_sil.h">
-<persistable path="/stm32f1-usb-usbtest/usb_sil.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_gpio.h" tooltip="stm32f1-usb-usbtest/stm_lib/inc/stm32f10x_gpio.h">
-<persistable path="/stm32f1-usb-usbtest/stm_lib/inc/stm32f10x_gpio.h"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="cc0KLRv7.s" tooltip="C:\DOCUME~1\CHUBAR~1.SIB\LOCALS~1\Temp\cc0KLRv7.s">
-<persistable uri="file:/C:/DOCUME~1/CHUBAR~1.SIB/LOCALS~1/Temp/cc0KLRv7.s"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="ccNdUjav.s" tooltip="C:\DOCUME~1\CHUBAR~1.SIB\LOCALS~1\Temp\ccNdUjav.s">
-<persistable uri="file:/C:/DOCUME~1/CHUBAR~1.SIB/LOCALS~1/Temp/ccNdUjav.s"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="stm32f1-usb-usbtest/cmsis/core_cm3.c">
-<persistable path="/stm32f1-usb-usbtest/cmsis/core_cm3.c"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="ccDcpema.s" tooltip="C:\DOCUME~1\CHUBAR~1.SIB\LOCALS~1\Temp\ccDcpema.s">
-<persistable uri="file:/C:/DOCUME~1/CHUBAR~1.SIB/LOCALS~1/Temp/ccDcpema.s"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="ARMada/Armada/src/main.c">
-<persistable path="/ARMada/Armada/src/main.c"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_regs.c" tooltip="stm32f1-usb-usbtest/usb_regs.c">
 <persistable path="/stm32f1-usb-usbtest/usb_regs.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ws2812b_conf.h" tooltip="stm32f0/ws2812/inc/ws2812b_conf.h">
 <persistable path="/stm32f0/ws2812/inc/ws2812b_conf.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bluetooth.c" tooltip="ARMada/BLUETOOTH/src/bluetooth.c">
+<persistable path="/ARMada/BLUETOOTH/src/bluetooth.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="bluetooth.h" tooltip="ARMada/BLUETOOTH/inc/bluetooth.h">
+<persistable path="/ARMada/BLUETOOTH/inc/bluetooth.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="types.h" tooltip="ARMada/Armada/inc/types.h">
+<persistable path="/ARMada/Armada/inc/types.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_exti.h" tooltip="ARMada/stm_lib/inc/stm32f10x_exti.h">
+<persistable path="/ARMada/stm_lib/inc/stm32f10x_exti.h"/>
 </file>
 </mruList>
 </workbench>

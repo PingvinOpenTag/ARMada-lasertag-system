@@ -373,22 +373,23 @@ void DirectionCalculanionTask(void *pvParameters){
 void BluetoothTask(void *pvParameters) {
 
 //	bt_reset();
-
+/*
 #ifndef 	COLOR_LCD
 		lcd8544_init(); // инициализация чёрно-белого дисплея
 #else
 
 		ILI9163Init();//
-/*
-		drawBMP("2gun.bmp");
-		vTaskDelay((portTickType)(TIC_FQR*2));
-*/
 
 #endif
+*/
+display_init();// инициализация дисплея
+
+
 #ifdef 	COLOR_LCD
 	 static volatile TextParamStruct TS;
 #endif
-	if (!read_parameters_from_sd_card())
+
+	 if (!read_parameters_from_sd_card())
 				{
 					if (get_settings_from_ini_file())
 					{
@@ -416,35 +417,6 @@ void BluetoothTask(void *pvParameters) {
 							armadaSystem.gun.rounds = 0;
 						#endif
 
-
-
-#ifndef 	COLOR_LCD
-						clear_screen();
-						  lcd8544_putstr(0, 0, "Настр. блютус", 0); // вывод первой строки
-						  if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
-#else
-
-							 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-							 {
-							 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-							 	while (SPI3->SR & SPI_SR_BSY);
-							 	init_spi3();
-							 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-							 	TS.Size = 0;
-							 	TS.Font = StdFont;
-							 	TS.XPos =  0;
-							 	TS.YPos = 0;
-							 	TS.TxtCol = iWhite;//iGreen;//iRed;
-							 	TS.BkgCol =iBlack;//iWhite;
-							 	PStr("Set BT", &TS);
-							 	xSemaphoreGive(xColorLCDSemaphore);
-							 }
-#endif
 						  configure_bluetooth();
 
 
@@ -488,7 +460,6 @@ void BluetoothTask(void *pvParameters) {
 
 
 					}
-
 
 //	configure_bluetooth();
 
@@ -3336,15 +3307,8 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 {
 
 	bool at_res;
-#ifdef 	COLOR_LCD
-	 static volatile TextParamStruct TS;
-	 TS.XPos =  0;
-	 TS.YPos = 10;
-	 TS.Size = 0;
-	 TS.Font = StdFont;
-	 TS.TxtCol = iWhite;//iGreen;//iRed;
-	 TS.BkgCol =iBlack;//iWhite;
-#endif
+	unsigned char line_counter=0;
+	unsigned char line_on_screen=display_vertical_screen_resolution()/display_standard_symbol_height();
 
 
 	USART_DeInit(USART1);
@@ -3353,30 +3317,18 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 	 vTaskDelay(100);
 	 bt_reset();
 	 BL_ON;
+	display_put_string(0,line_counter++, "Set BT");
 
 	 at_res = send_test_at_command();
+
 	 if(!at_res){
-#ifndef 	COLOR_LCD
-		 lcd8544_putstr(0, 8, "38400 тест не прошел", 0); // вывод первой строки
-		 if (!screen_auto_refresh) lcd8544_dma_refresh(); // вывод буфера на экран ! без этого ничего видно не будет !
-#else
-
-
-		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-		 {
-		 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-		 	while (SPI3->SR & SPI_SR_BSY);
-		 	init_spi3();
-		 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-		 	PStr("38400: Test error", &TS);
-		 	xSemaphoreGive(xColorLCDSemaphore);
+		 if(!(line_counter<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
 		 }
-#endif
+		 display_put_string(0,display_standard_symbol_height()*(line_counter++),"38400: Test error");
+
 		 USART_DeInit(USART1);
 		 InitCOM1(9600);
 		 vTaskDelay(100);
@@ -3384,247 +3336,104 @@ bool configure_bluetooth(void)//настраиваем блютус модуль
 	if(strlen(armadaSystem.bluetooth.name))//если строка с именем не пустая
 	{
 
-#ifndef 	COLOR_LCD
-		 lcd8544_putstr(0, 16, "Имя: ", 0); // вывод первой строки
-		 lcd8544_putstr(8, 16, armadaSystem.bluetooth.name, 0); // вывод первой строки
-		 if (!screen_auto_refresh) lcd8544_dma_refresh(); //
-#else
-		 if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-		 {
-		 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-		 	while (SPI3->SR & SPI_SR_BSY);
-		 	init_spi3();
-		 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-		 	TS.XPos =  0;
-		 	TS.YPos +=10;
-		 	PStr( "Name: ", &TS);
-		 	PStr(armadaSystem.bluetooth.name, &TS);
-		 	xSemaphoreGive(xColorLCDSemaphore);
+		 if(!((line_counter+1)<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
 		 }
-#endif
-
-
 		at_res = send_set_at_command(at_name,armadaSystem.bluetooth.name);
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	if (at_res) PStr( "OK", &TS);
-					 	else PStr( "ERROR", &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
+		display_put_string(0,display_standard_symbol_height()*(line_counter),"Name: ");
+		display_put_string(display_standard_symbol_width()*5,display_standard_symbol_height()*(line_counter++),armadaSystem.bluetooth.name);
 
-#else
 		if (at_res)
-				{
-
-					lcd8544_putstr(0, 24, "Имя успешно задано ", 0); // вывод первой строки
-					if (!screen_auto_refresh) lcd8544_dma_refresh(); //
-
-
-				}
-
-#endif
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"OK");
+			}
+		else
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"ERROR");
+			}
 	}
 	if(strlen(armadaSystem.bluetooth.cmode))//если строка с именем не пустая
 	{
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	PStr( at_cmode, &TS);
-					 	PStr( "=", &TS);
-					 	PStr( armadaSystem.bluetooth.cmode, &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
+
+		if(!((line_counter+1)<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
+		 }
+
 		at_res = send_set_at_command(at_cmode,armadaSystem.bluetooth.cmode);
-
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		display_put_string(0,display_standard_symbol_height()*(line_counter),at_cmode);
+		display_put_string(display_standard_symbol_width()*8,display_standard_symbol_height()*(line_counter),"=");
+		display_put_string(display_standard_symbol_width()*9,display_standard_symbol_height()*(line_counter++),armadaSystem.bluetooth.cmode);
+		if (at_res)
 					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	if (at_res) PStr( "OK", &TS);
-					 	else PStr( "ERROR", &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
-
-
-
+						display_put_string(0,display_standard_symbol_height()*(line_counter++),"OK");
+					}
+				else
+					{
+						display_put_string(0,display_standard_symbol_height()*(line_counter++),"ERROR");
+					}
 	}
 	if(strlen(armadaSystem.bluetooth.role))//если строка с именем не пустая
 	{
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	PStr( at_role, &TS);
-					 	PStr( "=", &TS);
-					 	PStr( armadaSystem.bluetooth.role, &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
-
-
+		if(!((line_counter+1)<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
+		 }
 		at_res = send_set_at_command(at_role,armadaSystem.bluetooth.role);
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
+		display_put_string(0,display_standard_symbol_height()*(line_counter),at_role);
+		display_put_string(display_standard_symbol_width()*7,display_standard_symbol_height()*(line_counter),"=");
+		display_put_string(display_standard_symbol_width()*8,display_standard_symbol_height()*(line_counter++),armadaSystem.bluetooth.role);
+		if (at_res)
 					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	if (at_res) PStr( "OK", &TS);
-					 	else PStr( "ERROR", &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
-
-
-
+						display_put_string(0,display_standard_symbol_height()*(line_counter++),"OK");
+					}
+				else
+					{
+						display_put_string(0,display_standard_symbol_height()*(line_counter++),"ERROR");
+					}
 	}
 	if(strlen(armadaSystem.bluetooth.mac_adress_for_bind))//если строка с именем не пустая
 	{
-
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	PStr( "BIND:", &TS);
-//					 	PStr( "=", &TS);
-					 	PStr( armadaSystem.bluetooth.mac_adress_for_bind, &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
+		if(!((line_counter+1)<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
+		 }
 		at_res = send_set_at_command(at_bind,armadaSystem.bluetooth.mac_adress_for_bind);
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	if (at_res) PStr( "OK", &TS);
-					 	else PStr( "ERROR", &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
-
+		display_put_string(0,display_standard_symbol_height()*(line_counter),"BIND:");
+		display_put_string(display_standard_symbol_width()*5,display_standard_symbol_height()*(line_counter++),armadaSystem.bluetooth.mac_adress_for_bind);
+		if (at_res)
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"OK");
+			}
+		else
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"ERROR");
+			}
 	}
 	if(strlen(armadaSystem.bluetooth.pswd))//если строка с именем не пустая
 		{
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	PStr( "PASSWORD:", &TS);
-//					 	PStr( "=", &TS);
-					 	PStr( armadaSystem.bluetooth.pswd, &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
 
+		if(!((line_counter+1)<line_on_screen)){
+		 	 vTaskDelay(150);
+		 	 line_counter=0;
+		 	 display_clear_screen();
+		 }
 			at_res = send_set_at_command(at_pswd,armadaSystem.bluetooth.pswd);
-#ifdef COLOR_LCD
-		if(xSemaphoreTake(xColorLCDSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если LCD занят, ждем 2 с
-					{
-					 	while (!(SPI3->SR & SPI_SR_TXE)); // Wait for bus free
-					 	while (SPI3->SR & SPI_SR_BSY);
-					 	init_spi3();
-					 	SB(0x36, Reg); //Set Memory access mode
-#if    		LCD_MODUL_VERSION == 2
-			SB((0x08 |(1<<7)|(1<<6)), Dat);
-#elif 	LCD_MODUL_VERSION == 1
-		 	SB((0x08 /*|(1<<7)*/), Dat);
-#endif
-					 	TS.XPos =  0;
-					 	TS.YPos +=10;
-					 	if (at_res) PStr( "OK", &TS);
-					 	else PStr( "ERROR", &TS);
-					 	xSemaphoreGive(xColorLCDSemaphore);
-					 }
-#endif
-
+			display_put_string(0,display_standard_symbol_height()*(line_counter),"PASSWORD:");
+			display_put_string(display_standard_symbol_width()*9,display_standard_symbol_height()*(line_counter++),armadaSystem.bluetooth.pswd);
+			if (at_res)
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"OK");
+			}
+			else
+			{
+				display_put_string(0,display_standard_symbol_height()*(line_counter++),"ERROR");
+			}
 		}
 	bt_set_at_commands_mode(false);
 	GPIO_ResetBits(GPIOC, GPIO_Pin_4);//
