@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=rtos.map -O0 --gc-sections -LE:\CooCox\CoIDE\configuration\ProgramData\ARMada -TE:\CooCox\CoIDE\configuration\ProgramData\ARMada/arm-gcc-link.ld -g -L..\..\.. -lm">
+      <target file="rtos.elf" lastModified="15e2d439b97">
+         <source file="..\obj\bluetooth.o" lastModified="15e2d436b8e"/>
+         <source file="..\obj\stm32f10x_rtc.o" lastModified="15e2d436c3a"/>
+         <source file="..\obj\stm32f10x_tim.o" lastModified="15e2d436dc1"/>
+         <source file="..\obj\bluetooth_modul.o" lastModified="15e2d436f19"/>
+         <source file="..\obj\core_cm3.o" lastModified="15e2d436fa5"/>
+         <source file="..\obj\sdio_sd.o" lastModified="15e2d43715b"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="15e2d4371e7"/>
+         <source file="..\obj\startup_stm32f10x_hd.o" lastModified="15e2d437226"/>
+         <source file="..\obj\chipher.o" lastModified="15e2d4372a3"/>
+         <source file="..\obj\f10x-pcd8544.o" lastModified="15e2d43740a"/>
+         <source file="..\obj\common.o" lastModified="15e2d437468"/>
+         <source file="..\obj\stm32f10x_pwr.o" lastModified="15e2d4374f5"/>
+         <source file="..\obj\diskio.o" lastModified="15e2d437581"/>
+         <source file="..\obj\GFXC.o" lastModified="15e2d4376f8"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="15e2d4377a4"/>
+         <source file="..\obj\ILI9163.o" lastModified="15e2d4378ae"/>
+         <source file="..\obj\stm32f10x_dac.o" lastModified="15e2d4379a8"/>
+         <source file="..\obj\main.o" lastModified="15e2d437c38"/>
+         <source file="..\obj\bandana.o" lastModified="15e2d437d42"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="15e2d437f07"/>
+         <source file="..\obj\display.o" lastModified="15e2d438030"/>
+         <source file="..\obj\slots.o" lastModified="15e2d4380eb"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="15e2d438178"/>
+         <source file="..\obj\tasks.o" lastModified="15e2d438262"/>
+         <source file="..\obj\stm32f10x_adc.o" lastModified="15e2d43833d"/>
+         <source file="..\obj\gun.o" lastModified="15e2d438446"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="15e2d438512"/>
+         <source file="..\obj\syscall.o" lastModified="15e2d43859e"/>
+         <source file="..\obj\tim_isr.o" lastModified="15e2d4386a8"/>
+         <source file="..\obj\menu.o" lastModified="15e2d4387d1"/>
+         <source file="..\obj\list.o" lastModified="15e2d43883e"/>
+         <source file="..\obj\syscalls.o" lastModified="15e2d4388ea"/>
+         <source file="..\obj\queue.o" lastModified="15e2d438b6b"/>
+         <source file="..\obj\port.o" lastModified="15e2d438bc8"/>
+         <source file="..\obj\game.o" lastModified="15e2d438c84"/>
+         <source file="..\obj\stm32f10x_sdio.o" lastModified="15e2d438dcc"/>
+         <source file="..\obj\ff.o" lastModified="15e2d438ffe"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="15e2d43909b"/>
+         <source file="..\obj\croutine.o" lastModified="15e2d439108"/>
+         <source file="..\obj\misc.o" lastModified="15e2d439195"/>
+         <source file="..\obj\stm32f10x_spi.o" lastModified="15e2d439260"/>
+         <source file="..\obj\hardware_init.o" lastModified="15e2d439389"/>
+         <source file="..\obj\heap_2.o" lastModified="15e2d439415"/>
+         <source file="..\obj\global_variables.o" lastModified="15e2d439761"/>
+         <source file="..\obj\stm32f10x_bkp.o" lastModified="15e2d4397fd"/>
+         <source file="..\obj\usart.o" lastModified="15e2d4398e8"/>
+      </target>
+   </processor>
+</history>

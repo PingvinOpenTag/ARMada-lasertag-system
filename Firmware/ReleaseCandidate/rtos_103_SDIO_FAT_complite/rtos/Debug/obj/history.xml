@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -std=c99 -c -DSTM32F103RE -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSTM32F103RET6 -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\NOKIA5110_LCD -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Gun\inc -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\LCD_ILI9163 -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS\Source -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\CIPHER -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\stm_lib -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\cmsis -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Game -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS\Source\portable -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\stm_lib\inc -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Game\inc -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Bluetooth_modul -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Gun -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FATFS -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\cmsis_boot -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS\Source\portable\GCC -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS\Source\include -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Bandana\inc -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Display\inc -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\MENU -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Display -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FATFS\src -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Bandana -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\BLUETOOTH -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\SDIO_SD -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\FRT_Library\FreeRTOS\Source\portable\GCC\ARM_CM3 -I..\..\..\..\..\Repositories\ARMaDa\FirmWare\trunk\Projects\LaserTag\ARMada_from_git\rtos_103_SDIO_FAT_complite\Middleware\Devices\Bluetooth_modul\inc">
+      <target file="stm32f10x_exti.o" lastModified="15e2d438178">
+         <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="15e1706bc13"/>
+      </target>
+      <target file="tim_isr.o" lastModified="15e2d4386a8">
+         <source file="..\..\..\tim_isr.c" lastModified="15e2d324869"/>
+      </target>
+      <target file="chipher.o" lastModified="15e2d4372a3">
+         <source file="..\..\..\CIPHER\chipher.c" lastModified="15e1706c144"/>
+      </target>
+      <target file="syscalls.o" lastModified="15e2d4388ea">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="15e1706c4af"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="15e2d4377a4">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="15e1706bb19"/>
+      </target>
+      <target file="menu.o" lastModified="15e2d4387d1">
+         <source file="..\..\..\MENU\menu.c" lastModified="15e2d3905e0"/>
+      </target>
+      <target file="misc.o" lastModified="15e2d439195">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="15e1706bb96"/>
+      </target>
+      <target file="common.o" lastModified="15e2d437468">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\portable\GCC\ARM_CM3\common.c" lastModified="15e1706d327"/>
+      </target>
+      <target file="global_variables.o" lastModified="15e2d439761">
+         <source file="..\..\..\global_variables.c" lastModified="15e1706c105"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="15e2d4371e7">
+         <source file="..\..\..\cmsis_boot\system_debug\system_stm32f10x.c" lastModified="15e1706be84"/>
+      </target>
+      <target file="queue.o" lastModified="15e2d438b6b">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\queue.c" lastModified="15e1706d1ef"/>
+      </target>
+      <target file="stm32f10x_usart.o" lastModified="15e2d438512">
+         <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="15e1706bb57"/>
+      </target>
+      <target file="bluetooth_modul.o" lastModified="15e2d436f19">
+         <source file="..\..\..\Middleware\Devices\Bluetooth_modul\src\bluetooth_modul.c" lastModified="15e2d22a633"/>
+      </target>
+      <target file="diskio.o" lastModified="15e2d437581">
+         <source file="..\..\..\FATFS\src\diskio.c" lastModified="15e1706cd3b"/>
+      </target>
+      <target file="usart.o" lastModified="15e2d4398e8">
+         <source file="..\..\..\usart.c" lastModified="15e1706d366"/>
+      </target>
+      <target file="tasks.o" lastModified="15e2d438262">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\tasks.c" lastModified="15e1706d21e"/>
+      </target>
+      <target file="ILI9163.o" lastModified="15e2d4378ae">
+         <source file="..\..\..\LCD_ILI9163\ILI9163.c" lastModified="15e2cdd1ee0"/>
+      </target>
+      <target file="stm32f10x_tim.o" lastModified="15e2d436dc1">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="15e1706bc23"/>
+      </target>
+      <target file="bandana.o" lastModified="15e2d437d42">
+         <source file="..\..\..\Middleware\Devices\Bandana\src\bandana.c" lastModified="15e17b6421e"/>
+      </target>
+      <target file="game.o" lastModified="15e2d438c84">
+         <source file="..\..\..\Middleware\Game\src\game.c" lastModified="15e2d36bc7c"/>
+      </target>
+      <target file="stm32f10x_sdio.o" lastModified="15e2d438dcc">
+         <source file="..\..\..\stm_lib\src\stm32f10x_sdio.c" lastModified="15e1706bb48"/>
+      </target>
+      <target file="hardware_init.o" lastModified="15e2d439389">
+         <source file="..\..\..\hardware_init.c" lastModified="15e1706c4ed"/>
+      </target>
+      <target file="croutine.o" lastModified="15e2d439108">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\croutine.c" lastModified="15e1706d356"/>
+      </target>
+      <target file="bluetooth.o" lastModified="15e2d436b8e">
+         <source file="..\..\..\BLUETOOTH\bluetooth.c" lastModified="15e2d22a5e5"/>
+      </target>
+      <target file="f10x-pcd8544.o" lastModified="15e2d43740a">
+         <source file="..\..\..\NOKIA5110_LCD\f10x-pcd8544.c" lastModified="15e2cd89263"/>
+      </target>
+      <target file="stm32f10x_rtc.o" lastModified="15e2d436c3a">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rtc.c" lastModified="15e1706bc13"/>
+      </target>
+      <target file="list.o" lastModified="15e2d43883e">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\list.c" lastModified="15e1706d0e5"/>
+      </target>
+      <target file="port.o" lastModified="15e2d438bc8">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\portable\GCC\ARM_CM3\port.c" lastModified="15e1706d327"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="15e2d437f07">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="15e1706bbb5"/>
+      </target>
+      <target file="stm32f10x_dac.o" lastModified="15e2d4379a8">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dac.c" lastModified="15e1706bb96"/>
+      </target>
+      <target file="core_cm3.o" lastModified="15e2d436fa5">
+         <source file="..\..\..\cmsis\core_cm3.c" lastModified="15e1706d097"/>
+      </target>
+      <target file="stm32f10x_pwr.o" lastModified="15e2d4374f5">
+         <source file="..\..\..\stm_lib\src\stm32f10x_pwr.c" lastModified="15e1706bbf4"/>
+      </target>
+      <target file="GFXC.o" lastModified="15e2d4376f8">
+         <source file="..\..\..\LCD_ILI9163\GFXC.c" lastModified="15e2cd989c3"/>
+      </target>
+      <target file="stm32f10x_adc.o" lastModified="15e2d43833d">
+         <source file="..\..\..\stm_lib\src\stm32f10x_adc.c" lastModified="15e1706bb96"/>
+      </target>
+      <target file="stm32f10x_bkp.o" lastModified="15e2d4397fd">
+         <source file="..\..\..\stm_lib\src\stm32f10x_bkp.c" lastModified="15e1706bafa"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="15e2d43909b">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="15e1706bb77"/>
+      </target>
+      <target file="slots.o" lastModified="15e2d4380eb">
+         <source file="..\..\..\slots.c" lastModified="15e1706c422"/>
+      </target>
+      <target file="heap_2.o" lastModified="15e2d439415">
+         <source file="..\..\..\FRT_Library\FreeRTOS\Source\portable\MemMang\heap_2.c" lastModified="15e1706d347"/>
+      </target>
+      <target file="sdio_sd.o" lastModified="15e2d43715b">
+         <source file="..\..\..\SDIO_SD\sdio_sd.c" lastModified="15e1706d422"/>
+      </target>
+      <target file="ff.o" lastModified="15e2d438ffe">
+         <source file="..\..\..\FATFS\src\ff.c" lastModified="15e1706cf4f"/>
+      </target>
+      <target file="main.o" lastModified="15e2d437c38">
+         <source file="..\..\..\main.c" lastModified="15e2d3b244b"/>
+      </target>
+      <target file="startup_stm32f10x_hd.o" lastModified="15e2d437226">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_hd.c" lastModified="15e1706bf5f"/>
+      </target>
+      <target file="gun.o" lastModified="15e2d438446">
+         <source file="..\..\..\Middleware\Gun\src\gun.c" lastModified="15e2d3dd6d8"/>
+      </target>
+      <target file="syscall.o" lastModified="15e2d43859e">
+         <source file="..\..\..\FATFS\src\option\syscall.c" lastModified="15e1706cec2"/>
+      </target>
+      <target file="stm32f10x_spi.o" lastModified="15e2d439260">
+         <source file="..\..\..\stm_lib\src\stm32f10x_spi.c" lastModified="15e1706babb"/>
+      </target>
+      <target file="display.o" lastModified="15e2d438030">
+         <source file="..\..\..\Middleware\Devices\Display\src\display.c" lastModified="15e2cfe7000"/>
+      </target>
+   </processor>
+</history>
