@@ -103,6 +103,7 @@ xSemaphoreHandle xGameOverSemaphore;
 xSemaphoreHandle xSDcardLockSemaphore;
 xQueueHandle xEventQueue;
 
+
 #ifdef COLOR_LCD
 volatile xSemaphoreHandle xColorLCDSemaphore;
 volatile xSemaphoreHandle xColorLCD_DMA_Semaphore;
@@ -110,7 +111,13 @@ volatile xSemaphoreHandle xColorLCD_DMA_Semaphore;
 volatile bool bt_configured;
 volatile ftime_t date;
 
+#ifdef SI4432_ENABLE
+xSemaphoreHandle Si4432_IQR_Semaphore;
+xSemaphoreHandle rf_tx_buff_Semaphore;
+xQueueHandle xRfRxEventQueue;
 
+
+#endif
 
 
 #ifndef COLOR_LCD

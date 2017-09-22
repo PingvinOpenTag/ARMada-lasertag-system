@@ -27,6 +27,7 @@ const unsigned char parameter_22[] = "autostart_game";//автоматически запускать 
 const unsigned char parameter_23[] = "backlight_level";//яркость фоновой подсветки датчиков
 const unsigned char parameter_24[] = "ir_power_offset";//смещение на операционном усилителе
 const unsigned char parameter_25[] = "sonar_sound_file_name";//звук сонара, будем воспроизводить пока не будет соединения по блютус
+const unsigned char parameter_26[] = "health_after_start";//количество здоровья после старта
 const unsigned char* parametersPointers[] =
 {	parameter_0,
 	parameter_1,
@@ -53,7 +54,8 @@ const unsigned char* parametersPointers[] =
 	parameter_22,
 	parameter_23,
 	parameter_24,
-	parameter_25
+	parameter_25,
+	parameter_26
 };
 
 const unsigned char at_name[] = "AT+NAME";  //

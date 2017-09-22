@@ -93,6 +93,15 @@ extern xSemaphoreHandle xBluetoothSemaphore;
 extern xSemaphoreHandle xGameOverSemaphore;
 extern xSemaphoreHandle xSDcardLockSemaphore;
 extern xQueueHandle xEventQueue;
+
+#ifdef SI4432_ENABLE
+extern xSemaphoreHandle Si4432_IQR_Semaphore;
+extern xSemaphoreHandle rf_tx_buff_Semaphore;
+extern xQueueHandle xRfRxEventQueue;
+#endif
+
+
+
 #ifdef COLOR_LCD
 extern volatile xSemaphoreHandle xColorLCDSemaphore;
 extern volatile xSemaphoreHandle xColorLCD_DMA_Semaphore;

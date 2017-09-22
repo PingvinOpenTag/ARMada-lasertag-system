@@ -85,6 +85,17 @@ void Zone4task(void *pvParameters);
 void Zone3task(void *pvParameters);
 void Zone2task(void *pvParameters);
 void Zone1task(void *pvParameters);
+
+
+#ifdef SI4432_ENABLE
+void Si4432task(void *pvParameters);
+//void Si4432_Init(void);
+void Si4432_Rx_Tx_Init(void);
+bool Si4432_TxBuf(unsigned char *pBuf, unsigned char bytes);
+bool  Si4432_Rx(unsigned char *pBuf, unsigned char* pBytes, portTickType timeout);
+#endif
+
+
 #ifdef DIRECTION_CALCULATION
 void DirectionCalculanionTask(void *pvParameters);
 #endif
@@ -179,4 +190,9 @@ void bt_tag_init_with_game_status(bool status, ttag_init_command);
 void set_sensor_color(uint8_t color, uint8_t brightness_level, TDamageZone zone);
 void set_sensor_vibro(uint8_t power_level, TDamageZone zone);
 #endif
+
+
+
+
+
 #endif /* __ARMADA_H */

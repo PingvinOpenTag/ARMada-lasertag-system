@@ -1,7 +1,7 @@
 //http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-na-stm32f10x-chast-2-zapusk-cap.html
 //http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-na-stm32f10x-chast-2-zapusk-cap.html
 // подключаем библиотеку CMSIS
-
+#include "types.h"
 #include "armada.h"
 #include "commands.h"
 #include "bandana.h"
@@ -10,6 +10,11 @@
 #include <string.h>
 
 #include "f10x-pcd8544.h" // смотрите этот файл для настройки дисплея !
+#include "SI4432.h"
+#include "rf_modul.h"
+#include "network_base_types.h"
+#include  "network_low_level.h"
+#include "network_tasks.h"
 //#include "math.h"
 
 
@@ -244,6 +249,10 @@ int main(void)
 	vSemaphoreCreateBinary(xBluetoothSemaphore);//семафор Blutooth
 	vSemaphoreCreateBinary(xGameOverSemaphore);//семафор Blutooth
 	vSemaphoreCreateBinary(xSDcardLockSemaphore);//семафор указывает, что с SD картой работает какой-то таск
+#ifdef SI4432_ENABLE
+	vSemaphoreCreateBinary(Si4432_IQR_Semaphore);//семафор прерываний радиомодуля
+	vSemaphoreCreateBinary(rf_tx_buff_Semaphore);//семафор буфера радиопередатчика
+#endif
 
 /*
 	xTaskCreate( vTaskLED1, ( signed char * ) "LED1", configMINIMAL_STACK_SIZE/2, NULL, 0,
@@ -286,7 +295,15 @@ int main(void)
 				                        ( xTaskHandle * ) NULL);
 #endif
 
+#ifdef SI4432_ENABLE
+/*
+	xTaskCreate( Si4432task, ( signed char * ) "NRF24task", configMINIMAL_STACK_SIZE*2, NULL, 0,
+				                        ( xTaskHandle * ) NULL);
+*/
+	xTaskCreate( rf_tx_interrogate_task, ( signed char * ) "rf_tx_task", configMINIMAL_STACK_SIZE*4, NULL, 2,
+				                        ( xTaskHandle * ) NULL);
 
+#endif
 
 	vTaskStartScheduler();
 
@@ -384,6 +401,7 @@ display_init();// инициализация дисплея
 					{
 						save_parameters_to_sd_card();
 						set_player_id(armadaSystem.player.id);
+						armadaSystem.player.health = armadaSystem.player.health_after_start;
 						set_team_color(armadaSystem.player.team_color);
 						set_gun_damage(armadaSystem.gun.damage);
 
@@ -414,6 +432,7 @@ display_init();// инициализация дисплея
 				else {//параметры успешно прочитаны из бинарного файла
 						armadaSystem.wav_player.type_of_reproduced_sound=NOTHING;
 						armadaSystem.wav_player.type_of_sound_to_play=NOTHING;
+						armadaSystem.player.health = armadaSystem.player.health_after_start;
 						set_player_id(armadaSystem.player.id);
 						set_team_color(armadaSystem.player.team_color);
 						set_gun_damage(armadaSystem.gun.damage);
@@ -2068,7 +2087,7 @@ void hit_processing(TDamageZone zone)//обрабатываем попадания
 
 #if DEVICE_ROLE==BANDANA
 					bt_tag_init_with_game_status(game_status, HEALTH_UPDATE);
-					send_package_by_bluetooth(hit.rx_package);
+//					send_package_by_bluetooth(hit.rx_package);
 #endif
 					xSemaphoreGive(xWavPlayerManagerSemaphore);
 				}
@@ -2228,6 +2247,9 @@ void message_processing(TDamageZone zone)//обрабатываем сообщения (команды пульт
 								bandana_all_sensors_set_color_vibro(index_to_color[armadaSystem.player.team_color],false);
 								vTaskDelay(TIC_FQR);
 								bandana_all_sensors_set_color_vibro(BLACK,false);
+#if DEVICE_ROLE==BANDANA
+								send_message_by_bluetooth(cap_message.rx_message);
+#endif
 								taskENTER_CRITICAL();
 
 							}
@@ -2336,6 +2358,7 @@ void parsing_string(char* record)//анализ строки
 		case 23:{get_int_argument_value((char*)record,(uint8_t*)&armadaSystem.backlight_level,0,NUMBER_OF_SENSORS_FRAMES);} break;
 		case 24:{get_int_argument_value((char*)record,(uint8_t*)&armadaSystem.gun.ir_power_offset,0,30);} break;
 		case 25:{get_string_argument_value((char*)record,(char*)armadaSystem.wav_player.sonar_sound_file_name);} break;
+		case 26:{get_int_argument_value((char*)record,(uint8_t*)&armadaSystem.player.health_after_start,0,255);} break;
 		default: break;
 	}
 }
@@ -3371,6 +3394,101 @@ void bt_tag_init_with_game_status(bool status, ttag_init_command command){
 	tag_init_message.clone_data_union.tag_init_data.game_session_ID = bandana_game_session_ID;
 	tag_init_message.clone_data_union.tag_init_data.Checksum =  checksum_for_tag_init_data(tag_init_message.clone_data_union.tag_init_data);
 	send_message_by_bluetooth(tag_init_message);
+}
+#endif
+
+
+
+
+
+
+#ifdef SI4432_ENABLE
+
+//#define TX_MODE
+//#define RX_MODE
+void Si4432task(void *pvParameters) {
+	static unsigned char rx_buff[64];
+	static unsigned char bytes_rx;
+	static unsigned char reg_tmp;
+	if (xSemaphoreTake(rf_tx_buff_Semaphore, 600/*portMAX_DELAY*/ )== pdTRUE)//ждем 2 секунды прерывание Si4432
+		  {//дождались
+	rf_FlushTxBuf();
+	tWaitingPackage rf_package_tmp;
+//	rf_InitDefaultPackageTimings((tPackageTimings* )&rf_package_tmp.timings);
+	rf_InitDefaultWaitingPackage((tWaitingPackage*)&rf_package_tmp);
+	rf_package_tmp.nextTransmission = 1000;
+	rf_PutWaitingPackage(rf_package_tmp);
+//	vTaskDelay(1);
+
+	rf_InitDefaultWaitingPackage((tWaitingPackage*)&rf_package_tmp);
+	rf_PutWaitingPackage(rf_package_tmp);
+	rf_SortTxBuffByNextTransmission();
+	xSemaphoreGive(rf_tx_buff_Semaphore);
+		  }
+//	Si4432_Init();
+//	Si4432_Rx_Tx_Init();
+//	RF_modul_Init();
+	RF_modul_Init_with_parameters(/*dataRate9600BPS_DEV45KHZ*/dataRate2400BPS_DEV36KHZ,power_11dBm);
+	reg_tmp =  si4432_spi_readReg(Si4432_Reg_Device_Type_Code);
+	if(reg_tmp==0x08){
+
+		FLASH_LED_ON;
+		vTaskDelay(30);
+		FLASH_LED_OFF;
+		vTaskDelay(30);
+		FLASH_LED_ON;
+		vTaskDelay(30);
+		FLASH_LED_OFF;
+	}
+	else{
+		FLASH_LED_ON;
+		vTaskDelay(900);
+		FLASH_LED_OFF;
+	}
+	reg_tmp =  si4432_spi_readReg(Si4432_Reg_Verson_Code);
+	reg_tmp = RF_modul_get_RSSI();
+	for (;;) {
+
+//#ifdef RX_MODE
+		if (RF_modul_Rx((unsigned char *)&rx_buff[0],(unsigned char *)&bytes_rx,1500 ))
+
+		{
+			FLASH_LED_ON;
+			vTaskDelay(300);
+			RF_modul_TxBuf((unsigned char*)&rx_buff[0], 6);
+			FLASH_LED_OFF;
+			//volatile int a;
+			//a++;
+//			vTaskDelay(1500);
+//			Si4432_TxBuf((unsigned char*)"Hello!", 6);
+		}
+		else{
+			RF_modul_TxBuf((unsigned char*)"Hello!", 6);
+			//volatile int b;
+			//b++;
+//			vTaskDelay(1500);
+//			Si4432_TxBuf((unsigned char*)"ByByBY", 6);
+		}
+
+/*		reg_tmp =  si4432_spi_readReg(Si4432_Reg_Device_Type_Code);
+		reg_tmp =  si4432_spi_readReg(Si4432_Reg_Verson_Code);
+
+		reg_tmp =  si4432_spi_readReg(Si4432_Reg_Frequency_Band_Select);
+		reg_tmp =  si4432_spi_readReg(Si4432_Reg_Nominal_Carrier_Frequency_H);
+		reg_tmp =  si4432_spi_readReg(Si4432_Reg_Nominal_Carrier_Frequency_L);
+		*/
+//#endif
+/*
+		#ifdef TX_MODE
+		FLASH_LED_ON;
+		Si4432_TxBuf((unsigned char*)"Hello!", 6);
+		vTaskDelay(750);
+		FLASH_LED_OFF;
+		vTaskDelay(750);
+#endif
+*/
+
+}
 }
 #endif
 

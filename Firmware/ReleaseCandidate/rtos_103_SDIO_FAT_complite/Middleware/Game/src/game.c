@@ -43,7 +43,7 @@ void game_over(void){
 
 }
 
-
+extern const uint8_t index_to_color[4];
 
 void game_start_new(void){
 

@@ -188,6 +188,8 @@ void test_bt_data()
 										if ((armadaSystem.game_session_ID == bt_message.clone_data_union.tag_init_data.game_session_ID)&&(connection_has_been)) {
 											if (game_status!=bt_message.clone_data_union.tag_init_data.game_status)
 											{
+												armadaSystem.player.team_color=bt_message.clone_data_union.tag_init_data.team_id;
+												set_team_color(armadaSystem.player.team_color);
 												game_status=bt_message.clone_data_union.tag_init_data.game_status;
 											}
 										}
@@ -195,6 +197,8 @@ void test_bt_data()
 										else if ((armadaSystem.game_session_ID == bt_message.clone_data_union.tag_init_data.game_session_ID)&&(!connection_has_been))
 										{
 											connection_has_been = true;
+											armadaSystem.player.team_color=bt_message.clone_data_union.tag_init_data.team_id;
+											set_team_color(armadaSystem.player.team_color);
 											armadaSystem.gun.rounds = 0;
 											armadaSystem.player.health = bt_message.clone_data_union.tag_init_data.health;
 #ifdef DISPLAY_ENABLE
@@ -255,7 +259,8 @@ void test_bt_data()
 										else if(armadaSystem.game_session_ID != bt_message.clone_data_union.tag_init_data.game_session_ID)
 										{//новая игровая сессия
 											armadaSystem.game_session_ID = bt_message.clone_data_union.tag_init_data.game_session_ID;
-
+											armadaSystem.player.team_color=bt_message.clone_data_union.tag_init_data.team_id;
+											set_team_color(armadaSystem.player.team_color);
 											armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
 //											stopWavPlayer();
 											armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
@@ -324,6 +329,8 @@ void test_bt_data()
 									{
 										armadaSystem.game_session_ID = bt_message.clone_data_union.tag_init_data.game_session_ID;
 										armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
+										armadaSystem.player.team_color=bt_message.clone_data_union.tag_init_data.team_id;
+										set_team_color(armadaSystem.player.team_color);
 										armadaSystem.wav_player.type_of_sound_to_play = NOTHING;
 										xSemaphoreGive(xWavPlayerManagerSemaphore);
 										if(xSemaphoreTake(xSDcardLockSemaphore, (portTickType)(TIC_FQR*2)/*600*/ )== pdTRUE)//если SD карта занята, ждем 2 с
@@ -485,7 +492,15 @@ void test_bt_data()
 				    }
 				    case Change_color:
 					{
+
+#if DEVICE_ROLE==TAG
 						//код для смены цвета
+						if((bt_message.param>=0)&&(bt_message.param<=3))
+						{
+							armadaSystem.player.team_color=bt_message.param;
+							set_team_color(armadaSystem.player.team_color);
+						}
+#endif
 						break;
 					}
 				    case Command://какая то дополнительноя команда

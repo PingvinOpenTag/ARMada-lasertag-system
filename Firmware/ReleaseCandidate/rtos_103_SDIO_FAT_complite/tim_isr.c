@@ -6,6 +6,7 @@
 #include "task.h"
 #include "semphr.h"
 #include "queue.h"
+#include "si4432.h"
 
 extern TKEYBOARD_EVENT test_reload_key(int adc_value);//ѕровер€ем событи€ клавиши "ѕерезар€дить"
 extern TKEYBOARD_EVENT test_keyboard(int adc_value);//ѕровер€ем событи€ клавиатуры
@@ -546,7 +547,15 @@ void TIM7_IRQHandler(void)
 	  xHigherPriorityTaskWoken = pdFALSE;
 	static /*volatile*/ tsystem_event_type sys_event_tmp;
 	TIM_ClearITPendingBit(TIM7, TIM_IT_Update);
+#ifdef SI4432_ENABLE
+#if SI4432_SPI_NUMBER==3
 	startSPI2();//запускаем DMA дл€ передачи по SPI
+
+#endif
+#else //[#ifdef SI4432_ENABLE]
+	startSPI2();//запускаем DMA дл€ передачи по SPI
+#endif
+
 #ifdef SENSORS_BECKLIGHT
 static volatile div=0;
 	if (div++ >=NUMBER_OF_SENSORS_FRAMES)

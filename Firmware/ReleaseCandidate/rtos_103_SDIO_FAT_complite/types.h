@@ -15,14 +15,20 @@
 //#define OLD_VERSION_PCB
 
 //роль устройства: BANDANA или TAG
-//#define DEVICE_ROLE BANDANA
+#define DEVICE_ROLE BANDANA
+//#define DEVICE_ROLE TAG
+
 
 #define DISPLAY_ENABLE
-#define DEVICE_ROLE TAG
+//#define COLOR_LCD
+
+
 #define RTC_Enable
 #define LOW_DROP_ENABLE
 
-#define COLOR_LCD
+//#define SI4432_ENABLE
+
+
 //определение направления, откуда прилетел пакет
 //#define DIRECTION_CALCULATION
 #define HIT_TIMEOUT 10
@@ -48,6 +54,8 @@
 #endif
 //использовать фоновую подсветку датчиков
 //#define SENSORS_BECKLIGHT
+
+
 
 #define NUMBER_OF_SENSORS_FRAMES 8
 
@@ -399,6 +407,10 @@ enum tag_init_command_type {
 };
 
 typedef enum tag_init_command_type ttag_init_command;
+
+
+
+
 
 
 #endif /* __TYPES_H */
