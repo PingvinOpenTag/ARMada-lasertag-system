@@ -192,6 +192,15 @@ void test_bt_data()
 												set_team_color(armadaSystem.player.team_color);
 												game_status=bt_message.clone_data_union.tag_init_data.game_status;
 											}
+											
+											if(game_status)
+                                                                                        {
+#ifdef DISPLAY_ENABLE
+                                                                                                 display_init_gui();
+#endif
+                                                                                                 xSemaphoreGive(xGameOverSemaphore);//отдаем семафор
+                                                                                        }										
+											
 										}
 										//если это ПЕРВОЕ соединение после включения тага и игровая сессия не менялась
 										else if ((armadaSystem.game_session_ID == bt_message.clone_data_union.tag_init_data.game_session_ID)&&(!connection_has_been))
