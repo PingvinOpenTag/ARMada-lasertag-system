@@ -199,7 +199,13 @@ void test_bt_data()
                                                                                                  display_init_gui();
 #endif
                                                                                                  xSemaphoreGive(xGameOverSemaphore);//отдаем семафор
-                                                                                        }										
+                                                                                        }
+                                                                                        else
+                                                                                        {
+#ifdef DISPLAY_ENABLE
+                                                                                                  display_show_game_over_picture();
+#endif
+                                                                                        }                                                                                        
 											
 										}
 										//если это ПЕРВОЕ соединение после включения тага и игровая сессия не менялась
