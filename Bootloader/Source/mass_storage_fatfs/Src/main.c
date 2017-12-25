@@ -52,8 +52,14 @@
 #define BUFF_PAGE_ADDRESS  0x807F800 //последняя страница для хранения стек поинтера и reset handle
 #define MASS_STORAGE_ADDRESS 0x8073800 //адрес, по которому размещён mass storage
 
+//#define USB_ATTACH_PIN GPIO_PIN_4
 #define USB_ATTACH_PIN GPIO_PIN_6
+//GPIO_PIN_6
+//GPIO_PIN_4
+//#define USB_ATTACH_PORT GPIOB
 #define USB_ATTACH_PORT GPIOC
+//GPIOC
+//GPIOB
 #define USB_ATTACH
 
 
@@ -284,6 +290,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
+  HAL_Delay(1000);
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -298,15 +305,18 @@ int main(void)
   HAL_SPI_Transmit(&hspi2, &sensors[0], 4, 100);
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
    // MX_FATFS_Init();
+
   MX_USB_DEVICE_Init();
 
 
   /* USER CODE BEGIN 2 */
+//  HAL_Delay(1000);
 
 #ifdef USB_ATTACH
   USB_attach();
 #endif
-  HAL_Delay(1500);
+
+  HAL_Delay(2000);
   if (0 == isCardreaderActive())
   	{
 
@@ -451,7 +461,7 @@ void SystemClock_Config(void)
 /* SDIO init function */
 static void MX_SDIO_SD_Init(void)
 {
-
+  HAL_SD_ErrorTypedef sd_init_result;
   hsd.Instance = SDIO;
   hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
   hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
@@ -460,7 +470,9 @@ static void MX_SDIO_SD_Init(void)
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
   hsd.Init.ClockDiv = 3;
 
-  HAL_SD_Init(&hsd, &SDCardInfo);
+  do{
+  sd_init_result = HAL_SD_Init(&hsd, &SDCardInfo);
+  }while (sd_init_result !=SD_OK);
 
   HAL_SD_WideBusOperation_Config(&hsd, SDIO_BUS_WIDE_4B);
 
@@ -960,10 +972,16 @@ static void MX_SPI2_Init(void)
 }
 #ifdef USB_ATTACH
 static void USB_attach(void){
-
-
 	GPIO_InitTypeDef GPIO_InitStruct;
-   HAL_GPIO_WritePin(USB_ATTACH_PORT, USB_ATTACH_PIN, GPIO_PIN_SET);
+	 HAL_GPIO_WritePin(USB_ATTACH_PORT, USB_ATTACH_PIN, GPIO_PIN_SET);
+/*
+	   GPIO_InitStruct.Pin = GPIO_PIN_6;
+	   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+*/
+
+
    //USB Disconnect
       GPIO_InitStruct.Pin = USB_ATTACH_PIN;
       GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
