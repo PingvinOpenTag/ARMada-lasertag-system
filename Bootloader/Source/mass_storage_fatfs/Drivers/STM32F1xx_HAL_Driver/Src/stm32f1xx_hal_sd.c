@@ -2521,7 +2521,7 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
   /* If errorstate is Command TimeOut, it is a MMC card */
   /* If errorstate is SD_OK it is a SD card: SD card 2.0 (voltage range mismatch)
      or SD card 1.x */
-  if(errorstate == SD_OK)
+  if(/*errorstate == SD_OK*/1)
   {
     /* SD CARD */
     /* Send ACMD41 SD_APP_OP_COND with Argument 0x80100000 */
