@@ -316,7 +316,7 @@ int main(void)
   USB_attach();
 #endif
 
-  HAL_Delay(2000);
+  HAL_Delay(1000);
   if (0 == isCardreaderActive())
   	{
 
@@ -462,6 +462,7 @@ void SystemClock_Config(void)
 static void MX_SDIO_SD_Init(void)
 {
   HAL_SD_ErrorTypedef sd_init_result;
+  int attempts = 3;
   hsd.Instance = SDIO;
   hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
   hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
@@ -472,10 +473,15 @@ static void MX_SDIO_SD_Init(void)
 
   do{
   sd_init_result = HAL_SD_Init(&hsd, &SDCardInfo);
-  }while (sd_init_result !=SD_OK);
+  attempts--;
+  }while ((attempts>0)&&(sd_init_result !=SD_OK));
 
-  HAL_SD_WideBusOperation_Config(&hsd, SDIO_BUS_WIDE_4B);
-
+  if (sd_init_result == SD_OK) HAL_SD_WideBusOperation_Config(&hsd, SDIO_BUS_WIDE_4B);
+ /*
+  else{
+	  startApp();
+  }
+  */
 }
 
 /** Configure pins as 
