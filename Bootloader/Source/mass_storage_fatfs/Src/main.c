@@ -316,7 +316,7 @@ int main(void)
   USB_attach();
 #endif
 
-  HAL_Delay(1000);
+  HAL_Delay(2000);
   if (0 == isCardreaderActive())
   	{
 
