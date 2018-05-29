@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench version="2.0">
+<workbenchAdvisor/>
+<window>
+<fastViewData fastViewLocation="1024">
+<orientation position="512" view="org.eclipse.debug.ui.ExpressionView"/>
+<orientation position="512" view="org.coocox.codebugger.trace.ui.traceview"/>
+<orientation position="512" view="org.eclipse.ui.console.ConsoleView"/>
+<orientation position="512" view="org.eclipse.debug.ui.VariableView"/>
+</fastViewData>
+<perspectiveBar/>
+<page focus="true" label="Workspace - CooCox CoBuilder">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
+<part id="18"/>
+<part id="19"/>
+<part id="20"/>
+<part id="21"/>
+<part id="22"/>
+<part id="23"/>
+<part id="24"/>
+<part id="25"/>
+<part id="26"/>
+<part id="27"/>
+<part id="28"/>
+<part id="29"/>
+<part id="30"/>
+<part id="31"/>
+<part id="32"/>
+<part id="33"/>
+<part id="34"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/main.c" title="main.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3170" selectionTopPixel="1410"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="port.c" partName="port.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c" title="port.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5078" selectionTopPixel="1382"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_rcc.h" partName="stm32f10x_rcc.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_rcc.h" title="stm32f10x_rcc.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_rcc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_rcc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="19" selectionOffset="22377" selectionTopPixel="10100"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sdcard.c" partName="sdcard.c" path="G:/CooCox/CoIDE/workspace/rtos_103/SDIO_SD/sdcard.c" title="sdcard.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103/SDIO_SD/sdcard.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/SDIO_SD/sdcard.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12955" selectionTopPixel="6920"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="diskio.h" partName="diskio.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/diskio.h" title="diskio.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/diskio.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/diskio.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="875" selectionTopPixel="150"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.h" partName="sdio_sd.h" path="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/SDIO_SD/sdio_sd.h" title="sdio_sd.h" tooltip="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/SDIO_SD/sdio_sd.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/SDIO_SD/sdio_sd.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="16682" selectionTopPixel="4515"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="diskio.c" partName="diskio.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/diskio.c" title="diskio.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/diskio.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/diskio.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3241" selectionTopPixel="2120"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="integer.h" partName="integer.h" path="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/FATFS/src/integer.h" title="integer.h" tooltip="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/FATFS/src/integer.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/integer.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_sdio.h" partName="stm32f10x_sdio.h" path="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/stm_lib/inc/stm32f10x_sdio.h" title="stm32f10x_sdio.h" tooltip="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/stm_lib/inc/stm32f10x_sdio.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_sdio.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="2280" selectionTopPixel="750"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_sdio.c" partName="stm32f10x_sdio.c" path="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/stm_lib/src/stm32f10x_sdio.c" title="stm32f10x_sdio.c" tooltip="C:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT/stm_lib/src/stm32f10x_sdio.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/src/stm32f10x_sdio.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="47" selectionOffset="5679" selectionTopPixel="2700"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.c" partName="sdio_sd.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/SDIO_SD/sdio_sd.c" title="sdio_sd.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/SDIO_SD/sdio_sd.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/SDIO_SD/sdio_sd.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="38649" selectionTopPixel="22980"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.c" partName="sdio_sd.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/SDIO_SD/sdio_sd.c" title="sdio_sd.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/SDIO_SD/sdio_sd.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/SDIO_SD/sdio_sd.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9072" selectionTopPixel="4500"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="FreeRTOSConfig.h" partName="FreeRTOSConfig.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FreeRTOSConfig.h" title="FreeRTOSConfig.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FreeRTOSConfig.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FreeRTOSConfig.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="2269"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_conf.h" partName="stm32f10x_conf.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/cmsis_boot/stm32f10x_conf.h" title="stm32f10x_conf.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/cmsis_boot/stm32f10x_conf.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/cmsis_boot/stm32f10x_conf.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1406" selectionTopPixel="300"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_gpio.h" partName="stm32f10x_gpio.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_gpio.h" title="stm32f10x_gpio.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_gpio.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_gpio.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="17" selectionOffset="2114" selectionTopPixel="1020"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x.h" partName="stm32f10x.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/cmsis_boot/stm32f10x.h" title="stm32f10x.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/cmsis_boot/stm32f10x.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/cmsis_boot/stm32f10x.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6133" selectionTopPixel="1980"/>
+</editor>
+<editor id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" partName="Repository" title="Repository" tooltip="Repository" workbook="DefaultEditorWorkbook">
+<input factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory">&#x0A;<subPage horizontalPosition="0" selectedItemId="0" subPageIndex="2" verticalPosition="0"/>
+</input>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dma.c" partName="stm32f10x_dma.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/src/stm32f10x_dma.c" title="stm32f10x_dma.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/src/stm32f10x_dma.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/src/stm32f10x_dma.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="8" selectionOffset="6480" selectionTopPixel="3530"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dac.h" partName="stm32f10x_dac.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_dac.h" title="stm32f10x_dac.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_dac.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_dac.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="278" selectionTopPixel="2250"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dma.h" partName="stm32f10x_dma.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_dma.h" title="stm32f10x_dma.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_dma.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_dma.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="15" selectionOffset="3965" selectionTopPixel="1260"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_tim.c" partName="stm32f10x_tim.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/src/stm32f10x_tim.c" title="stm32f10x_tim.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/src/stm32f10x_tim.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/src/stm32f10x_tim.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5844" selectionTopPixel="4340"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" title="main.c" tooltip="G:\CooCox\CoIDE\workspace\WAV_PLAYER\src\main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/G:/CooCox/CoIDE/workspace/WAV_PLAYER/src/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="120" selectionOffset="20123" selectionTopPixel="12407"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="syscall.c" partName="syscall.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/FATFS/src/option/syscall.c" title="syscall.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/FATFS/src/option/syscall.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/option/syscall.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="49" selectionOffset="2256" selectionTopPixel="1000"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.c" partName="system_stm32f10x.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/cmsis_boot/system_stm32f10x.c" title="system_stm32f10x.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/cmsis_boot/system_stm32f10x.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/cmsis_boot/system_stm32f10x.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="17" selectionOffset="4715" selectionTopPixel="2060"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_tim.h" partName="stm32f10x_tim.h" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_tim.h" title="stm32f10x_tim.h" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/stm_lib/inc/stm32f10x_tim.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/stm32f10x_tim.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="26115" selectionTopPixel="11800"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tasks.c" partName="tasks.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FRT_Library/FreeRTOS/Source/tasks.c" title="tasks.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FRT_Library/FreeRTOS/Source/tasks.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FRT_Library/FreeRTOS/Source/tasks.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="7" selectionOffset="63992" selectionTopPixel="39060"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ff.c" partName="ff.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/ff.c" title="ff.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/FATFS/src/ff.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/ff.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="60394" selectionTopPixel="37680"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/main.c" title="main.c" tooltip="G:/CooCox/CoIDE/workspace/rtos_103_SDIO_FAT_complite/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3170" selectionTopPixel="1600"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_hd.c" partName="startup_stm32f10x_hd.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/cmsis_boot/startup/startup_stm32f10x_hd.c" title="startup_stm32f10x_hd.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/cmsis_boot/startup/startup_stm32f10x_hd.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/cmsis_boot/startup/startup_stm32f10x_hd.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12296" selectionTopPixel="4300"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="misc.h" partName="misc.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/inc/misc.h" title="misc.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/stm_lib/inc/misc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/stm_lib/inc/misc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="21" selectionOffset="8812" selectionTopPixel="3729"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="types.h" partName="types.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/types.h" title="types.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/types.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/Armada/types.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="657" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="armada.h" partName="armada.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/armada.h" title="armada.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/armada.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/Armada/armada.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1233" selectionTopPixel="289"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/main.c" title="main.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/Armada/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="11476" selectionTopPixel="7023"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="global_variables.c" partName="global_variables.c" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/global_variables.c" title="global_variables.c" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/global_variables.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/Armada/global_variables.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="77" selectionOffset="218" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ff.h" partName="ff.h" path="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/FATFS/src/ff.h" title="ff.h" tooltip="G:/CooCox/CoIDE/workspace/ARMada/rtos_103_SDIO_FAT_complite/FATFS/src/ff.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/rtos/FATFS/src/ff.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="74" selectionOffset="24145" selectionTopPixel="7780"/>
+</editor>
+</editors>
+<views>
+<view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<expanded>
+<element path="/rtos"/>
+<element path="/rtos/Armada"/>
+<element path="/rtos/cmsis"/>
+<element path="/rtos/cmsis_boot"/>
+</expanded>
+<selection>
+<element path="/rtos/Armada/armada.h"/>
+</selection>
+</viewState>
+</view>
+<view id="org.coocox.codebugger.trace.ui.traceview" partName="Semihosting">
+<viewState/>
+</view>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
+</viewState>
+</view>
+<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
+<view id="org.coocox.coassistant.view.CoAssistantView_debug" partName="Peripherals">
+<viewState horizontalPosition="0" verticalPosition="0">
+<selection>&#x0A;<element name="DMA1"/>
+</selection>
+<registerValues baseAddress="Base Address: 0x40020000" description="Description:  Direct Memory Access 1 registers"/>
+</viewState>
+</view>
+<view id="org.eclipse.debug.ui.VariableView" partName="Variables">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
+<viewState/>
+</view>
+<view id="org.coocox.component.ui.Help" partName="Help">
+<viewState/>
+</view>
+</views>
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
+<alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
+<alwaysOnActionSet id="org.coocox.welcome.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.coocox.userspace.actionSet"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.ShowDisassemblyAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showExpressionsAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showDebugAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showConsoleAction"/>
+<hide_menu_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryBrowserAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showVariablesAction"/>
+<hide_menu_item_id id="org.coocox.builder.ui.openProjectExplorerAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.trace.actions.ShowTraceControlAction"/>
+<hide_menu_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showRegistersAction"/>
+<hide_toolbar_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
+<view id="org.coocox.builder.ui.views.ProjectView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.coocox.component.ui.Help"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@2c7ad9">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.component.ui.ComponentView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.internal.ViewStack@2c7ad9">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1bc4c37" ratio="0.7" ratioLeft="441" ratioRight="189" relationship="4" relative="org.eclipse.ui.internal.ViewStack@2c7ad9">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@50039b" ratio="0.16919853" ratioLeft="323" ratioRight="1586" relationship="2" relative="org.eclipse.ui.internal.ViewStack@2c7ad9">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.exampleView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@18bc78e" ratio="0.7198113" ratioLeft="763" ratioRight="297" relationship="2" relative="org.eclipse.ui.internal.ViewStack@50039b">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.coocox.component.ui.Help" label="Help"/>
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
+<page content="org.coocox.coassistant.view.CoAssistantView" label="LabelNotFound"/>
+<page content="org.coocox.builder.ui.MoreExampleView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@ad03ef" ratio="0.44920635" ratioLeft="283" ratioRight="347" relationship="4" relative="org.eclipse.ui.internal.ViewStack@50039b">
+<folder appearance="2" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@3a811f" ratio="0.2497309" ratioLeft="464" ratioRight="1394" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ad03ef">
+<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.2497309" ratioLeft="464" ratioRight="1394" relationship="2" relative="org.eclipse.ui.internal.ViewStack@3a811f"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@355d79" ratio="0.36984128" ratioLeft="233" ratioRight="397" relationship="4" relative="org.eclipse.ui.internal.ViewStack@2c7ad9">
+<folder appearance="2" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.coocox.codebugger.configuration.ui.Perspective" id="org.coocox.codebugger.configuration.perspective" label="CoDebugger"/>
+<alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
+<alwaysOnActionSet id="org.coocox.welcome.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
+<hide_menu_item_id id="org.coocox.builder.ui.newFolder"/>
+<hide_menu_item_id id="org.coocox.welcome.ui.action.repository"/>
+<hide_menu_item_id id="org.eclipse.ui.file.save"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
+<hide_menu_item_id id="org.eclipse.ui.file.saveAll"/>
+<hide_menu_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_menu_item_id id="org.coocox.builder.ui.openFile"/>
+<hide_menu_item_id id="org.eclipse.ui.file.saveAs"/>
+<hide_menu_item_id id="org.coocox.builder.rcp.projectMenu"/>
+<hide_menu_item_id id="org.coocox.builder.rcp.flashMenu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.debug"/>
+<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction"/>
+<hide_menu_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_menu_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.build"/>
+<hide_menu_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_menu_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.actions.TargetManageAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newProject"/>
+<hide_toolbar_item_id id="org.coocox.welcome.ui.action.repository"/>
+<hide_toolbar_item_id id="org.eclipse.ui.file.save"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideFlashEraseAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.debug"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
+<hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.debug.ui.DebugView"/>
+<view id="org.coocox.codebugger.trace.ui.traceview"/>
+<view id="org.eclipse.debug.ui.VariableView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.coocox.coassistant.view.CoAssistantView_debug"/>
+<view id="org.coocox.builder.ui.views.ProjectView"/>
+<fastViewBars/>
+<viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e5eda">&#x0A;<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e5eda">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e9a8e3" ratio="0.6998928" ratioLeft="653" ratioRight="280" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1e5eda">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@14ef1ea" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e9a8e3">&#x0A;<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
+<page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1ec4abb" ratio="0.7333683" ratioLeft="1400" ratioRight="509" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e5eda">&#x0A;<folder activePageID="org.coocox.coassistant.view.CoAssistantView_debug" appearance="2" expanded="2">&#x0A;<page content="org.coocox.coassistant.view.CoAssistantView_debug" label="Peripherals"/>
+<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.26453143" ratioLeft="223" ratioRight="620" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e5eda"/>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/Armada/types.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/Armada/armada.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/Armada/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/Armada/global_variables.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/FATFS/src/option/syscall.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/FATFS/src/ff.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/rtos/stm_lib/src/stm32f10x_tim.c"/>
+</editors>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="230" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="869" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="257" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="869" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15979" y="0"/>
+</item>
+<item historyLabel="global_variables.c" index="3">
+<position info="not_deleted" x="297" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="types.h" index="0">
+<position info="not_deleted" x="661" y="0"/>
+</item>
+<item historyLabel="types.h" index="0">
+<position info="not_deleted" x="657" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15979" y="0"/>
+</item>
+<item historyLabel="types.h" index="0">
+<position info="not_deleted" x="560" y="15"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15979" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15880" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15922" y="0"/>
+</item>
+<item historyLabel="types.h" index="0">
+<position info="not_deleted" x="657" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15836" y="46"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15922" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15836" y="46"/>
+</item>
+<item historyLabel="syscall.c" index="4">
+<position info="not_deleted" x="1114" y="0"/>
+</item>
+<item historyLabel="syscall.c" index="4">
+<position info="not_deleted" x="2256" y="49"/>
+</item>
+<item historyLabel="syscall.c" index="4">
+<position info="not_deleted" x="571" y="78"/>
+</item>
+<item historyLabel="syscall.c" index="4">
+<position info="not_deleted" x="2256" y="49"/>
+</item>
+<item historyLabel="ff.h" index="5">
+<position info="not_deleted" x="24145" y="74"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="15920" y="0"/>
+</item>
+<item historyLabel="stm32f10x_tim.c" index="6">
+<position info="not_deleted" x="6678" y="0"/>
+</item>
+<item historyLabel="stm32f10x_tim.c" index="6">
+<position info="not_deleted" x="8167" y="11"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="12103" y="0"/>
+</item>
+<item historyLabel="stm32f10x_tim.c" index="6">
+<position info="not_deleted" x="8167" y="11"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="11894" y="0"/>
+</item>
+<item historyLabel="stm32f10x_tim.c" index="6">
+<position info="not_deleted" x="5844" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="11476" y="0"/>
+</item>
+<item historyLabel="global_variables.c" index="3">
+<position info="not_deleted" x="297" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="11689" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="11689" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="230" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="730" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="230" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="313" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="401" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="500" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="1243" y="0"/>
+</item>
+<item historyLabel="global_variables.c" index="3">
+<position info="not_deleted" x="297" y="0"/>
+</item>
+<item historyLabel="armada.h" index="1">
+<position info="not_deleted" x="895" y="0"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="11476" y="0"/>
+</item>
+<item historyLabel="global_variables.c" index="3">
+<position info="not_deleted" x="218" y="77"/>
+</item>
+<item active="true" historyLabel="armada.h" index="1">
+<position info="not_deleted" x="895" y="0"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ff.h" tooltip="rtos/FATFS/src/ff.h">
+<persistable path="/rtos/FATFS/src/ff.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="global_variables.c" tooltip="rtos/Armada/global_variables.c">
+<persistable path="/rtos/Armada/global_variables.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="rtos/Armada/main.c">
+<persistable path="/rtos/Armada/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="armada.h" tooltip="rtos/Armada/armada.h">
+<persistable path="/rtos/Armada/armada.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="types.h" tooltip="rtos/Armada/types.h">
+<persistable path="/rtos/Armada/types.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="misc.h" tooltip="rtos/stm_lib/inc/misc.h">
+<persistable path="/rtos/stm_lib/inc/misc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_hd.c" tooltip="rtos/cmsis_boot/startup/startup_stm32f10x_hd.c">
+<persistable path="/rtos/cmsis_boot/startup/startup_stm32f10x_hd.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="rtos/main.c">
+<persistable path="/rtos/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="diskio.c" tooltip="rtos/FATFS/src/diskio.c">
+<persistable path="/rtos/FATFS/src/diskio.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.h" tooltip="rtos/SDIO_SD/sdio_sd.h">
+<persistable path="/rtos/SDIO_SD/sdio_sd.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sdio_sd.c" tooltip="rtos/SDIO_SD/sdio_sd.c">
+<persistable path="/rtos/SDIO_SD/sdio_sd.c"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="rtos.coproj" tooltip="G:\CooCox\CoIDE\workspace\LT_ARMada\rtos.coproj">
+<persistable uri="file:/E:/CooCox/CoIDE/workspace/LT_ARMada/rtos.coproj"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="G:\CooCox\CoIDE\workspace\WAV_PLAYER\src\main.c">
+<persistable uri="file:/E:/CooCox/CoIDE/workspace/WAV_PLAYER/src/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="G:\CooCox\CoIDE\workspace\WAV_PLAYER\main.c">
+<persistable uri="file:/E:/CooCox/CoIDE/workspace/WAV_PLAYER/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dma.h" tooltip="rtos/stm_lib/inc/stm32f10x_dma.h">
+<persistable path="/rtos/stm_lib/inc/stm32f10x_dma.h"/>
+</file>
+</mruList>
+</workbench>

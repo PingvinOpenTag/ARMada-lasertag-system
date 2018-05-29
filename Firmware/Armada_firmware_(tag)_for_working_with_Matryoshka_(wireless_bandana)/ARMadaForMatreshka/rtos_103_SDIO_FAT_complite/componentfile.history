@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<History> 
+  <File usedCount="3" path="stm_lib/inc/stm32f10x_rcc.h"/>  
+  <File usedCount="3" path="cmsis_boot/startup/startup_stm32f10x_hd.c"/>  
+  <File usedCount="3" path="cmsis/core_cm3.h"/>  
+  <File usedCount="3" path="cmsis_boot/stm32f10x.h"/>  
+  <File usedCount="3" path="cmsis_boot/stm32f10x_conf.h"/>  
+  <File usedCount="3" path="cmsis_boot/system_stm32f10x.c"/>  
+  <File usedCount="3" path="cmsis_boot/system_stm32f10x.h"/>  
+  <File usedCount="3" path="stm_lib/src/stm32f10x_rcc.c"/>  
+  <File usedCount="2" path="stm_lib/inc/stm32f10x_gpio.h"/>  
+  <File usedCount="2" path="stm_lib/src/stm32f10x_gpio.c"/>  
+  <File usedCount="2" path="cmsis/core_cmfunc.h"/>  
+  <File usedCount="2" path="cmsis/core_cminstr.h"/> 
+</History>

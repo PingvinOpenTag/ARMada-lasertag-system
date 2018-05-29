@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=rtos.map -O0 --gc-sections -LE:\CooCox\CoIDE\configuration\ProgramData\ARMada -TE:\CooCox\CoIDE\configuration\ProgramData\ARMada/arm-gcc-link.ld -g -L..\..\.. -lm">
+      <target file="rtos.elf" lastModified="163913b7a1b">
+         <source file="..\obj\bluetooth.o" lastModified="163913b481f"/>
+         <source file="..\obj\stm32f10x_rtc.o" lastModified="163913b48ca"/>
+         <source file="..\obj\stm32f10x_tim.o" lastModified="163913b4a6f"/>
+         <source file="..\obj\bluetooth_modul.o" lastModified="163913b4b59"/>
+         <source file="..\obj\core_cm3.o" lastModified="163913b4bd5"/>
+         <source file="..\obj\sdio_sd.o" lastModified="163913b4d99"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="163913b4e64"/>
+         <source file="..\obj\startup_stm32f10x_hd.o" lastModified="163913b4eb2"/>
+         <source file="..\obj\chipher.o" lastModified="163913b4f1f"/>
+         <source file="..\obj\f10x-pcd8544.o" lastModified="163913b50b4"/>
+         <source file="..\obj\common.o" lastModified="163913b5102"/>
+         <source file="..\obj\stm32f10x_pwr.o" lastModified="163913b51bd"/>
+         <source file="..\obj\diskio.o" lastModified="163913b5259"/>
+         <source file="..\obj\GFXC.o" lastModified="163913b5305"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="163913b53cf"/>
+         <source file="..\obj\ILI9163.o" lastModified="163913b547b"/>
+         <source file="..\obj\stm32f10x_dac.o" lastModified="163913b55a3"/>
+         <source file="..\obj\main.o" lastModified="163913b5831"/>
+         <source file="..\obj\network_tasks.o" lastModified="163913b58be"/>
+         <source file="..\obj\bandana.o" lastModified="163913b59b7"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="163913b5ac0"/>
+         <source file="..\obj\display.o" lastModified="163913b5be8"/>
+         <source file="..\obj\slots.o" lastModified="163913b5cb3"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="163913b5f03"/>
+         <source file="..\obj\tasks.o" lastModified="163913b603b"/>
+         <source file="..\obj\rf_modul.o" lastModified="163913b60d7"/>
+         <source file="..\obj\stm32f10x_adc.o" lastModified="163913b61e0"/>
+         <source file="..\obj\gun.o" lastModified="163913b62c9"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="163913b63a4"/>
+         <source file="..\obj\syscall.o" lastModified="163913b645f"/>
+         <source file="..\obj\tim_isr.o" lastModified="163913b6603"/>
+         <source file="..\obj\menu.o" lastModified="163913b672b"/>
+         <source file="..\obj\list.o" lastModified="163913b6799"/>
+         <source file="..\obj\syscalls.o" lastModified="163913b6815"/>
+         <source file="..\obj\network_low_level.o" lastModified="163913b68e0"/>
+         <source file="..\obj\queue.o" lastModified="163913b69ba"/>
+         <source file="..\obj\port.o" lastModified="163913b6a27"/>
+         <source file="..\obj\game.o" lastModified="163913b6af2"/>
+         <source file="..\obj\stm32f10x_sdio.o" lastModified="163913b6bbc"/>
+         <source file="..\obj\ff.o" lastModified="163913b6dce"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="163913b6e99"/>
+         <source file="..\obj\croutine.o" lastModified="163913b6f16"/>
+         <source file="..\obj\random.o" lastModified="163913b6f92"/>
+         <source file="..\obj\misc.o" lastModified="163913b705d"/>
+         <source file="..\obj\si4432.o" lastModified="163913b70f9"/>
+         <source file="..\obj\stm32f10x_spi.o" lastModified="163913b71c3"/>
+         <source file="..\obj\hardware_init.o" lastModified="163913b74cf"/>
+         <source file="..\obj\heap_2.o" lastModified="163913b753c"/>
+         <source file="..\obj\global_variables.o" lastModified="163913b7606"/>
+         <source file="..\obj\stm32f10x_bkp.o" lastModified="163913b76b2"/>
+         <source file="..\obj\usart.o" lastModified="163913b777d"/>
+      </target>
+   </processor>
+</history>
