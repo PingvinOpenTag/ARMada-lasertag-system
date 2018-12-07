@@ -23,7 +23,10 @@ void rf_tx_interrogate_task(void *pvParameters){
 				                        ( xTaskHandle * ) NULL);
 	xTaskCreate( rf_manager_task, ( signed char * ) "rf_manager_task", configMINIMAL_STACK_SIZE/2, NULL, 0,
 				                        ( xTaskHandle * ) NULL);
-
+/*
+	xTaskCreate( rf_manager_task, ( signed char * ) "rf_sender_task", configMINIMAL_STACK_SIZE/2, NULL, 0,
+				                        ( xTaskHandle * ) NULL);
+*/
 	timings_to_send.infiniteResend=0;
 	timings_to_send.timeout = (defaultTimeout/1000000)*TIC_FQR;
 	timings_to_send.resendTime = (defaultResendTime*TIC_FQR)/1000000;
@@ -80,4 +83,12 @@ i++;
 	}
 }
 
+/*
+void rf_sender_task(void *pvParameters){
+	for (;;) {
+
+	}
+
+}
+*/
 #endif

@@ -9,7 +9,8 @@ extern tfire_mode test_fire_mode_switch(void);
 extern TKEYBOARD_EVENT test_keyboard(int adc_value);
 
 void gun_on_trigger_pressing(void){
-		if (game_status == OUT_OF_GAME)
+
+	if (game_status == OUT_OF_GAME)
 		{
 			if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено
 			{
@@ -20,8 +21,10 @@ void gun_on_trigger_pressing(void){
 			}
 		}
 
-		if((countdown_shock_time)||(game_status==OUT_OF_GAME))//если время шока не прошло
+
+		if((countdown_shock_time)||(game_status==OUT_OF_GAME)||(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 0))//если время шока не прошло
 																				// или внеигры
+																				// или нет связи
 																				//игнорируем нажатие
 		return;
 
@@ -195,9 +198,12 @@ if(game_status==OUT_OF_GAME)//если время шока не прошло
 		xSemaphoreGive(xWavPlayerManagerSemaphore);
 	 }
 
-		reload_key_event = no_key_pressing;
+//		reload_key_event = no_key_pressing;
 	    return;
 	}
+if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 0)//если соединение не установлено
+	return;
+
 
 if(armadaSystem.gun.clips)
 	{

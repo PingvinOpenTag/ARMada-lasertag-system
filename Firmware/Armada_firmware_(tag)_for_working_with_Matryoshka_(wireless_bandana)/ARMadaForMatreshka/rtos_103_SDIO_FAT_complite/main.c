@@ -129,7 +129,7 @@ int main(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |  GPIO_Pin_13;//
+	GPIO_InitStructure.GPIO_Pin = /*GPIO_Pin_4 | */ GPIO_Pin_13;// Pin_4 - bluetooth reset
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 	GPIO_SetBits(GPIOC, GPIO_Pin_7);
 	GPIO_SetBits(GPIOC, GPIO_Pin_13);//выключаем подсветку ∆ »
@@ -411,6 +411,7 @@ void BluetoothTask(void *pvParameters) {
 #ifdef DISPLAY_ENABLE
 display_init();// инициализаци€ диспле€
 #endif
+
 	 if (!read_parameters_from_sd_card())
 				{
 					if (get_settings_from_ini_file())
@@ -420,7 +421,7 @@ display_init();// инициализаци€ диспле€
 						armadaSystem.player.health = armadaSystem.player.health_after_start;
 						set_team_color(armadaSystem.player.team_color);
 						set_gun_damage(armadaSystem.gun.damage);
-
+						game_status = armadaSystem.autostart_game;
 
 						#ifdef RTC_Enable
 						if(armadaSystem.autostart_game)
@@ -455,6 +456,8 @@ display_init();// инициализаци€ диспле€
 						game_status = armadaSystem.autostart_game;
 
 
+
+
 #ifdef RTC_Enable
 						if(armadaSystem.autostart_game)
 						{
@@ -470,16 +473,18 @@ display_init();// инициализаци€ диспле€
 
 #else
 	#if DEVICE_ROLE==TAG
-
-	#elif DEVICE_ROLE==BANDANA
+			armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
+			armadaSystem.gun.rounds = 0;
+//	#elif DEVICE_ROLE==BANDANA
 
 
 	#else
-						armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
-						armadaSystem.gun.rounds = 0;
+//						armadaSystem.gun.clips = armadaSystem.gun.clips_after_start;
+//						armadaSystem.gun.rounds = 0;
 	#endif
 #endif
 					}
+
 //LCD_BL_ON;
 
 #ifdef DISPLAY_ENABLE
@@ -708,7 +713,7 @@ void Zone4task(void *pvParameters) {
 
 
 
-
+const unsigned char team_id_to_symbol[4]={'r','b','y','g'};
 
 void vTaskLED1(void *pvParameters) {
 for (;;) {
@@ -718,6 +723,7 @@ for (;;) {
 	   			continue;
 	   		}
 
+if((game_status==OUT_OF_GAME)&&(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)) USART1_PutChar(team_id_to_symbol[armadaSystem.player.team_color]);
 vTaskDelay(200);
 if(xSemaphoreTake(xGameOverSemaphore, (portTickType)(25))== pdTRUE )
 {
@@ -907,8 +913,10 @@ else if(sys_event_tmp.event_source == BLUETOOTH){
 	   {
 		    bluetooth_module_on_disconnected();
 	   }//else
-
-
+#ifdef SI4432_ENABLE
+	//RF_send_status_package();
+	send_status_message_now=true;
+#endif
 
 	}//[else if(sys_event_tmp.event_source == BLUETOOTH)]
 
@@ -2071,8 +2079,16 @@ void bt_hit_processing(trx_packet new_rx_bt_packet)//обрабатываем попадани€, при
 						armadaSystem.player.health =  armadaSystem.player.health - new_rx_bt_packet.damage;
 						armadaSystem.wav_player.type_of_sound_to_play = HIT;//надо воспроизвести звук ранени€
 						xSemaphoreGive(xWavPlayerManagerSemaphore);
+#ifdef SI4432_ENABLE
+	RF_send_status_package();
+#endif
 					}
-					else {game_over();}
+					else {
+						game_over();
+#ifdef SI4432_ENABLE
+	RF_send_status_package();
+#endif
+					}
 
 if(game_status != OUT_OF_GAME)
 {
@@ -2087,7 +2103,7 @@ if(game_status != OUT_OF_GAME)
 #endif
 */
 USART1_PutChar(team_color_to_symbol[new_rx_bt_packet.team_id]);
-
+USART1_PutChar('v');
 }
 
 				}
@@ -2169,8 +2185,20 @@ void hit_processing(TDamageZone zone)//обрабатываем попадани€
 //					send_package_by_bluetooth(hit.rx_package);
 #endif
 					xSemaphoreGive(xWavPlayerManagerSemaphore);
+#ifdef SI4432_ENABLE
+	//RF_send_status_package();
+	send_status_message_now=true;
+#endif
 				}
-				else {game_over();}
+				else {
+
+					game_over();
+#ifdef SI4432_ENABLE
+	//RF_send_status_package();
+	send_status_message_now=true;
+#endif
+
+				}
 if(game_status != OUT_OF_GAME)
 {
 #ifdef DISPLAY_ENABLE
@@ -2802,10 +2830,31 @@ void bt_set_at_commands_mode(bool mode)//переводим блютус модуль в режим at-кома
 
 void bt_reset(void)//аппаратный сброс блютус-модул€
 {
+	GPIO_InitTypeDef port;
+/*
 	GPIO_ResetBits(GPIOC, GPIO_Pin_4);
 	 vTaskDelay(200);
 	GPIO_SetBits(GPIOC, GPIO_Pin_4);
 	 vTaskDelay(200);
+*/
+	//BLUETOOTH_RCC_AHBPeriphClockCmd(BLUETOOTH_RCC_AHBPeriph, ENABLE);
+			GPIO_StructInit(&port);
+			port.GPIO_Mode = GPIO_Mode_Out_PP;
+			port.GPIO_Pin = GPIO_Pin_4;
+			//port.GPIO_OType=GPIO_OType_PP;
+			port.GPIO_Speed=GPIO_Speed_2MHz;
+			GPIO_Init( GPIOC, &port);
+			GPIO_ResetBits(GPIOC, GPIO_Pin_4);
+			vTaskDelay(200);
+			GPIO_SetBits(GPIOC, GPIO_Pin_4);
+			vTaskDelay(200);
+			port.GPIO_Mode=GPIO_Mode_Out_OD;
+			GPIO_Init( GPIOC, &port);
+			GPIO_SetBits(GPIOC, GPIO_Pin_4);
+			vTaskDelay(200);
+
+
+
 }
 uint8_t get_damage_index(uint8_t damage)
 {

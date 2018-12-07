@@ -11,6 +11,7 @@
 void rf_tx_interrogate_task(void *pvParameters);
 void rf_rx_interrogate_task(void *pvParameters);
 void rf_manager_task(void *pvParameters);
+//void rf_sender_task(void *pvParameters);
 
 #endif //[#ifdef SI4432_ENABLE]
 #endif//[#ifndef NETWORK_TASKS_H]

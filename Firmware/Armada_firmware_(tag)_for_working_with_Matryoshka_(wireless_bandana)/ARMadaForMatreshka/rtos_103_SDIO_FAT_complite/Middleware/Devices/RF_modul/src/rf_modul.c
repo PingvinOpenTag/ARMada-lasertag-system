@@ -414,9 +414,12 @@ extern volatile unsigned char rf_txBufHead;
 extern volatile unsigned char rf_txCount;
 
 
-
+/*
 #define BLOCKING_PERIOD_AFTE_RECEIVING ((8000*TIC_FQR)/1000000)
 #define BLOCKING_PERIOD_AFTE_TRANSMISSION (1000*TIC_FQR/1000000)
+*/
+#define BLOCKING_PERIOD_AFTE_RECEIVING 2
+#define BLOCKING_PERIOD_AFTE_TRANSMISSION 1
 
 /*
 #define BLOCKING_PERIOD_AFTE_RECEIVING 30*(TIC_FQR/300)
@@ -432,7 +435,7 @@ const tDeviceAddress my_rf_net_address = {1,1,2};
 
 const tDeviceAddress target_rf_net_address = {1,1,2};
 const tDeviceAddress my_rf_net_address = {1,1,1};
-
+//const tDeviceAddress my_rf_net_address = {2,2,2};
 #endif
 
 extern volatile tPackageTimings timings_to_send;
@@ -463,7 +466,7 @@ void RF_modul_send_next_package(void){
 //∆дем получени€ данных по радиоканалу
 	if (RF_modul_Rx(&rx_package_tmp, (unsigned char*)&Bytes, waiting_interval)){
 		//если данные получены
-		FLASH_LED_ON;
+//-//		FLASH_LED_ON;
 		time_tmp =  xTaskGetTickCount();
 		unlock_time = time_tmp + BLOCKING_PERIOD_AFTE_RECEIVING;
 		waiting_interval = 	BLOCKING_PERIOD_AFTE_RECEIVING;
@@ -489,11 +492,11 @@ void RF_modul_send_next_package(void){
 						rf_set_delivery_complite_flag(pack_id_tmp,rx_package_tmp.sender);
 //						display_backlight_off();
 						//delivered_packages_array[delivered_packages++]=pack_id_tmp;
-						FLASH_LED_OFF;
+//-//						FLASH_LED_OFF;
 						return;
 					}
 				}
-		FLASH_LED_OFF;
+//-//		FLASH_LED_OFF;
 
 		/*
 		FLASH_LED_ON;
@@ -730,15 +733,24 @@ void RF_modul_read_packages(void){
 }
 
 static volatile tPackage unique_package_tmp;
+
 void rf_listen(void){//слушаем радиоэфир
 	const char data_to_send [] = "Hello!";
-if (xQueueReceive( xRfRxUniquePackagesQueue, (void*)&unique_package_tmp, TIC_FQR*10/*portMAX_DELAY*/)==pdPASS)
+	tstatus_payload *status_payload_tmp;
+	static volatile status_message_delay_counter = 0;
+if (xQueueReceive( xRfRxUniquePackagesQueue, (void*)&unique_package_tmp, TIC_FQR/**10*//*portMAX_DELAY*/)==pdPASS)
 	{//если прочитали
+
 	FLASH_LED_ON;
 	vTaskDelay(TIC_FQR);
 	rf_send(unique_package_tmp.sender/*target_rf_net_address*/, my_rf_net_address, data_to_send,6,true, timings_to_send);
 	FLASH_LED_OFF;
 	xQueueReceive( xRfRxUniquePackagesQueue, (void*)&unique_package_tmp, TIC_FQR/*portMAX_DELAY*/);
+
+
+
+
+
 /*
 	received_unique_packages_array[received_unique_packages++]=unique_package_tmp.details.packageId;
 		if(received_unique_packages==128)
@@ -752,7 +764,24 @@ if (xQueueReceive( xRfRxUniquePackagesQueue, (void*)&unique_package_tmp, TIC_FQR
 	}
 else
 	{
-	RF_send_status_package();
+		taskENTER_CRITICAL();
+		if (send_status_message_now )
+		{
+			send_status_message_now=false;
+			taskEXIT_CRITICAL();
+			RF_send_status_package();
+			status_message_delay_counter=0;
+}
+else {
+	taskEXIT_CRITICAL();
+	if (status_message_delay_counter/10){
+		RF_send_status_package();
+		status_message_delay_counter=0;
+	}
+	else {
+		status_message_delay_counter++;
+	}
+}
 /*
 	volatile	int m;
 		m++;
@@ -785,9 +814,16 @@ tstatus_payload status_payload_tmp;
 	status_payload_tmp.clips = (uint16_t)armadaSystem.gun.clips;
 
 
+	//memcpy((void*)status_payload_tmp.nickname,/*"Pingvin\0"*/"Eagle\0",strlen(/*"Pingvin\0"*/"Eagle\0")+1);
 	memcpy((void*)status_payload_tmp.nickname,"Pingvin\0",strlen("Pingvin\0")+1);
 
-	rf_send(target_rf_net_address, my_rf_net_address, (uint8_t*)&status_payload_tmp, payloadLength,true, timings_to_send);
+bool send_result;
+
+send_result =	rf_send(target_rf_net_address, my_rf_net_address, (uint8_t*)&status_payload_tmp, payloadLength,true/*false*/, timings_to_send);
+
+static volatile int u;
+u++;
+
 }
 
 

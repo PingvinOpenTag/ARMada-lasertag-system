@@ -70,10 +70,19 @@ typedef struct AckPayload tAckPayload;
 
 
 
-
+//в микросекундах
+/*
 #define defaultTimeout 10000000
 #define defaultResendTime 200000
 #define  defaultResendTimeDelta 100000
+*/
+//5 секунд таймаут на отправку
+#define defaultTimeout 5000000
+//повторная попытка отправить пакет через 0,5 секунд
+#define defaultResendTime 500000
+//максимальная случайная прибавка к времени отпраки - 0,5 секунд
+#define  defaultResendTimeDelta 500000
+
 struct PackageTimings
 {
 //	constexpr static uint32_t defaultTimeout = 10000000;

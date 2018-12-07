@@ -121,6 +121,7 @@ xSemaphoreHandle Si4432_IQR_Semaphore;
 xSemaphoreHandle rf_tx_buff_Semaphore;
 xQueueHandle xRfRxEventQueue;
 xQueueHandle xRfRxUniquePackagesQueue;
+volatile bool send_status_message_now=true;
 
 #endif
 

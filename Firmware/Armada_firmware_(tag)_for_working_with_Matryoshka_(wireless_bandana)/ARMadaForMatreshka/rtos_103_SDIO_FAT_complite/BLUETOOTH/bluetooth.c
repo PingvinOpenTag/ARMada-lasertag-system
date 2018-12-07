@@ -412,6 +412,7 @@ void test_bt_data()
 
 
 
+
 									}
 									break;
 									case STOP_GAME:
@@ -431,6 +432,7 @@ void test_bt_data()
 										}//[ if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_7) == 1)//если соединение установлено]
 
 #endif
+
 
 
 									}
@@ -663,6 +665,10 @@ void test_bt_data()
 	  	  	  	armadaSystem.wav_player.type_of_sound_to_play = START_GAME;
 	xSemaphoreGive(xWavPlayerManagerSemaphore);
 								game_status = true;
+#ifdef SI4432_ENABLE
+	//RF_send_status_package();
+	send_status_message_now=true;
+#endif
 								break;
 							}
 							case 0x00://"выключить" игрока
@@ -677,7 +683,10 @@ void test_bt_data()
 									armadaSystem.wav_player.type_of_sound_to_play = GAME_OVER;//надо воспроизвести звук "игра закончена"
 									xSemaphoreGive(xWavPlayerManagerSemaphore);
 								}
-
+#ifdef SI4432_ENABLE
+	//RF_send_status_package();
+	send_status_message_now=true;
+#endif
 								break;
 							}
 							default: break;

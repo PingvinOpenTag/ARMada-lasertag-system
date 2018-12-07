@@ -95,10 +95,10 @@
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
     <File name="LCD_ILI9163/src" path="" type="2"/>
     <File name="stm_lib/inc/stm32f10x_spi.h" path="stm_lib/inc/stm32f10x_spi.h" type="1"/>
-    <File name="Armada/inc/types.h" path="types.h" type="1"/>
-    <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
     <File name="BLUETOOTH/src/bluetooth.c" path="BLUETOOTH/bluetooth.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_dma.h" path="stm_lib/inc/stm32f10x_dma.h" type="1"/>
+    <File name="Armada/inc/types.h" path="types.h" type="1"/>
     <File name="FRT_Library/FreeRTOS/Source/include" path="" type="2"/>
     <File name="FRT_Library/FreeRTOS/Source/include/StackMacros.h" path="FRT_Library/FreeRTOS/Source/include/StackMacros.h" type="1"/>
     <File name="BLUETOOTH/src" path="" type="2"/>
@@ -106,9 +106,9 @@
     <File name="Armada/inc/cipher.h" path="CIPHER/cipher.h" type="1"/>
     <File name="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h" path="FRT_Library/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_bkp.c" path="stm_lib/src/stm32f10x_bkp.c" type="1"/>
-    <File name="Middleware/Devices/RF_modul/inc" path="" type="2"/>
     <File name="stm_lib/src/stm32f10x_gpio.c" path="stm_lib/src/stm32f10x_gpio.c" type="1"/>
     <File name="Middleware/Game" path="" type="2"/>
+    <File name="Middleware/Devices/RF_modul/inc" path="" type="2"/>
     <File name="Network_low_level" path="" type="2"/>
     <File name="FATFS/src/integer.h" path="FATFS/src/integer.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_usart.h" path="stm_lib/inc/stm32f10x_usart.h" type="1"/>
@@ -167,9 +167,9 @@
     <File name="stm_lib/src/stm32f10x_tim.c" path="stm_lib/src/stm32f10x_tim.c" type="1"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="FATFS" path="" type="2"/>
-    <File name="FATFS/src/ff.h" path="FATFS/src/ff.h" type="1"/>
     <File name="Middleware/Gun/inc" path="" type="2"/>
     <File name="Network_low_level/src/network_low_level.c" path="Network_low_level/src/network_low_level.c" type="1"/>
+    <File name="FATFS/src/ff.h" path="FATFS/src/ff.h" type="1"/>
     <File name="cmsis_boot/startup/startup_stm32f10x_hd.c" path="cmsis_boot/startup/startup_stm32f10x_hd.c" type="1"/>
     <File name="FATFS/src/diskio.h" path="FATFS/src/diskio.h" type="1"/>
     <File name="FRT_Library/FreeRTOS/Source/portable/MemMang/heap_2.c" path="FRT_Library/FreeRTOS/Source/portable/MemMang/heap_2.c" type="1"/>
@@ -194,10 +194,10 @@
     <File name="stm_lib/inc/stm32f10x_rtc.h" path="stm_lib/inc/stm32f10x_rtc.h" type="1"/>
     <File name="MENU/src" path="" type="2"/>
     <File name="Middleware/Devices/RF_modul/src/rf_modul.c" path="Middleware/Devices/RF_modul/src/rf_modul.c" type="1"/>
-    <File name="FATFS/src/ffconf.h" path="FATFS/src/ffconf.h" type="1"/>
     <File name="Network_low_level/inc/network_base_types.h" path="Network_low_level/inc/network_base_types.h" type="1"/>
-    <File name="Middleware/Devices/RF_modul/src" path="" type="2"/>
     <File name="stm_lib/src/stm32f10x_pwr.c" path="stm_lib/src/stm32f10x_pwr.c" type="1"/>
+    <File name="Middleware/Devices/RF_modul/src" path="" type="2"/>
+    <File name="FATFS/src/ffconf.h" path="FATFS/src/ffconf.h" type="1"/>
     <File name="MENU/inc/menu.h" path="MENU/menu.h" type="1"/>
     <File name="Armada/src/usart.c" path="usart.c" type="1"/>
     <File name="Middleware/Game/src" path="" type="2"/>

@@ -104,6 +104,7 @@ extern xSemaphoreHandle Si4432_IQR_Semaphore;
 extern xSemaphoreHandle rf_tx_buff_Semaphore;
 extern xQueueHandle xRfRxEventQueue;
 extern xQueueHandle xRfRxUniquePackagesQueue;
+extern volatile bool send_status_message_now;
 #endif
 
 
